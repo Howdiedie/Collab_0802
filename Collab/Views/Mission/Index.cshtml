@@ -1,4 +1,5 @@
-﻿@{
+﻿@model List<MissionViewModel>
+@{
     ViewData["Title"] = "Home Page";
 }
 
@@ -41,115 +42,76 @@
             <!-- 清單 -->
             <div class="row  gx-0">
 
-                <div class="col scroller">
-                    <ul id="sortable1" class="connectedSortable w-100 " style="height:65vh">
-                        <li class="ui-state my-4 mx-4">
-                            <h3 class="mx-4 my-4">校稿並與主管確認1</h3>
-                            <div class="row mx-2 my-3">
-                                <div class="col d-flex  align-items-center">
-                                    <div class=" bd-highlight">2023/06/13 - 2023/06/20</div>
-                                </div>
-                                <div class="col-2 d-flex align-items-center">
-                                    <img class="MissionAvatar"
-                                         src="~/img/MemberImg/0733ba760b29378474dea0fdbcb97107.jpg" alt="頭像">
-                                </div>
-                                <div class="col-2 d-flex align-items-center">
-                                    <i class="fa-regular fa-envelope fa-2xl"
-                                       style="color:#696c71"></i>
-                                </div>
-                            </div>
-                        </li>
-                        <li class="ui-state my-4 mx-4">
-                            <h3 class="mx-4 my-4">校稿並與主管確認1</h3>
-                            <div class="row mx-2 my-3">
-                                <div class="col d-flex  align-items-center">
-                                    <div class=" bd-highlight">2023/06/13 - 2023/06/20</div>
-                                </div>
-                                <div class="col-2 d-flex align-items-center">
-                                    <img class="MissionAvatar"
-                                         src="~/img/MemberImg/0733ba760b29378474dea0fdbcb97107.jpg" alt="頭像">
-                                </div>
-                                <div class="col-2 d-flex align-items-center">
-                                    <i class="fa-regular fa-envelope fa-2xl"
-                                       style="color:#696c71"></i>
-                                </div>
-                            </div>
-                        </li>
-                        <li class="ui-state my-4 mx-4">
-                            <h3 class="mx-4 my-4">校稿並與主管確認1</h3>
-                            <div class="row mx-2 my-3">
-                                <div class="col d-flex  align-items-center">
-                                    <div class=" bd-highlight">2023/06/13 - 2023/06/20</div>
-                                </div>
-                                <div class="col-2 d-flex align-items-center">
-                                    <img class="MissionAvatar"
-                                         src="~/img/MemberImg/0733ba760b29378474dea0fdbcb97107.jpg" alt="頭像">
-                                </div>
-                                <div class="col-2 d-flex align-items-center">
-                                    <i class="fa-regular fa-envelope fa-2xl"
-                                       style="color:#696c71"></i>
-                                </div>
-                            </div>
-                        </li>
-                        <li class="ui-state my-4 mx-4">
-                            <h3 class="mx-4 my-4">校稿並與主管確認1</h3>
-                            <div class="row mx-2 my-3">
-                                <div class="col d-flex  align-items-center">
-                                    <div class=" bd-highlight">2023/06/13 - 2023/06/20</div>
-                                </div>
-                                <div class="col-2 d-flex align-items-center">
-                                    <img class="MissionAvatar"
-                                         src="~/img/MemberImg/0733ba760b29378474dea0fdbcb97107.jpg" alt="頭像">
-                                </div>
-                                <div class="col-2 d-flex align-items-center">
-                                    <i class="fa-regular fa-envelope fa-2xl"
-                                       style="color:#696c71"></i>
-                                </div>
-                            </div>
-                        </li>
-
+        <div class="col scroller" style="height:65vh">
+                    <ul id="sortable1" class="connectedSortable" >
+                        @foreach (var mission in Model) {
+                            @if (mission.MisState == "新任務") {
+                                <li class="ui-state my-4 mx-4">
+                                    <h3 class="mx-4 my-4">@mission.MissionName</h3>
+                                    <div class="row mx-2 my-3">
+                                        <div class="col d-flex  align-items-center">
+                                            <div class=" bd-highlight">@mission.MisStartTime - @mission.MisFinishTime</div>
+                                        </div>
+                                        <div class="col-2 d-flex align-items-center">
+                                            <img class="MissionAvatar"
+                                                 src="~/img/MemberImg/0733ba760b29378474dea0fdbcb97107.jpg" alt="頭像">
+                                        </div>
+                                        <div class="col-2 d-flex align-items-center">
+                                            <i class="fa-regular fa-envelope fa-2xl"
+                                               style="color:#696c71"></i>
+                                        </div>
+                                    </div>
+                                </li>
+                            }
+                        }
                     </ul>
                 </div>
-                <div class="col scroller">
-                    <ul id="sortable2" class="connectedSortable w-100" style="height:65vh">
-                        <li class="ui-state my-4 mx-4">
-                            <h3 class="mx-4 my-4">校稿並與主管確認1</h3>
-                            <div class="row mx-2 my-3">
-                                <div class="col d-flex  align-items-center">
-                                    <div class=" bd-highlight">2023/06/13 - 2023/06/20</div>
-                                </div>
-                                <div class="col-2 d-flex align-items-center">
-                                    <img class="MissionAvatar"
-                                         src="~/img/MemberImg/0733ba760b29378474dea0fdbcb97107.jpg" alt="頭像">
-                                </div>
-                                <div class="col-2 d-flex align-items-center">
-                                    <i class="fa-regular fa-envelope fa-2xl"
-                                       style="color:#696c71"></i>
-                                </div>
-                            </div>
-                        </li>
-
+                <div class="col scroller" style="height:65vh">
+                    <ul id="sortable2" class="connectedSortable" >
+                        @foreach (var mission in Model) {
+                            @if (mission.MisState == "進行中") {
+                                <li class="ui-state my-4 mx-4">
+                                    <h3 class="mx-4 my-4">@mission.MissionName</h3>
+                                    <div class="row mx-2 my-3">
+                                        <div class="col d-flex  align-items-center">
+                                            <div class=" bd-highlight">@mission.MisStartTime - @mission.MisFinishTime</div>
+                                        </div>
+                                        <div class="col-2 d-flex align-items-center">
+                                            <img class="MissionAvatar"
+                                                 src="~/img/MemberImg/0733ba760b29378474dea0fdbcb97107.jpg" alt="頭像">
+                                        </div>
+                                        <div class="col-2 d-flex align-items-center">
+                                            <i class="fa-regular fa-envelope fa-2xl"
+                                               style="color:#696c71"></i>
+                                        </div>
+                                    </div>
+                                </li>
+                            }
+                        }
                     </ul>
                 </div>
-                <div class="col scroller">
-                    <ul id="sortable3" class="connectedSortable w-100" style="height:65vh">
-                        <li class="ui-state my-4 mx-4">
-                            <h3 class="mx-4 my-4">校稿並與主管確認1</h3>
-                            <div class="row mx-2 my-3">
-                                <div class="col d-flex  align-items-center">
-                                    <div class=" bd-highlight">2023/06/13 - 2023/06/20</div>
-                                </div>
-                                <div class="col-2 d-flex align-items-center">
-                                    <img class="MissionAvatar"
-                                         src="~/img/MemberImg/0733ba760b29378474dea0fdbcb97107.jpg" alt="頭像">
-                                </div>
-                                <div class="col-2 d-flex align-items-center">
-                                    <i class="fa-regular fa-envelope fa-2xl"
-                                       style="color:#696c71"></i>
-                                </div>
-                            </div>
-                        </li>
-
+                <div class="col scroller" style="height:65vh">
+                    <ul id="sortable3" class="connectedSortable" >
+                        @foreach (var mission in Model) {
+                            @if (mission.MisState == "已完成") {
+                                <li class="ui-state my-4 mx-4">
+                                    <h3 class="mx-4 my-4">@mission.MissionName</h3>
+                                    <div class="row mx-2 my-3">
+                                        <div class="col d-flex  align-items-center">
+                                            <div class=" bd-highlight">@mission.MisStartTime - @mission.MisFinishTime</div>
+                                        </div>
+                                        <div class="col-2 d-flex align-items-center">
+                                            <img class="MissionAvatar"
+                                                 src="~/img/MemberImg/0733ba760b29378474dea0fdbcb97107.jpg" alt="頭像">
+                                        </div>
+                                        <div class="col-2 d-flex align-items-center">
+                                            <i class="fa-regular fa-envelope fa-2xl"
+                                               style="color:#696c71"></i>
+                                        </div>
+                                    </div>
+                                </li>
+                            }
+                        }
                     </ul>
                 </div>
 
