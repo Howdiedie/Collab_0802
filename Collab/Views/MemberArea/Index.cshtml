@@ -1,0 +1,211 @@
+﻿
+@{
+    ViewData["Title"] = "Index";
+}
+
+<div class="scroller " style="height: 87vh;">
+    <div class="mx-4">
+        <div class=" mx-4">
+            <!-- 從這裡開始寫 -->
+            <div class="Mycontainer">
+                <div class="headerBody pt-4  " style="display: flex;">
+                    <!-- 資料區(左半邊) -->
+                    <div class="containerLeft">
+                        <!-- 大頭貼區 -->
+                        <div class="row gx-4 col-12">
+                            <div class="col-auto ms-4 ">
+                                <div class="avatar MemberAreaImg ImgDiv">
+                                    <a href="" class="editImgA">編輯</a>
+                                    <img src="~/img/MemberImg/0733ba760b29378474dea0fdbcb97107.jpg" alt="頭像">
+                                </div>
+                            </div>
+                            <div class="col-auto my-auto">
+                                <div class="">
+                                    <h5 class="mb-1 fs-1 UserName"> Partrick</h5>
+                                </div>
+                            </div>
+                            <!-- <div class="col-lg-4 my-sm-auto me-sm-0 mx-auto mt-3" style="display: flex;">
+                                <button id="editBtn" class="Mybtn ms-5" type="button">編輯</button>
+                                <button id="ChangePWDBtn" class="ms-4 Mybtn" type="button">更改密碼</button>
+                            </div> -->
+                        </div>
+                        <!-- 表單區 -->
+                        <div class=" pb-0 mt-5 pt-3 ">
+                            <!-- 基本資料區 -->
+                            <div class="profile">
+                                <div class=" d-flex align-items-center ">
+                                    <p class="mb-0 ms-3 mt-3 fs-2">基本資料</p>
+                                    <!-- <button id="SaveBtn" class="Mybtn mt-3 " type="button"
+                                        style="display: none;">儲存</button> -->
+                                    <a id="btnEditProfile" class="icon-addTarget margin-editbtn">
+                                        <i id="iconeditProfile"
+                                           class="fa-regular fa-pen-to-square fa-xl"></i>
+                                        <i id="iconSaveProfile" class="fa-regular fa-floppy-disk fa-xl"
+                                           style="display: none;"></i>
+
+                                    </a>
+                                    <a href="" class="icon-addTarget">
+                                        <i id="iconCancelProfile" class="fa-solid fa-xmark fa-xl ms-3"
+                                           style="display: none;"></i>
+                                    </a>
+                                    <!-- <a id="SaveBtn" class="icon-addTarget margin-editbtn"
+                                        style="display: none;">
+                                        <i id="iconSaveTextarea"
+                                            class="fa-regular fa-floppy-disk fa-xl"></i>
+                                    </a> -->
+                                </div>
+                                <!-- 基本資料-內容區 -->
+                                <form id="editForm" class="col-12 ">
+                                    <div class="mb-4 mt-5 col-12 " style="display: flex;">
+                                        <label for="" class="col-3 form-label ms-3 fs-3">會員名稱</label>
+                                        <input type="text" class="myInput  ms-4  disabled-input"
+                                               id="inputName" placeholder="Partrick" disabled>
+                                    </div>
+                                    <div class="mb-4 pb-4 mt-3 col-12" style="display: flex;">
+                                        <label for="" class=" col-3 form-label ms-3 fs-3">帳號</label>
+
+                                        <input type="text" class="myInput  ms-4  disabled-input"
+                                               id="inputAccount" placeholder="qqq011334466@gmail.com"
+                                               disabled>
+                                        <!-- <div class="ms-3 fs-5 col-8 form-label ms-3  small-input"></div> -->
+                                        <!-- <div id="formGroupExampleInput2" class="col-2 form-control ms-3 p-3 fs-5">
+                                            qqq011334466@gmail.com
+                                        </div> -->
+                                    </div>
+                                </form>
+                            </div>
+
+                        </div>
+                    </div>
+                    <!-- 更改密碼區(右半邊) -->
+                    <div class="containerRight">
+                        <div id="editPWDForm" class="ChangePWD pb-0 ms-5 ">
+                            <div class="d-flex align-items-center">
+                                <p class=" mb-0 ms-3 mt-3 fs-2">更改密碼</p>
+                                <!-- <button id="SavePWDBtn" class="Mybtn mt-3 me-5"
+                                type="button">儲存</button> -->
+                                <a id="editPWDBtn" class="icon-addTarget margin-editbtnPWD">
+                                    <i id="iconeditPWD" class="fa-regular fa-pen-to-square fa-xl"></i>
+                                    <i id="iconSavePWD" class="fa-regular fa-floppy-disk fa-xl"
+                                       style="display: none;"></i>
+                                </a>
+                                <a href="" class="icon-addTarget">
+                                    <i id="iconCancelPWD" class="fa-solid fa-xmark fa-xl ms-3"
+                                       style="display: none;"></i>
+                                </a>
+                            </div>
+                            <form id="forminputPWD" class="col-12  mt-3 ">
+                                <div class="mb-4 pt-4 col-12 pb-4" style="display: flex;">
+                                    <label for="formGroupExampleInput"
+                                           class="col-3 form-label ms-3 fs-3">舊密碼</label>
+                                    <input id="inputOddPWD" type="text"
+                                           class="myInput form-control ms-4 p-3 fs-5"
+                                           id="formGroupExampleInput" placeholder="請輸入舊密碼" disabled>
+                                </div>
+                                <div class="mb-4 col-12 pb-4 " style="display: flex;">
+                                    <label for=" " class="col-3 form-label ms-3 fs-3">新密碼</label>
+                                    <input id="inputNewPWD" type="text"
+                                           class="myInput form-control ms-4 p-3 fs-5"
+                                           id="formGroupExampleInput" placeholder="請輸入新密碼" disabled>
+                                </div>
+                                <div class="mb-4 col-12 pb-4" style="display: flex;">
+                                    <label for=" " class="col-3 form-label ms-3 fs-3">確認新密碼</label>
+                                    <input id="inputNewPWD2" type="text"
+                                           class="myInput form-control ms-4 p-3 fs-5"
+                                           id="formGroupExampleInput" placeholder="請再次輸入新密碼" disabled>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+        <!-- 大頭貼區END -->
+        <!-- 會員資料表單 -->
+
+        <div class="mt-5 mb-5"></div>
+        <!-- 結束 -->
+    </div>
+</div>
+<link rel="stylesheet" href="~/css/MemberArea.css" />
+
+<script>
+    $(document).ready(function () {
+
+        var isEditing = false; // 初始编辑状态为 false
+        var originalText = ""; // 保存原始内容的变量
+
+        $("#btnEditProfile").click(function () {
+            if (!isEditing) {
+                originalText = $("#inputName").val(); // 保存原始内容
+                // $(this).text("取消");
+                $("#inputName").prop("disabled", false);
+                $("#iconSaveProfile").show();
+                isEditing = true;
+                $("#iconSaveProfile").show();
+                $("#iconCancelProfile").show();
+                $("#iconeditProfile").hide();
+            } else {
+                // $(this).text("編輯");
+                $("#iconSaveProfile").hide();
+                $("#inputName").prop("disabled", true);
+                $("#inputAccount").addClass("disabled-input");
+                $("#inputName").val(originalText); // 恢复原始内容
+                isEditing = false;
+                $("#iconeditProfile").show();
+                $("#iconSaveProfile").hide();
+                $("#iconCancelProfile").hide();
+
+            }
+        });
+
+
+        // 儲存按鈕點擊事件處理
+        $("#iconSaveProfile").click(function () {
+            $("#editBtn").text("編輯");
+            $("#SaveBtn").hide();
+            $("#iconCancelProfile").hide();
+            $("#inputName").prop("disabled", true);
+            $("#inputAccount").addClass("disabled-input");
+            var inputText = $("#inputName").val();
+            if (inputText !== "") {
+                $("#inputName").prop("placeholder", inputText);
+            }
+            originalText = inputText;
+        });
+        // ---------密碼區域------------
+
+        var isEditingPWD = true;
+
+        $("#editPWDBtn").click(function () {
+            if (isEditingPWD) {
+                //編輯
+                $("#iconeditPWD").hide();
+                $("#iconSavePWD").show();
+                $("#iconCancelPWD").show();
+                // $("#forminputPWD").show();
+                $("#inputOddPWD").prop("disabled", false);
+                $("#inputNewPWD").prop("disabled", false);
+                $("#inputNewPWD2").prop("disabled", false);
+                isEditingPWD = false;
+            } else {
+                //儲存
+                $("#iconSavePWD").hide();
+                $("#iconCancelPWD").hide();
+                $("#iconeditPWD").show();
+                // $("#forminputPWD").hide();
+                isEditingPWD = true;
+            }
+            // $(this).text("取消");
+            // $("#editPWDForm").show();
+            // $("#ChangePWDButton").show();
+        })
+
+
+
+    });
+
+</script>

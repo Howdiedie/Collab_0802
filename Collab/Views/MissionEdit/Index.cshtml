@@ -1,0 +1,101 @@
+﻿
+@{
+    ViewData["Title"] = "Index";
+    Layout = null;
+}
+<link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+<link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+@*    <link rel="stylesheet" href="~/collab_00.styles.css" asp-append-version="true" />*@
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+      integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+<!-- MVC -->
+<script src="~/lib/jquery/dist/jquery.min.js"></script>
+<script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+<script src="~/js/site.js" asp-append-version="true"></script>
+
+
+<button id="show" style="font-size: 30px;">點我</button>
+<dialog id="infoModal">
+    <div class="position-relative">
+        <button type="button" class="btn-close position-absolute top-10 end-0" aria-label="Close"></button>
+    </div>
+    <!-- 計劃標題 -->
+    <h1 class="projectName">藝起派對寫生活動</h1>
+    <!-- 編輯內容 -->
+    <form>
+        <!-- 任務名稱 -->
+        <div class="taskName">
+            <label for="taskName">任務：</label>
+            <input type="text" placeholder="">
+        </div>
+        <!-- 指派人員 -->
+        <div class="member">
+            <label for="personnel" class="col-md-2 col-form-label">人員：</label>
+            <img src="~/img/MemberImg/0733ba760b29378474dea0fdbcb97107.jpg" class="rounded-circle" alt="頭像" width="60px"
+                 height="60px">
+        </div>
+        <!-- 開始日 -->
+        <div class="startDate">
+            <label for="startDate">開始日：</label>
+            <input type="date" class="calendar">
+        </div>
+        <!-- 截止日 -->
+        <div class="endDate">
+            <label for="endDate">截止日：</label>
+            <input type="date" class="calendar">
+        </div>
+        <!-- 狀態 -->
+        <div class="status">
+            <label for="status">狀態：</label>
+            <div class="btn-group-toggle" data-toggle="buttons">
+                <label class="btn btn-secondary btn-lg">
+                    <input type="radio" name="status" value="pending"> 新任務
+                </label>&nbsp;&nbsp;
+                <label class="btn btn-secondary btn-lg">
+                    <input type="radio" name="status" value="inProgress"> 進行中
+                </label>&nbsp;&nbsp;
+                <label class="btn btn-secondary btn-lg">
+                    <input type="radio" name="status" value="completed"> 已完成
+                </label>
+            </div>
+        </div>
+        <!-- 目標選單 -->
+        <div class="targetSelect">
+            <label for="target">目標：</label>
+            <select>
+                <option value="" selected disabled>請選擇</option>
+                <option value="文宣規劃">文宣規劃</option>
+                <option value="寫生活動">寫生活動</option>
+                <option value="派對市集">派對市集</option>
+            </select>
+        </div>
+        <!-- 描述 -->
+        <div class="description">
+            <label for="description">描述：</label>
+            <textarea class="form-control" id="description" rows="5" maxlength="200" placeholder="請輸入描述內容">
+確認印製數量、費用、交件時程
+需開發票打統編
+                    </textarea>
+        </div>
+        <!-- 儲存按鈕 -->
+        <div class="submitBtn">
+            <button type="submit" class="btn btn-secondary btn-lg">儲存</button>
+        </div>
+    </form>
+</dialog>
+
+
+
+<!-- ------------- JS ---------------- -->
+
+<script>
+    let btn = document.querySelector("#show");
+    let infoModal = document.querySelector("#infoModal");
+    btn.addEventListener("click", function () {
+        infoModal.showModal();
+    })
+</script>
+
+<!-- ------------- JS end---------------- -->
+
+<link rel="stylesheet" href="~/css/MissionEdit.css" />

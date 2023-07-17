@@ -1,0 +1,74 @@
+﻿
+@{
+    ViewData["Title"] = "Index";
+}
+
+            <!-- 從這裡開始寫 -->
+            <div class="container ">
+                <div class="position-relative">
+                    <button type="button" class="btn-close position-absolute top-10 end-0"
+                            aria-label="Close"></button>
+                    <!-- 儲存取消按鈕 -->
+                    <!-- <a id="btnEditTextarea" class="icon-addTarget margin-editbtn">
+                        <i id="iconSaveTextarea" class="fa-regular fa-floppy-disk fa-xl"></i>
+                        <i id="iconCancelProfile" class="fa-solid fa-xmark fa-xl ms-3"></i>
+                    </a> -->
+                    <!-- 区块内容 -->
+                </div>
+                <div class="my-5 ">
+                    <div class="row">
+                        <div class="col-sm-12 ">
+                            <h3 id="dateBlock" class="text-center fs-2">内容</h3>
+                            <div class="col-sm-12 pe-5 mb-3 text-end">
+                                <button class="btnSave">儲存</button>
+                            </div>
+                        </div>
+                        <!-- 上方設定日期 -->
+                        <div class="col-sm-12 mb-3 pe-5  d-flex">
+                            <p class="col-1 fs-2 ">標題：</p>
+                            <!-- <textarea class="form-control  custom-textarea" id="exampleTextarea" row="0" placeholder="請輸入標題" style="font-size: 65px;">討論市集規劃</textarea> -->
+                            <input type="text" class="form-control custom-input " id="exampleInput"
+                                   placeholder="請輸入標題" style="font-size: 36px; background-color: #f5f4f1;"
+                                   value="討論市集規劃" maxlength="20">
+                        </div>
+                        <div class="col-sm-12 ">
+                            <hr>
+                        </div>
+                        <div class="form-group mb-5 mt-3 pe-5 d-flex">
+                            <p class="col-1 fs-2">內容：</p>
+                            <textarea class="form-control" id="exampleTextarea" rows="10"
+                                      placeholder="请输入文章内容"
+                                      style="font-size: 25px; background-color: #f5f4f1;"></textarea>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <script>
+                // 获取当前日期
+                var today = new Date();
+
+                // 将日期格式化为字符串
+                var dateString = today.toLocaleDateString();
+
+                // 将日期字符串显示在指定的区块内
+                document.getElementById("dateBlock").textContent = dateString;
+
+                // 以下為設定保存按鈕
+                // document.getElementById('SaveContext').addEventListener('click', function() {
+                // window.open('./LayoutTestNotebookMain.html');
+                // });
+
+                document.getElementById('SaveContext').addEventListener('click', function () {
+                    window.location.href = './LayoutTestNotebookMain.html';
+                });
+
+            </script>
+            <!-- 結束 -->
+
+<link rel="stylesheet" href="~/css/NotebookEdit.css" />
+<script>
+    $(document).ready(function () {
+        var text = "都市計畫（英語：Urban Planning）是處理都市及其鄰近區域的工程建設、經濟、社會、土地利用配置以及對未來發展預測的專門學問或技術。它的對象偏重於都市物質形態的部分，涉及都市中產業的區域配置、建築物的區域配置和分類管制、道路及運輸設施的設置、公共設施的規劃建設及都市工程的安排，主要內容有空間規劃、道路交通規劃、綠化植被和水體規劃等內容。都市計畫是都市建設及管理的依據，位於都市管理之規劃、建設、運作三個階段之首，是都市管理的龍頭。\n\n歷史上除了少部分都市外，大部分的都市發展大多雜亂無章自由發展，到了十九世紀，都市計畫藉著建築與工程學的進步成為了能以理性以及型態分析的方法透過物理設計來解決都市問題。1960年代之後都市設計模型理論如雨後春筍般的出現，幫助拓展了都市發展的論域，如經濟發展計畫、社群社會計畫以及環境計畫。20世紀，部分都市計畫的課題演變為都市再生，或是透過都市計畫的方法將某些歷史悠久的都市進行都市再生。\n由於都市的地價相對較高，所以建築物容積率要妥善利用。但在另一方面，若過份提高容積率，可能會對周遭環境構成影響，也會對附近的交通造成衝擊壓力。而對於都市再生，歷史因素及古蹟的保留亦是一個考慮因素。\n\n都市計畫有許多形式，它與都市設計有著許多共同的理論觀點和實踐活動。\n\n都市計畫控制引導城鄉空間的有序發展。雖然都市計畫主要關注於城鄉居民點和都市社區的規劃設計，但也涉及到資源開發利用與保護，鄉村和農業用地，公園以及自然保護區等方面。都市計畫從業人員關注研究與分析、戰略思考、建築與都市設計、公眾諮詢、政策建議、實施和管理等方面。\n\n都市計畫技師與建築、景觀、土木工程和公共行政等交叉領域合作，實現戰略、政策和永續發展目標。早期的都市計畫技師通常是這些相關領域的從業者。今天，都市計畫已經成為一個獨立的專業學科，包括土地利用規劃與分區、經濟發展、環境規劃和交通規劃等不同子領域的更廣泛的範疇。";
+        $("#exampleTextarea").val(text);
+    })
+</script>

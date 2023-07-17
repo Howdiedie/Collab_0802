@@ -1,0 +1,72 @@
+﻿.topcontainer {
+    display: flex;
+    height: 300px;
+    width: 90%;
+    margin-left: 80px;
+}
+
+.grid-topcontainer {
+    display: grid;
+    grid-template-rows: 1fr 1fr;
+    /* 定義兩行等高 */
+    max-height: 245px;
+    width: 100%;
+    background-color: #d8d8d85b;
+    /* border-radius: 5px; */
+    border: solid #254e6b 4px;
+    border-top: none;
+    border-radius: 0 0 10px 10px;
+}
+
+.grid-item {
+    overflow-y: auto;
+    margin-top: 4px;
+    padding: 10px;
+    height: 225px;
+    width: 100%;
+}
+
+.column {
+    width: 100%;
+    padding: 1%;
+}
+
+.missions {
+    text-align: center;
+    font-size: 23px;
+    letter-spacing: 25px;
+    /* border: solid #2b3040e6 3px; */
+    border-radius: 10px 10px 0 0;
+    background-color: #254e6b;
+    ;
+    color: #f5f4f1;
+    font-weight: bold;
+}
+
+.grid-item div {
+    /* margin-bottom: 8px; */
+    font-size: 20px;
+    border-radius: 10px;
+    padding: 3px;
+    padding-left: 15px;
+    margin: 12px 16px;
+}
+
+    .grid-item div:hover {
+        color: #f5f4f1 !important;
+        cursor: pointer;
+    }
+
+.missiontitle {
+    margin-left: 50px;
+    padding-top: 40px;
+    font-weight: 800;
+    color: #2b3040e6;
+}
+
+.calendartitle {
+    margin-left: 50px;
+    padding-bottom: 15px;
+    font-weight: 800;
+    color: #2b3040e6;
+}

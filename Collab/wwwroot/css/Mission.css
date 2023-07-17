@@ -1,0 +1,49 @@
+﻿/* body {
+        margin: 0;
+        padding: 0 0 2.5em;
+        margin-right: 10px;
+} */
+
+#sortable1,
+#sortable2,
+#sortable3 {
+    list-style-type: none;
+    margin: 0;
+    padding: 0 0 2.5em;
+    float: left;
+    margin-right: 10px;
+}
+
+    #sortable1 li,
+    #sortable2 li,
+    #sortable3 li {
+        margin: 0 5px 5px 5px;
+        padding: 5px;
+        font-size: 1.2em;
+    }
+
+.ui-state {
+    background-color: #ffffff;
+    border-radius: 10px;
+    box-shadow: 2px 5px 6px rgba(0, 0, 0, 0.2);
+}
+
+.MissionAvatar {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    overflow: hidden;
+}
+
+.addIcon {
+    color: #b8b7b7;
+    font-size: 20px;
+    margin-left: 15px;
+    margin-top: 5px;
+}
+
+    .addIcon:hover {
+        color: #767676e6;
+        font-size: 20px;
+        cursor: pointer;
+    }

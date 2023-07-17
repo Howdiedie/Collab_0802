@@ -1,0 +1,214 @@
+﻿#show {
+    margin-top: 3%;
+    margin-left: 3%;
+}
+
+/* --------------------------------------- */
+/* 彈出視窗 */
+dialog {
+    border: none;
+    box-shadow: 0 2px 6px #ccc;
+    border-radius: 10px;
+    width: 900px;
+    background-color: #f5f4f1;
+}
+
+    /* 彈出視窗背景透明 */
+    dialog::backdrop {
+        background-color: rgba(0, 0, 0, 0.1);
+    }
+
+/* 計劃標題 */
+.projectName {
+    margin-top: 3%;
+    color: rgb(30, 30, 30);
+    font-size: 36px;
+    margin-left: 5%;
+}
+
+/* 任務名稱 */
+.taskName {
+    margin-top: 5%;
+    font-size: 30px;
+    margin-left: 5%;
+}
+
+    .taskName input {
+        width: 400px;
+        background-color: #f5f4f1;
+        border: 2px solid rgb(162, 162, 162);
+        border-radius: 10px 10px 10px 10px;
+        outline: none;
+        padding-left: 2%;
+        font-size: 28px;
+        padding-top: 5px;
+        padding-bottom: 5px;
+    }
+
+        .taskName input:focus {
+            width: 400px;
+            background-color: #f5f5f3;
+            border: 2px solid rgb(44, 43, 43);
+            border-radius: 10px 10px 10px 10px;
+            outline: none;
+            padding-left: 2%;
+            font-size: 28px;
+            padding-top: 5px;
+            padding-bottom: 5px;
+            box-shadow: 2px 2px 2px #cccccc;
+        }
+
+/* 指派人員 */
+.member {
+    margin-top: 3%;
+    font-size: 30px;
+    margin-left: 5%;
+}
+
+/* 開始日 */
+.startDate {
+    margin-top: 3%;
+    font-size: 30px;
+    margin-left: 5%;
+}
+
+    .startDate input {
+        background-color: #f5f4f1;
+        border-radius: 10px 10px 10px 10px;
+        padding-left: 1%;
+        font-size: 28px;
+        padding-top: 5px;
+        padding-bottom: 5px;
+        outline: none;
+        border: 2px solid rgb(162, 162, 162);
+    }
+
+        .startDate input:focus {
+            background-color: #f5f4f1;
+            border-radius: 10px 10px 10px 10px;
+            padding-left: 1%;
+            font-size: 28px;
+            padding-top: 5px;
+            padding-bottom: 5px;
+            outline: none;
+            border: 2px solid rgb(44, 43, 43);
+            box-shadow: 2px 2px 2px #cccccc;
+        }
+
+/* 截止日 */
+.endDate {
+    margin-top: 3%;
+    font-size: 30px;
+    margin-left: 5%;
+}
+
+
+    .endDate input {
+        background-color: #f5f4f1;
+        border-radius: 10px 10px 10px 10px;
+        padding-left: 1%;
+        font-size: 28px;
+        padding-top: 5px;
+        padding-bottom: 5px;
+        outline: none;
+        border: 2px solid rgb(162, 162, 162);
+    }
+
+        .endDate input:focus {
+            background-color: #f5f4f1;
+            border-radius: 10px 10px 10px 10px;
+            padding-left: 1%;
+            font-size: 28px;
+            padding-top: 5px;
+            padding-bottom: 5px;
+            outline: none;
+            border: 2px solid rgb(44, 43, 43);
+            box-shadow: 2px 2px 2px #cccccc;
+        }
+
+/* 狀態 */
+.status {
+    margin-top: 3%;
+    font-size: 30px;
+    margin-left: 5%;
+    display: flex;
+    align-items: center;
+}
+
+.btn-group-toggle {
+    padding-left: 1%;
+}
+
+/* 目標選單 */
+.targetSelect {
+    margin-top: 3%;
+    font-size: 30px;
+    margin-left: 5%;
+}
+
+    .targetSelect select {
+        background-color: #f5f4f1;
+        border-radius: 10px 10px 10px 10px;
+        padding-left: 1%;
+        font-size: 28px;
+        padding-top: 5px;
+        padding-bottom: 5px;
+        outline: none;
+        border: 2px solid rgb(162, 162, 162);
+        width: 400px;
+    }
+
+        .targetSelect select:focus {
+            background-color: #f5f4f1;
+            border-radius: 10px 10px 10px 10px;
+            padding-left: 1%;
+            font-size: 28px;
+            padding-top: 5px;
+            padding-bottom: 5px;
+            outline: none;
+            border: 2px solid rgb(44, 43, 43);
+            width: 400px;
+            box-shadow: 2px 2px 2px #cccccc;
+        }
+
+
+/* 描述 */
+.description {
+    margin-top: 6%;
+    font-size: 30px;
+    margin-left: 5%;
+}
+
+    .description textarea {
+        margin-top: 2%;
+        width: 90%;
+        background-color: #f5f4f1;
+        border: 2px solid rgb(162, 162, 162);
+        border-radius: 10px 10px 10px 10px;
+        /* outline: none; */
+        padding-left: 2%;
+        font-size: 25px;
+        padding-top: 2%;
+        padding-bottom: 2%;
+    }
+
+        .description textarea:focus {
+            margin-top: 2%;
+            width: 90%;
+            background-color: #f5f5f3;
+            border: 2px solid rgb(44, 43, 43);
+            border-radius: 10px 10px 10px 10px;
+            outline: none;
+            padding-left: 2%;
+            font-size: 25px;
+            padding-top: 2%;
+            padding-bottom: 2%;
+            box-shadow: 3px 3px 20px #cccccc;
+        }
+
+/* 儲存按鈕 */
+.submitBtn {
+    margin-top: 7%;
+    margin-left: 5%;
+    margin-bottom: 3%;
+}

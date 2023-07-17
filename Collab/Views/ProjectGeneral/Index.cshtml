@@ -1,0 +1,235 @@
+﻿
+@{
+    ViewData["Title"] = "Index";
+}
+
+
+        <div class="Mycontainer  d-flex my-5 ">
+            <!--------計劃概述------>
+            <div class=" col-5 me-5 ">
+                <div class="d-flex ">
+                    <p class="MyTitle fs-3 ms-3">計劃概述</p>
+                    <!-- <button id="btnEditTextarea" class="btn-start mb-2 margin-editbtn">編輯</button> -->
+                    <a id="btnEditTextarea" class="icon-addTarget margin-editbtn">
+                        <i id="iconeditTextarea" class="fa-regular fa-pen-to-square fa-xl"></i>
+                        <i id="iconSaveTextarea" class="fa-regular fa-floppy-disk fa-xl"
+                           style="display: none;"></i>
+                    </a>
+                </div>
+                <div class="headerBody  pt-3 pb-4 ">
+                    <textarea id="ProjectTextarea" class="pe-4 lh-lg " name="" id="" cols="50" rows="17"
+                              readonly>
+                                        </textarea>
+                </div>
+            </div>
+            <!--------計劃概述END------>
+            <!-- 參與成員+資料連結 -->
+            <div class="col-6 ms-3 ">
+
+                <!--------參與成員------>
+                <div class="">
+                    <div class="d-flex ms-3">
+                        <p class="MyTitle fs-3 ">參與成員</p>
+                        <!-- <button class="btn-start mb-2 margin-delete">刪除</button> -->
+                        <a id="" class="icon-addTarget margin-delete">
+                            <i class="fa-sharp fa-solid fa-user-xmark fa-xl"></i>
+                        </a>
+                    </div>
+                    <div class=" headerBody pt-2 pb-4 d-flex flex-wrap ms-3">
+                        <div class=" me-5 mt-3 text-center ">
+                            <a class="Myavatar AddNewBtn">
+                                <i class="fa-solid fa-plus fa-xl"></i>
+                            </a>
+                            <p class="mt-3 fs-5">新增成員</p>
+                        </div>
+                        <!-- 一個人 -->
+                        <div class="me-5 mt-3 text-center ">
+                            <div class="Myavatar">
+                                <img src="~/img/MemberImg/0733ba760b29378474dea0fdbcb97107.jpg" alt="" class="">
+                            </div>
+                            <p class="mt-3 fs-5 ">Partrick</p>
+                        </div>
+                        <!-- 一個人 -->
+                        <div class="me-5 mt-3  text-center ">
+                            <div class="Myavatar">
+                        <img src="~/img/MemberImg/33fd1f2798aba71937fc6318bc7f8a14.jpg" alt="" class="">
+                            </div>
+                            <p class="mt-3 fs-5">Tina</p>
+                        </div>
+                        <!-- 一個人 -->
+                        <div class="me-5 mt-3  text-center ">
+                            <div class="Myavatar">
+                        <img src="~/img/MemberImg/3ace294c8314e041e7c52ec31d9355d4.jpg" alt="" class="">
+                            </div>
+                            <p class="mt-3 fs-5">Jessica</p>
+                        </div>
+                        <!-- 一個人 -->
+                        <div class="me-5 mt-3  text-center ">
+                            <div class="Myavatar">
+                        <img src="~/img/MemberImg/9121f2b3c557192b6fcd234782a7c399.jpg" alt="" class="">
+                            </div>
+                            <p class="mt-3 fs-5">Jeff</p>
+                        </div>
+                        <!-- 一個人 -->
+                        <div class="me-5 mt-3  text-center ">
+                            <div class="Myavatar">
+                        <img src="~/img/MemberImg/b85e9df9e9b75bcce3a767eb894ef153.jpg" alt="" class="">
+                            </div>
+                            <p class="mt-3 fs-5">John</p>
+                        </div>
+                        <!-- 一個人 -->
+                        <div class="me-5 mt-3  text-center ">
+                            <div class="Myavatar">
+                        <img src="~/img/MemberImg/97e11a32ea41760dbb080ed692018b0c.jpg" alt="" class="">
+                            </div>
+                            <p class="mt-3 fs-5">Hana</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!--------參與成員END------>
+                <!--------資料連結------>
+                <div class="mt-5 mb-5">
+                    <div class="d-flex ms-3">
+                        <p class="MyTitle fs-3">資料連結</p>
+                        <!-- <button class="btn-start mb-2  margin-delete">新增</button> -->
+                        <a id="btnAddLink" class="icon-addTarget margin-btnAddLink">
+                            <i class="fa-regular fa-square-plus fa-xl"></i>
+                        </a>
+                    </div>
+                    <div class="headerBody pb-4 ">
+                        <div id="divAddLink" class="m-3" style="display: none;">
+                            <input class="addInput me-3" type="text" placeholder="名稱" name=""
+                                   onfocus="this.placeholder = ''" onblur="this.placeholder = '名稱'">
+                            <input class="addInput" type="text" placeholder="URL" name=""
+                                   onfocus="this.placeholder = ''" onblur="this.placeholder = 'URL'">
+                            <a id="btnSaveLink" class="icon-addTarget margin-btnSaveLink ">
+                                <!-- <i class="fa-regular fa-square-plus fa-2xl"></i> -->
+                                <i class="fa-regular fa-floppy-disk fa-xl"></i>
+                            </a>
+                        </div>
+
+                        <!-- linkList -->
+                        <div class=" me-2 mb-3 pe-2">
+                            <div class="scrollable-div mb-4 mt-3">
+                                <!-- linkRow -->
+                                <div class="linkList  me-5">
+                                    <a class="linkRow me-3"
+                                       href="https://fb.me/e/1vemrSNpD">『藝起×派對』美術嘉年華-活動專頁</a>
+                                    <div class="linkDelete ">
+                                        <a class="icon-addTarget me-4 ms-5" href="">
+                                            <i class="fa-solid fa-trash fa-lg"></i>
+                                        </a>
+                                    </div>
+                                </div>
+                                <!-- linkRow -->
+                                <div class="linkList mt-4 me-5">
+                                    <a class="linkRow me-3"
+                                       href="https://reurl.cc/bz7e1v ">『藝起×派對』美術嘉年華-活動簡章</a>
+                                    <div class="linkDelete ">
+                                        <a class="icon-addTarget me-4 ms-5" href="">
+                                            <i class="fa-solid fa-trash fa-lg"></i>
+                                        </a>
+                                    </div>
+                                </div>
+                                <!-- linkRow -->
+                                <div class="linkList mt-4 me-5">
+                                    <a class="linkRow me-3"
+                                       href="https://ptam.ptcg.gov.tw/news2.php?no=502">『藝起×派對』美術嘉年華-勝利星村寫生攝影活動</a>
+                                    <div class="linkDelete ">
+                                        <a class="icon-addTarget me-4 ms-5" href="">
+                                            <i class="fa-solid fa-trash fa-lg"></i>
+                                        </a>
+                                    </div>
+                                </div>
+                                <!-- linkRow -->
+                                <div class="linkList mt-4 me-5">
+                                    <a class="linkRow me-3"
+                                       href="https://www.accupass.com/event/2205241732311280047150">
+                                        2022桃園「尋找水麗」寫生比賽及親子沙畫同繪活動
+                                        - ACCUPASS 活動通
+                                    </a>
+                                    <div class="linkDelete ">
+                                        <a class="icon-addTarget me-4 ms-5" href="">
+                                            <i class="fa-solid fa-trash fa-lg"></i>
+                                        </a>
+                                    </div>
+                                </div>
+                                <!-- linkRow -->
+                                <div class="linkList mt-4 me-5">
+                                    <a class="linkRow me-3"
+                                       href="https://news.idea-show.com/tag/%E5%AF%AB%E7%94%9F%E6%AF%94%E8%B3%BD/">
+                                        寫生比賽
+                                        – 點子秀
+                                    </a>
+                                    <div class="linkDelete ">
+                                        <a class="icon-addTarget me-4 ms-5" href="">
+                                            <i class="fa-solid fa-trash fa-lg"></i>
+                                        </a>
+                                    </div>
+                                </div>
+
+
+                            </div>
+                        </div>
+                        <!-- linkList END -->
+                    </div>
+                </div>
+            </div>
+
+
+
+            <!--------資料連結END------>
+        </div>
+
+
+</div>
+<link rel="stylesheet" href="~/css/ProjectGeneral.css" />
+<script>
+    $(document).ready(function () {
+        $("#btnEditTextarea").click(function () {
+            $("#iconeditTextarea").hide();
+            $("#iconSaveTextarea").show();
+
+            var textarea = $("#ProjectTextarea");
+            if (textarea.prop("readonly")) {
+                // 切换为编辑模式
+                textarea.prop("readonly", false);
+                $("#ProjectTextarea").addClass("edit-textarea");
+                // $(this).text("儲存");
+            } else {
+                // 切换为只读模式
+                textarea.prop("readonly", true);
+                $("#ProjectTextarea").removeClass("edit-textarea");
+                // $(this).text("編輯");
+                $("#iconeditTextarea").show();
+                $("#iconSaveTextarea").hide();
+            }
+        });
+
+
+
+
+        var text = "本團隊期待與屏東縣政府文化處和美術相關工作者、藝術家、青年學子攜手共同辦理美術嘉年華，並將本次比賽的藝文作品陳列展示，這次美術嘉年華的活動，除了可以融入勝利星村的手作體驗課程，落實屏東的鄉土文化素養，更可以進一步豐碩屏東的藝文休閒內涵，提升屏東縣民藝文素養，培養其創造力及藝術鑒賞能力，並行銷推廣本縣重要文化景點，辦理110年度寫生攝影活動及展覽設計執行委託案。屏東勝利星村經過多年整修改造後，已如星空般逐漸閃耀！\n屏東勝利星村經過多年整修改造後，已如星空般逐漸閃耀！    這個春天，讓我們一起拿起野餐籃、畫具與相機，走訪勝利星村，參加這場藝術派對吧！\n\n-----------------------------------------\n\n本次活動包含三大主題：寫生攝影比賽、周邊系列活動、獲獎作品現地展與美術館聯合展。\n\n歡迎大家一起來共襄盛舉！\n\n活動日期：110年3月13日(六)8:00-17:00\n活動地點：屏東勝利星村(服務台位於大樹冊店後方星星廣場)\n活動專頁：https://fb.me/e/1vemrSNpD\n活動簡章：https://reurl.cc/bz7e1v (詳細資訊請見簡章)\n\n-----------------------------------------\n\n報名資訊\n\n【寫生組、創意組】\n報名時間自2月26日(五)中午12:00至3月5日(五)中午12:00止\n個人報名網址：https://forms.gle/SPbkWV7RqUTS7eNa6\n團體報名網址（團體報名無參加禮）：https://forms.gle/6Xt3EQab6n75mfUeA\n\n【攝影組】\n投件時間自3月1日(一)中午12:00至3月15日(一)中午12:00止\n報名投件網址：https://forms.gle/tcpZc2YoymfK4Cdj7\n";
+        $("#ProjectTextarea").val(text);
+
+
+
+
+        $("#btnAddLink").click(function () {
+            $(this).hide();
+            $("#divAddLink").show();
+        });
+
+        $("#btnSaveLink").click(function () {
+            $("#divAddLink").hide();
+            $("#btnAddLink").show();
+        });
+
+
+
+    });
+
+
+
+</script>

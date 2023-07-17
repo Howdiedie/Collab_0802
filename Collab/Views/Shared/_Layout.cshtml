@@ -3,47 +3,177 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>@ViewData["Title"] - Collab</title>
+    <title>@ViewData["Title"] - collab_00</title>
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
-    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
-    <link rel="stylesheet" href="~/Collab.styles.css" asp-append-version="true" />
+@*    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />*@
+@*    <link rel="stylesheet" href="~/collab_00.styles.css" asp-append-version="true" />*@
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+
+    <!-- ----------Google APIs------------ -->
+    <link rel="stylesheet"
+          href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+    <script src="https://kit.fontawesome.com/5df44635c5.js" crossorigin="anonymous"></script>
+    <!-- bootstrap -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-wEmeIV1mKuiNpC+IOBjI7aAzPcEZeedi5yW5f2yOq55WWLwNGmvvx4Um1vskeMj0" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/@@popperjs/core@2.9.2/dist/umd/popper.min.js"
+            integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p"
+            crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.min.js"
+            integrity="sha384-lpyLfhYuitXl2zRZ5Bn2fqnhNAKOAaM/0Kr9laMspuaMiZfGmfwRNFh8HlMy49eQ"
+            crossorigin="anonymous"></script>
+    <!-- JQuery ui -->
+    @*<link rel="stylesheet" href="//code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css">*@
+    <script src="//apps.bdimg.com/libs/jquery/1.10.2/jquery.min.js"></script>
+    <script src="//apps.bdimg.com/libs/jqueryui/1.10.4/jquery-ui.min.js"></script>
+    <!-- CSS Files -->
+    <link rel="stylesheet" href="~/css/style.css">
+    
+    <!-- JS Files -->
+
 </head>
-<body>
-    <header>
-        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
-            <div class="container-fluid">
-                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">Collab</a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
-                        aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
-                    <ul class="navbar-nav flex-grow-1">
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
+<body style="background-color: #ffffff;">
+    <div class="container-fluid ">
+        <div class="row ">
+            <div class="col-2 gx-0">
+                <!-- left bar -->
+                <div style="height: 100vh;background-color: #254e6b;" class=" scroller leftbar">
+                    <div class="divLogo my-3 ">
+                        <!-- <a class="navbar-brand fs-1" href="#">COLLAB</a> -->
+                        <img src="~/img/logo_white.png" alt="Logo">
+                        <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                                data-bs-target="#navbarNavDarkDropdown" aria-controls="navbarNavDarkDropdown"
+                                aria-expanded="false" aria-label="Toggle navigation">
+                        </button>
+                    </div>
+                    <!-- left personal -->
+                    <div class="col-8  truncate mt-4">
+                        <!-- <span class="material-symbols-outlined ">home</span> -->
+                        <!-- <i class="fa-solid fa-user fa-xl divHome"></i> -->
+                        <i class="fa-regular fa-user fa-xl divHome" style="color: #ffffff; "></i>
+                        <a href="#" class="ms-2  projectName  fs-4">個人總覽</a>
+                    </div>
+                    <!-- left projects-->
+                    <h3 class="col-8   projectTitle fs-4">計劃名稱</h3>
+                    <div class="col-8  truncate circleRed active">
+                        <a href="#" class=" projectName fs-4">藝起派對寫生活動</a>
+                    </div>
+                    <div class="col-8  truncate circleBlue ">
+                        <a href="#" class=" projectName fs-4">電影節網站設計</a>
+                    </div>
+                    <div class="col-8  truncate circle3 ">
+                        <a href="#" class=" projectName fs-4">電影節網站設計</a>
+                    </div>
+                    <div class="col-8  truncate circle4 ">
+                        <a href="#" class=" projectName fs-4">電影節網站設計</a>
+                    </div>
+                    <div class="col-8  truncate circle5 ">
+                        <a href="#" class=" projectName fs-4">電影節網站設計</a>
+                    </div>
+                </div>
+                <!-- left bar end-->
+            </div>
+            <div class="col-10 gx-0">
+                <!-- navbar -->
+                <nav class="navbar navbar-expand-lg navbar-dark  py-3 "
+                     style="background-color: #ffffff; box-shadow: 0 2px 5px rgba(181, 181, 181, 0.144) ">
+                    <div class="container-fluid d-flex justify-content-between ">
+                        <div class=" mx-auto circleyellow-Title">
+                            <span class="mx-auto fs-2 fw-bolder navbarTitle ">藝起派對寫生活動</span>
+                        </div>
+                        <!-- ----------------大頭貼下拉選單區------------ -->
+
+                        <div class="avatar ">
+                            <img src="~/img/MemberImg/0733ba760b29378474dea0fdbcb97107.jpg" alt="頭像">
+                        </div>
+                        <ul class="navbar-nav me-5">
+                            <li class="nav-item dropdown me-4 ">
+                                <a class="nav-link dropdown-toggle " href="#" id="navbarDarkDropdownMenuLink"
+                                   role="button" data-bs-toggle="dropdown" aria-expanded="false"
+                                   style="color: #2b3040e6;  font-size: 24px;  ">
+                                    Patrick
+                                </a>
+                                <ul class="dropdown-menu dropdown-menu-secondary "
+                                    aria-labelledby="navbarDarkDropdownMenuLink">
+                                    <li><a class="dropdown-item fs-5" href="#">會員中心</a></li>
+                                    <li><a class="dropdown-item fs-5" href="#">登出</a></li>
+                                </ul>
+                            </li>
+                        </ul>
+                        <!-- ----------------大頭貼下拉選單區end------------ -->
+                    </div>
+                </nav>
+                <!-- navbar end-->
+                <!-- page button group -->
+                <div class="btn-grouop ms-4">
+                    <ul class="nav nav-tabs mx-4 fs-4" role="tablist">
+                        <li class="nav-item" role="presentation">
+                            <button class="nav-link active" data-bs-toggle="tab" data-bs-target="#home" type="button"
+                                    role="tab" aria-controls="home" aria-selected="true">
+                                總覽
+                            </button>
                         </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+                        <li class="nav-item" role="presentation">
+                            <button class="nav-link" data-bs-toggle="tab" data-bs-target="#profile" type="button"
+                                    role="tab" aria-controls="profile" aria-selected="false">
+                                目標
+                            </button>
+                        </li>
+                        <li class="nav-item" role="presentation">
+                            <button class="nav-link" data-bs-toggle="tab" data-bs-target="#contact" type="button"
+                                    role="tab" aria-controls="contact" aria-selected="false">
+                                任務
+                            </button>
+                        </li>
+                        <li class="nav-item" role="presentation">
+                            <button class="nav-link" data-bs-toggle="tab" data-bs-target="#contact" type="button"
+                                    role="tab" aria-controls="contact" aria-selected="false">
+                                行事曆
+                            </button>
+                        </li>
+                        <li class="nav-item" role="presentation">
+                            <button class="nav-link" data-bs-toggle="tab" data-bs-target="#contact" type="button"
+                                    role="tab" aria-controls="contact" aria-selected="false">
+                                記事本
+                            </button>
+                        </li>
+                        <li class="nav-item" role="presentation">
+                            <button class="nav-link" data-bs-toggle="tab" data-bs-target="#contact" type="button"
+                                    role="tab" aria-controls="contact" aria-selected="false">
+                                通知
+                            </button>
                         </li>
                     </ul>
+                    <!-- <div class="tab-content" id="myTabContent">
+                        <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">...
+                        </div>
+                        <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">...</div>
+                        <div class="tab-pane fade" id="contact" role="tabpanel" aria-labelledby="contact-tab">...</div>
+                    </div> -->
                 </div>
+                <!-- page button group end-->
+                <!--------功能內頁------>
+                <div class="scroller " style="height: 87vh;">
+                    <div class="mx-4">
+                        <div class=" mx-4">
+                            <!-- 從這裡開始寫 -->
+                            @RenderBody()
+                            <!-- 結束 -->
+                        </div>
+                    </div>
+                </div>
+                <!--------功能內頁END------>
             </div>
-        </nav>
-    </header>
-    <div class="container">
-        <main role="main" class="pb-3">
-            @RenderBody()
-        </main>
-    </div>
-
-    <footer class="border-top footer text-muted">
-        <div class="container">
-            &copy; 2023 - Collab - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
         </div>
-    </footer>
+    </div>
+    <!-- MVC -->
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
     @await RenderSectionAsync("Scripts", required: false)
 </body>
+
+
+
 </html>

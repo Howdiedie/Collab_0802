@@ -1,0 +1,88 @@
+﻿
+@{
+    ViewData["Title"] = "Index";
+}
+
+            <div class="section1">
+                <div class="addTarget">
+                    <a class="icon-addTarget"><i class="fa-regular fa-square-plus fa-2xl"></i></a>
+                    <input class="addInput" type="text" placeholder="新增目標" name=""
+                           onfocus="this.placeholder = ''" onblur="this.placeholder = '新增目標'">
+                </div>
+                <div class="sort">
+                    <button class="btn dropdown-toggle" type="button" id="dropdownMenuButton1"
+                            data-bs-toggle="dropdown" aria-expanded="false">
+                        排序方式
+                    </button>
+                    <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                        <li><a class="dropdown-item" href="#">依新增日期</a></li>
+                        <li><a class="dropdown-item" href="#">依進度</a></li>
+                        <li><a class="dropdown-item" href="#">依任務數量</a></li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="progressArea">
+                <div class="targetItem">
+                    <div class="targeTittle">
+                        <div>
+                            <p for="">文宣規劃設計及製作</p>
+                        </div>
+                        <div class="target-addMission">
+                            <a class="icon-addMission">
+                                <i class="fa-solid fa-plus fa-lg"></i>&nbsp;新增任務
+                            </a>
+                        </div>
+                    </div>
+                    <progress class="target-1" max="100" value="70">70%</progress>
+                    <label>任務數量：5</label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<label>/</label>&nbsp;&nbsp;&nbsp;&nbsp;<label>已完成：3</label>
+                </div>
+                <div class="targetItem">
+                    <div class="targeTittle">
+                        <div>
+                            <p for="">寫生活動用品準備</p>
+                        </div>
+                        <div class="target-addMission">
+                            <a class="icon-addMission">
+                                <i class="fa-solid fa-plus fa-lg"></i>&nbsp;新增任務
+                            </a>
+                        </div>
+                    </div>
+                    <progress class="target-2" max="100" value="50">50%</progress>
+                    <label>任務數量：4</label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<label>/</label>&nbsp;&nbsp;&nbsp;&nbsp;<label>已完成：2</label>
+                </div>
+                <div class="targetItem">
+                    <div class="targeTittle">
+                        <div>
+                            <p for="">派對市集:安排至少20攤市集</p>
+                        </div>
+                        <div class="target-addMission">
+                            <a class="icon-addMission">
+                                <i class="fa-solid fa-plus fa-lg"></i>&nbsp;新增任務
+                            </a>
+                        </div>
+                    </div>
+                    <progress class="target-3" max="100" value="20">20%</progress>
+                    <label>任務數量：6</label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<label>/</label>&nbsp;&nbsp;&nbsp;&nbsp;<label>已完成：2</label>
+                </div>
+                <div class="targetItem">
+                    <div class="targeTittle">
+                        <div>
+                            <p for="">表演節目:至少2場或2組表演團隊/街頭藝人</p>
+                        </div>
+                        <div class="target-addMission">
+                            <a class="icon-addMission">
+                                <i class="fa-solid fa-plus fa-lg"></i>&nbsp;新增任務
+                            </a>
+                        </div>
+                    </div>
+                    <progress class="target-4" max="100" value="0">0%</progress>
+                    <label>任務數量：3</label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<label>/</label>&nbsp;&nbsp;&nbsp;&nbsp;<label>已完成：0</label>
+                </div>
+                <div>
+                    <img src="~/img/Intent/9812.png" alt="" class="bgImg">
+                </div>
+            </div>
+
+
+<link rel="stylesheet" href="~/css/Intent.css" />

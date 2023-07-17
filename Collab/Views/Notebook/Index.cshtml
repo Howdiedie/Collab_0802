@@ -1,0 +1,186 @@
+﻿@{
+    ViewData["Title"] = "Index";
+}
+
+<!--------功能內頁------>
+<div class="container">
+    <div class="mb-4">
+        <div class="row mx-2">
+            <!-- <div class="col-sm-5 mt-5">
+                <form class="d-flex">
+                    <input class="form-control me-2" type="search" placeholder="搜尋標題"
+                        aria-label="Search">
+                    <button class="btn btn-outline-success" type="submit">
+                        <i class="fas fa-search"></i>
+                    </button>
+                </form>
+            </div> -->
+            <div class="col-sm-5 mt-5">
+                <form>
+                    <input class="searchInput" type="text" placeholder="搜尋標題" name=""
+                           onfocus="this.placeholder = ''" onblur="this.placeholder = '搜尋標題'">
+                    <a class="icon-search"><i class="fa-solid fa-magnifying-glass fa-2xl"></i></a>
+                </form>
+            </div>
+
+            <div class="col-sm-7 mt-5">
+            </div>
+            <div class="col-sm-9 mt-5">
+                <a href="./LayoutTestEdit.html" class="addNote">
+                    <i class="fa-regular fa-square-plus fa-2xl" style="font-size: 40px;"></i>
+                    <span>新增記事本</span>
+                </a>
+            </div>
+
+            <div class="col-sm-3 mt-5">
+                <div class="sort">
+                    <button class="btn dropdown-toggle" type="button" id="dropdownMenuButton1"
+                            data-bs-toggle="dropdown" aria-expanded="false">
+                        排序方式
+                    </button>
+                    <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                        <li><a class="dropdown-item" href="#">日期由近到遠</a></li>
+                        <li><a class="dropdown-item" href="#">日期由遠到近</a></li>
+                    </ul>
+                </div>
+
+            </div>
+            <!-- 以下區塊為記事本條列 -->
+
+            <div class="col-sm-12 mt-4 custom-div">
+                <!-- 7/3晚上修改版本 -->
+
+                <div class="row justify-content-center">
+                    <div class="col-md-12 mt-3">
+                        <div class="NbListInside  p-4 my-1">
+                            <div class="d-flex align-items-center" style="height: 100%;">
+                                <!-- 區塊的內容 -->
+                                <div class="col-sm-5">
+                                    <p class="CtrNbIfo">廠商聯絡資料廠商聯絡資料廠商聯絡資料廠商聯絡資料廠商聯絡資料</p>
+                                </div>
+                                <div class="col-3"></div>
+                                <div class="col-sm-2">
+                                    <p class="CtrTimeBox">2023/07/03</p>
+                                </div>
+                                <div class="col-1"></div>
+                                <div class="col-sm-1">
+                                    <div class="NbListCtr">
+                                        <img src="~/img/MemberImg/0733ba760b29378474dea0fdbcb97107.jpg">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row justify-content-center">
+                    <div class="col-md-12 mt-3">
+                        <div class="NbListInside  p-4 my-1">
+                            <div class="d-flex align-items-center" style="height: 100%;">
+                                <!-- 區塊的內容 -->
+                                <div class="col-sm-5">
+                                    <p class="CtrNbIfo">廠商聯絡資料廠商聯絡資料廠商聯絡資料廠商聯絡資料廠商聯絡資料</p>
+                                </div>
+                                <div class="col-3"></div>
+                                <div class="col-sm-2">
+                                    <p class="CtrTimeBox">2023/07/03</p>
+                                </div>
+                                <div class="col-1"></div>
+                                <div class="col-sm-1">
+                                    <div class="NbListCtr">
+                                        <img src="~/img/MemberImg/0733ba760b29378474dea0fdbcb97107.jpg">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row justify-content-center">
+                    <div class="col-md-12 mt-3">
+                        <div class="NbListInside  p-4 my-1">
+                            <div class="d-flex align-items-center" style="height: 100%;">
+                                <!-- 區塊的內容 -->
+                                <div class="col-sm-5">
+                                    <p class="CtrNbIfo">廠商聯絡資料廠商聯絡資料廠商聯絡資料廠商聯絡資料廠商聯絡資料</p>
+                                </div>
+                                <div class="col-3"></div>
+                                <div class="col-sm-2">
+                                    <p class="CtrTimeBox">2023/07/03</p>
+                                </div>
+                                <div class="col-1"></div>
+                                <div class="col-sm-1">
+                                    <div class="NbListCtr">
+                                        <img src="~/img/MemberImg/0733ba760b29378474dea0fdbcb97107.jpg">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row justify-content-center">
+                    <div class="col-md-12 mt-3">
+                        <div class="NbListInside  p-4 my-1">
+                            <div class="d-flex align-items-center" style="height: 100%;">
+                                <!-- 區塊的內容 -->
+                                <div class="col-sm-5">
+                                    <p class="CtrNbIfo">廠商聯絡資料廠商聯絡資料廠商聯絡資料廠商聯絡資料廠商聯絡資料</p>
+                                </div>
+                                <div class="col-3"></div>
+                                <div class="col-sm-2">
+                                    <p class="CtrTimeBox">2023/07/03</p>
+                                </div>
+                                <div class="col-1"></div>
+                                <div class="col-sm-1">
+                                    <div class="NbListCtr">
+                                        <img src="~/img/MemberImg/0733ba760b29378474dea0fdbcb97107.jpg">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row justify-content-center">
+                    <div class="col-md-12 mt-3">
+                        <div class="NbListInside  p-4 my-1">
+                            <div class="d-flex align-items-center" style="height: 100%;">
+                                <!-- 區塊的內容 -->
+                                <div class="col-sm-5">
+                                    <p class="CtrNbIfo">廠商聯絡資料廠商聯絡資料廠商聯絡資料廠商聯絡資料廠商聯絡資料</p>
+                                </div>
+                                <div class="col-3"></div>
+                                <div class="col-sm-2">
+                                    <p class="CtrTimeBox">2023/07/03</p>
+                                </div>
+                                <div class="col-1"></div>
+                                <div class="col-sm-1">
+                                    <div class="NbListCtr">
+                                        <img src="~/img/MemberImg/0733ba760b29378474dea0fdbcb97107.jpg">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // // 获取当前日期
+        // var today = new Date();
+
+        // // 将日期格式化为字符串
+        // var dateString = today.toLocaleDateString();
+
+        // // 将日期字符串显示在指定的区块内
+        // document.getElementById("dateBlock").textContent = dateString;
+
+        document.getElementById('AddNotebook').addEventListener('click', function () {
+            window.open('./LayoutTestEdit.html', '_blank');
+        });
+
+    </script>
+
+    <!--------功能內頁END------>
+</div>
+<!--------功能內頁END------>
+<link rel="stylesheet" href="~/css/Notebook.css" />

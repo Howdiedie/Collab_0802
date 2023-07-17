@@ -1,0 +1,247 @@
+﻿body {
+}
+html,
+body,
+div {
+    margin: 0;
+    padding: 0;
+    border: 0;
+}
+
+
+/* ------navbar-------------------------- */
+.navbar {
+    width: 100%;
+    height: 120px;
+    /* background-color: rgb(243, 243, 244); */
+    display: flex;
+    align-items: center;
+    position: fixed;
+    top: 0;
+    background-color: white;
+    z-index: 999;
+    box-shadow: 0px 0px 30px rgba(157, 155, 155, 0.173);
+}
+
+.container {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.logo {
+    margin-left: 6%;
+    width: 250px;
+    height: auto;
+}
+
+.btn-start {
+    color: white;
+    font-size: 30px;
+    margin-right: 6%;
+    background-color: #0e356de6;
+    border-radius: 10px 10px 10px 10px;
+    padding: 8px 18px 8px 18px;
+    border: none;
+}
+
+    .btn-start:hover {
+        color: white;
+        font-size: 30px;
+        margin-right: 6%;
+        border-radius: 10px 10px 10px 10px;
+        padding: 8px 18px 8px 18px;
+        border: none;
+        background-color: #6230f7e6;
+    }
+
+/* -----section 1 -------------------------- */
+.section1 {
+    margin-top: 10%;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    height: 600px;
+    /* background-color: rgb(243, 244, 244); */
+}
+
+/* .content1-right {
+    width: 40%;
+} */
+
+.content-left {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 40%;
+}
+
+.section1 .colorgraphic {
+    position: absolute;
+}
+
+.section1 .intro1 {
+    position: absolute;
+    margin-left: 10%;
+}
+
+.intro1 > h1 {
+    font-size: 36px;
+}
+
+.intro1 > p {
+    font-size: 32px;
+    line-height: 2;
+    margin-bottom: 100px;
+}
+
+.intro1 > button {
+    font-size: 40px;
+}
+
+    .intro1 > button:hover {
+        font-size: 40px;
+    }
+
+/* -----section 2 -------------------------- */
+.section2 {
+    margin-top: 250px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    height: 800px;
+    /* background-color: rgb(248, 245, 245); */
+}
+
+.img1 {
+    width: 500px;
+    position: absolute;
+    left: 50px;
+    top: 50px;
+}
+
+.img2 {
+    width: 600px;
+    position: absolute;
+    left: 90px;
+    top: 300px;
+}
+
+.img3 {
+    width: 600px;
+    position: absolute;
+    left: 600px;
+    top: 0px;
+}
+
+.img4 {
+    width: 450px;
+    position: absolute;
+    left: 760px;
+    top: 430px;
+}
+
+.section2 .intro2 {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.section2 .colorgraphic {
+    position: absolute;
+    width: 40%;
+    right: 0;
+}
+
+.intro2-content {
+    width: 30%;
+    position: absolute;
+    font-size: 28px;
+    line-height: 2;
+    right: 40px;
+}
+
+/* -----section 3 -------------------------- */
+.section3 {
+    margin-top: 80px;
+    margin-left: 3%;
+    margin-right: 3%;
+    height: 700px;
+    background-color: rgb(206, 227, 253);
+    border-radius: 50px 50px 50px 50px;
+    /* display: flex; */
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+
+.circleImg {
+    padding-top: 80px;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+}
+
+.circleImg-1 {
+    width: 400px;
+}
+
+.circleImg-2 {
+    width: 400px;
+}
+
+.circleImg-3 {
+    width: 400px;
+}
+
+.intro3 {
+    font-size: 32px;
+    width: 70%;
+    line-height: 2;
+    padding-top: 50px;
+    text-align: left;
+    margin-left: 6%;
+}
+
+/* -----section 4 -------------------------- */
+.section4 {
+    margin-top: 80px;
+    margin-bottom: 80px;
+    height: 600px;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+}
+
+.intro4 > h1 {
+    font-size: 80px;
+    color: #154a94e6;
+}
+
+.intro4 > p {
+    font-size: 40px;
+}
+
+.intro4 > .btn-start {
+    margin-top: 50px;
+    font-size: 40px;
+}
+
+.img5 {
+    height: 400px;
+}
+
+
+/* ------footer------------------------------- */
+.footer {
+    height: 100px;
+    font-size: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    background-color: rgb(46, 101, 172);
+    color: white;
+}
