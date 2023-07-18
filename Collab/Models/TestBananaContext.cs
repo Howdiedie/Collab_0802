@@ -6,7 +6,11 @@ namespace Collab.Models;
 
 public partial class TestBananaContext : DbContext
 {
-    public TestBananaContext()
+	internal string? targetName;
+	internal int? missionCount;
+	internal int? missionFinish;
+
+	public TestBananaContext()
     {
     }
 
