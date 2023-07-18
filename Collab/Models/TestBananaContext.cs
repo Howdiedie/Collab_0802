@@ -9,6 +9,7 @@ public partial class TestBananaContext : DbContext
 	internal string? targetName;
 	internal int? missionCount;
 	internal int? missionFinish;
+	internal int targetID;
 
 	public TestBananaContext()
     {

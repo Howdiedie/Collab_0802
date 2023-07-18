@@ -38,5 +38,37 @@ namespace collab_00.Controllers {
 
 			return RedirectToAction("Index");
 		}
+
+		public IActionResult Sort(int? sortOrder)
+		{
+			var sortList = from targetItem in _bananaContext.Intents
+						   select new TestBananaContext
+						   {
+							   targetName = targetItem.IntentName,
+							   missionCount = targetItem.MissionCountTotal,
+							   missionFinish = targetItem.MissionCountFinish,
+							   targetID = targetItem.IntentId,
+						   };
+
+			switch (sortOrder) {
+				case 1:
+					// 按新增日期排序
+					sortList = sortList.OrderBy(item => item.targetID);
+					break;
+				case 2:
+					// 按進度排序
+					sortList = sortList.OrderBy(item => item.missionCount != 0 ? item.missionFinish / item.missionCount : 0);
+					break;
+				case 3:
+					// 按任務數量排序
+					sortList = sortList.OrderBy(item => item.missionCount);
+					break;
+				default:
+					break;
+			}
+
+			return View("Index", sortList.ToList());
+		}
+
 	}
 }

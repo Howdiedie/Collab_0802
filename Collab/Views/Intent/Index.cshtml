@@ -3,11 +3,12 @@
 }
 @model List<TestBananaContext>;
 
+
 <div class="section1">
 	<div class="addTarget">
 		<form asp-action="AddTarget" method="post">
 			<button class="icon-addTarget" type="submit" style="border:none; background-color:white"><i class="fa-regular fa-square-plus fa-2xl"></i></button>
-			<input class="addInput" type="text" placeholder="新增目標" name="target" value=""/>
+			<input class="addInput" type="text" placeholder="新增目標" name="target" value="" />
 		</form>
 	</div>
 
@@ -17,31 +18,34 @@
 			排序方式
 		</button>
 		<ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-			<li><a class="dropdown-item" href="#">依新增日期</a></li>
-			<li><a class="dropdown-item" href="#">依進度</a></li>
-			<li><a class="dropdown-item" href="#">依任務數量</a></li>
+
+			<li><a class="dropdown-item" href="@Url.Action("Sort", new { sortOrder = 1 })">依新增日期</a></li>
+			<li><a class="dropdown-item" href="@Url.Action("Sort", new { sortOrder = 2 })">依進度</a></li>
+			<li><a class="dropdown-item" href="@Url.Action("Sort", new { sortOrder = 3 })">依任務數量</a></li>
+
 		</ul>
 	</div>
 </div>
+</div>
 
 <div class="progressArea">
-	@foreach(var item in Model) {
+	@foreach (var targetItem in Model) {
 
-		int MC = Convert.ToInt32(item.missionCount);
-		int MF = Convert.ToInt32(item.missionFinish);
-		int P;
+		double MC = Convert.ToDouble(targetItem.missionCount);
+		double MF = Convert.ToDouble(targetItem.missionFinish);
+		int Count;
 
-		if(MC == 0) {
-			P = 0;
+		if (MC == 0 || MF == 0) {
+			Count = 0;
 		}
 		else {
-			P = (int)(MF / MC )* 100;
+			Count = Convert.ToInt32(Math.Round((MF / MC) * 100));
 		}
 
 		<div class="targetItem">
 			<div class="targeTittle">
 				<div>
-					<p for="">@item.targetName</p>
+					<p for="">@targetItem.targetName</p>
 				</div>
 				<div class="target-addMission">
 					<a class="icon-addMission">
@@ -49,12 +53,12 @@
 					</a>
 				</div>
 			</div>
-			<progress class="target-1" max="100" value="@P"></progress>
-			<label>任務數量：@item.missionCount</label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<label>/</label>&nbsp;&nbsp;&nbsp;&nbsp;<label>已完成：@item.missionFinish</label>
+			<progress class="progress-bar" max="100" min="0" value="@Count"></progress>
+			<label>任務數量：@targetItem.missionCount</label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<label>/</label>&nbsp;&nbsp;&nbsp;&nbsp;<label>已完成：@targetItem.missionFinish</label>
 		</div>
 	}
-	
-	
+
+
 	<div>
 		<img src="~/img/Intent/9812.png" alt="" class="bgImg">
 	</div>
@@ -62,3 +66,6 @@
 
 
 <link rel="stylesheet" href="~/css/Intent.css" />
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
