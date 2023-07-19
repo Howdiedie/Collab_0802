@@ -1,19 +1,19 @@
-﻿@model List<MissionViewModel>
-@{
-    ViewData["Title"] = "Home Page";
+﻿@{
+    var optionsList = ViewBag.option as List<string>;
 }
-
         <!-- 從這裡開始寫 -->
         <br>
         <!-- select option -->
-        <div class="sele">
+        <div class="">
             <div class="row  gx-0">
                 <div class="col-4">
-                    <select class="form-select" aria-label="Default select example">
-                        <option selected>全部目標分類</option>
-                        <option value="1">One</option>
-                        <option value="2">Two</option>
-                        <option value="3">Three</option>
+                <select id="selector" class="form-select" aria-label="Default select example">
+                <option value="all" selected>全部目標分類</option>
+                @if (optionsList != null && optionsList.Count > 0) {
+                            @foreach (var option in optionsList) {
+                                <option  value="@option">@option</option>
+                            }
+                        }
                     </select>
                 </div>
                 <div class="col"></div>
@@ -25,32 +25,29 @@
             <div class="row gx-0">
                 <div class="col d-flex justify-content-center align-items-start">
                     <h2>新任務</h2>
-                    <a class="addIcon"><i class="fa-regular fa-square-plus fa-2xl"></i></a>
+                    <button class="addIcon border-0 bg-white" type="submit"><i class="fa-regular fa-square-plus fa-2xl"></i></button>
                 </div>
                 <div class="col d-flex justify-content-center align-items-start">
                     <h2>進行中</h2>
-                    <a class="addIcon"><i class="fa-regular fa-square-plus fa-2xl"></i></a>
-
+                    <button class="addIcon border-0 bg-white" type="submit"><i class="fa-regular fa-square-plus fa-2xl"></i></button>
                 </div>
                 <div class="col d-flex justify-content-center align-items-start">
                     <h2>已完成</h2>
-                    <a class="addIcon"><i class="fa-regular fa-square-plus fa-2xl"></i></a>
-
+                    <button class="addIcon border-0 bg-white" type="submit"><i class="fa-regular fa-square-plus fa-2xl"></i></button>
                 </div>
             </div>
             <!-- 任務分類 end-->
             <!-- 清單 -->
             <div class="row  gx-0">
-
-        <div class="col scroller" style="height:65vh">
+                <div class="col scroller" style="height:65vh">
                     <ul id="sortable1" class="connectedSortable" >
-                        @foreach (var mission in Model) {
-                            @if (mission.MisState == "新任務") {
-                                <li class="ui-state my-4 mx-4">
-                                    <h3 class="mx-4 my-4">@mission.MissionName</h3>
+                        @foreach (var item in ViewBag.MissionWithIntent) {
+                            @if (item.Mission.MisState == "新任務") {
+                        <li class="ui-state show my-4 mx-4 draggable-mission" data-intent-name="@item.IntentName" data-mission-name="@item.Mission.MissionName" data-mis-state="@item.Mission.MisState">
+                                <h3 class="mx-4 my-4">@item.Mission.MissionName</h3>
                                     <div class="row mx-2 my-3">
                                         <div class="col d-flex  align-items-center">
-                                            <div class=" bd-highlight">@mission.MisStartTime - @mission.MisFinishTime</div>
+                                    <div class=" bd-highlight">@item.Mission.MisStartTime - @item.Mission.MisFinishTime</div>
                                         </div>
                                         <div class="col-2 d-flex align-items-center">
                                             <img class="MissionAvatar"
@@ -68,50 +65,50 @@
                 </div>
                 <div class="col scroller" style="height:65vh">
                     <ul id="sortable2" class="connectedSortable" >
-                        @foreach (var mission in Model) {
-                            @if (mission.MisState == "進行中") {
-                                <li class="ui-state my-4 mx-4">
-                                    <h3 class="mx-4 my-4">@mission.MissionName</h3>
-                                    <div class="row mx-2 my-3">
-                                        <div class="col d-flex  align-items-center">
-                                            <div class=" bd-highlight">@mission.MisStartTime - @mission.MisFinishTime</div>
-                                        </div>
-                                        <div class="col-2 d-flex align-items-center">
-                                            <img class="MissionAvatar"
-                                                 src="~/img/MemberImg/0733ba760b29378474dea0fdbcb97107.jpg" alt="頭像">
-                                        </div>
-                                        <div class="col-2 d-flex align-items-center">
-                                            <i class="fa-regular fa-envelope fa-2xl"
-                                               style="color:#696c71"></i>
-                                        </div>
-                                    </div>
-                                </li>
-                            }
-                        }
+                        @foreach (var item in ViewBag.MissionWithIntent) {
+                    @if (item.Mission.MisState == "進行中") {
+                        <li class="ui-state show my-4 mx-4 draggable-mission" data-intent-name="@item.IntentName" data-mission-name="@item.Mission.MissionName" data-mis-state="@item.Mission.MisState">
+                            <h3 class="mx-4 my-4">@item.Mission.MissionName</h3>
+                            <div class="row mx-2 my-3">
+                                <div class="col d-flex  align-items-center">
+                                    <div class=" bd-highlight">@item.Mission.MisStartTime - @item.Mission.MisFinishTime</div>
+                                </div>
+                                <div class="col-2 d-flex align-items-center">
+                                    <img class="MissionAvatar"
+                                         src="~/img/MemberImg/0733ba760b29378474dea0fdbcb97107.jpg" alt="頭像">
+                                </div>
+                                <div class="col-2 d-flex align-items-center">
+                                    <i class="fa-regular fa-envelope fa-2xl"
+                                       style="color:#696c71"></i>
+                                </div>
+                            </div>
+                        </li>
+                    }
+                }
                     </ul>
                 </div>
                 <div class="col scroller" style="height:65vh">
                     <ul id="sortable3" class="connectedSortable" >
-                        @foreach (var mission in Model) {
-                            @if (mission.MisState == "已完成") {
-                                <li class="ui-state my-4 mx-4">
-                                    <h3 class="mx-4 my-4">@mission.MissionName</h3>
-                                    <div class="row mx-2 my-3">
-                                        <div class="col d-flex  align-items-center">
-                                            <div class=" bd-highlight">@mission.MisStartTime - @mission.MisFinishTime</div>
-                                        </div>
-                                        <div class="col-2 d-flex align-items-center">
-                                            <img class="MissionAvatar"
-                                                 src="~/img/MemberImg/0733ba760b29378474dea0fdbcb97107.jpg" alt="頭像">
-                                        </div>
-                                        <div class="col-2 d-flex align-items-center">
-                                            <i class="fa-regular fa-envelope fa-2xl"
-                                               style="color:#696c71"></i>
-                                        </div>
-                                    </div>
-                                </li>
-                            }
-                        }
+                        @foreach (var item in ViewBag.MissionWithIntent) {
+                    @if (item.Mission.MisState == "已完成") {
+                        <li class="ui-state show my-4 mx-4 draggable-mission" data-intent-name="@item.IntentName" data-mission-name="@item.Mission.MissionName" data-mis-state="@item.Mission.MisState">
+                            <h3 class="mx-4 my-4">@item.Mission.MissionName</h3>
+                            <div class="row mx-2 my-3">
+                                <div class="col d-flex  align-items-center">
+                                    <div class=" bd-highlight">@item.Mission.MisStartTime - @item.Mission.MisFinishTime</div>
+                                </div>
+                                <div class="col-2 d-flex align-items-center">
+                                    <img class="MissionAvatar"
+                                         src="~/img/MemberImg/0733ba760b29378474dea0fdbcb97107.jpg" alt="頭像">
+                                </div>
+                                <div class="col-2 d-flex align-items-center">
+                                    <i class="fa-regular fa-envelope fa-2xl"
+                                       style="color:#696c71"></i>
+                                </div>
+                            </div>
+                        </li>
+                    }
+                }
                     </ul>
                 </div>
 
@@ -119,6 +116,11 @@
             <!-- 清單 end-->
         </div>
         <!-- 任務清單 end -->
+        <!-- 任務編輯-->
+        <dialog id="infoModal">
+            <partial name="~/Views/MissionEdit/Index.cshtml"/>
+        </dialog>
+        <!-- 任務編輯 end-->
         <!-- 結束 -->
 
 <script src="~/js/mission/JavaScript.js"></script>

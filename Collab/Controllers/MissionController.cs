@@ -12,18 +12,47 @@ namespace collab_00.Controllers {
             _TestBananaContext = testBananaContext;
         }
 
-
         public IActionResult Index() {
-            var missions = _TestBananaContext.Missions
-                            .Select(m => new MissionViewModel {
-                                MissionName = m.MissionName,
-                                MisStartTime = m.MisStartTime,
-                                MisFinishTime = m.MisFinishTime,
-                                MisState = m.MisState
-                            })
-                            .ToList();
+            var missions = from intent in _TestBananaContext.Intents
+                           join mission in _TestBananaContext.Missions on intent.IntentId equals  mission.IntentId
+                           select new {
+                               Mission = mission,
+                               IntentName = intent.IntentName
+                           };
 
-            return View(missions);
+            var query = from intent in _TestBananaContext.Intents
+                        join program in _TestBananaContext.Programs on intent.ProgramId equals program.ProgramId
+                        where intent.ProgramId == 1
+                        select intent.IntentName;
+
+            ViewBag.option = query.ToList();
+            var result = missions.ToList();
+
+            if (result != null && result.Count > 0) {
+                ViewBag.MissionWithIntent = result;
+            } else {
+                ViewBag.MissionWithIntent = null;
+            }
+            return View();
+        }
+
+        [HttpPost]
+        public IActionResult ActionName(string missionName, string misState) {
+            // 查询数据库中具有特定MissionName的Mission实例
+            var missionToUpdate = _TestBananaContext.Missions.FirstOrDefault(m => m.MissionName == missionName);
+
+            if (missionToUpdate != null) {
+                // 更新MisState的值
+                missionToUpdate.MisState = misState;
+
+                // 保存更改到数据库
+                _TestBananaContext.SaveChanges();
+
+                return Json(new { success = true });
+            }
+
+            return Json(new { success = false, message = "Mission not found." });
+
         }
     }
 }
