@@ -1,8 +1,13 @@
+using Collab.Models;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
+using System;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
-
+builder.Services.AddDbContext<TestBananaContext>(options => options.UseSqlServer(builder.Configuration.GetConnectionString("TestBananaContext")));
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -21,6 +26,6 @@ app.UseAuthorization();
 
 app.MapControllerRoute(
     name: "default",
-    pattern: "{controller=Home}/{action=Index}/{id?}");
+    pattern: "{controller=MissionEdit}/{action=Index}/{id?}");
 
 app.Run();

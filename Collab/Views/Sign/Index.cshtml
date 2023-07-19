@@ -1,4 +1,4 @@
-﻿
+﻿@model Collab.Models.Member
 @{
     ViewData["Title"] = "Index";
     Layout = null;
@@ -35,12 +35,12 @@
         <!-- 建立密碼 -->
         <div class="password">
             <label for="password">密碼</label>
-            <input type="password" placeholder="" minlength="6" maxlength="12" pattern="^[a-zA-Z0-9]$" required>
+            <input type="password" placeholder="" minlength="6" maxlength="12" pattern="^[a-zA-Z0-9][a-zA-Z0-9]{6,12}$" required>
         </div>
         <!-- 確認密碼 -->
         <div class="confirmPassword">
             <label for="confirmPassword">確認密碼</label>
-            <input type="password" placeholder="" required>
+            <input type="password" placeholder="" minlength="6" maxlength="12" pattern="^[a-zA-Z0-9]{6,12}$" required>
         </div>
 
         <!-- 註冊按鈕 -->
@@ -50,4 +50,30 @@
     </form>
 </div>
 <link rel="stylesheet" href="~/css/Sign.css" />
+<script>
+    $(document).ready(function () {
+        // 函數用於驗證密碼和確認密碼欄位
+        function validatePassword() {
+            var password = $("input[name='password']").val();
+            var confirmPassword = $("input[name='confirmPassword']").val();
 
+            if (password !== confirmPassword) {
+                alert("密碼不相符。");
+                return false;
+            }
+
+            return true;
+        }
+        e
+        // 為表單的提交事件附加事件處理程序
+        $("form").submit(function (event) {
+            // 如果密碼不匹配，阻止表單提交
+            if (!validatePassword()) {
+                event.preventDefault();
+            } else {
+                // 驗證成功，將使用者重新導向到會員登入的頁面
+                return RedirectToAction("Index", "Login"); // 替換為會員登入頁面的URL
+            }
+        });
+    });
+</script>
