@@ -48,13 +48,13 @@
 					<p for="">@targetItem.targetName</p>
 				</div>
 				<div class="target-addMission">
-					<a class="icon-addMission">
+					<button class="icon-addMission showDialog" style="border:none; background-color:white">
 						<i class="fa-solid fa-plus fa-lg"></i>&nbsp;新增任務
-					</a>
+					</button>
 				</div>
 			</div>
 			<progress class="progress-bar" max="100" min="0" value="@Count"></progress>
-			<label>任務數量：@targetItem.missionCount</label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<label>/</label>&nbsp;&nbsp;&nbsp;&nbsp;<label>已完成：@targetItem.missionFinish</label>
+			<label class="missionAmount">任務數量：@targetItem.missionCount</label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<label>/</label>&nbsp;&nbsp;&nbsp;&nbsp;<label class="missionAmount">已完成：@targetItem.missionFinish</label>
 		</div>
 	}
 
@@ -62,10 +62,36 @@
 	<div>
 		<img src="~/img/Intent/9812.png" alt="" class="bgImg">
 	</div>
+
+	<dialog id="infoModal">
+		<partial name="~/Views/MissionEdit/Index.cshtml" />
+	</dialog>
+
 </div>
 
+<!-- ------------- JS ---------------- -->
+
+<script>
+	let showBtns = document.querySelectorAll(".showDialog");
+	let infoModal = document.querySelector("#infoModal");
+	let closeBtns = document.querySelectorAll(".closeDialog");
+
+	showBtns.forEach(function (showBtn) {
+		showBtn.addEventListener("click", function () {
+			infoModal.showModal();
+		});
+	});
+
+	closeBtns.forEach(function (closeBtn) {
+		closeBtn.addEventListener("click", function () {
+			infoModal.close();
+		});
+	});
+</script>
+
+
+<!-- ------------- JS end---------------- -->
 
 <link rel="stylesheet" href="~/css/Intent.css" />
+
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>

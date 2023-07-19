@@ -57,7 +57,7 @@ namespace collab_00.Controllers {
 					break;
 				case 2:
 					// 按進度排序
-					sortList = sortList.OrderBy(item => item.missionCount != 0 ? item.missionFinish / item.missionCount : 0);
+					sortList = sortList.OrderByDescending(item => item.missionCount != 0 ? item.missionFinish / item.missionCount : 0);
 					break;
 				case 3:
 					// 按任務數量排序
