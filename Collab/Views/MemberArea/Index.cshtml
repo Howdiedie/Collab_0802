@@ -4,6 +4,7 @@
     ViewData["Title"] = "Index";
 }
 
+
 <div class="scroller " style="height: 87vh;">
     <div class="mx-4">
         <div class=" mx-4">
@@ -16,8 +17,8 @@
                         <div class="row gx-4 col-12">
                             <div class="col-auto ms-4 ">
                                 <div class="avatar MemberAreaImg ImgDiv">
-                                    <a href="" class="editImgA">編輯</a>
-                                    <img src="~/img/MemberImg/0733ba760b29378474dea0fdbcb97107.jpg" alt="頭像">
+                                    <a href="#" class="editImgA" id="show">編輯</a>
+                                    <img src="@ViewBag.ProfilePicturePath" alt="頭像">
                                 </div>
                             </div>
                             <div class="col-auto my-auto">
@@ -93,24 +94,23 @@
                                            class="col-3 form-label ms-3 fs-3">舊密碼</label>
                                     <input id="inputOddPWD" type="text"
                                            class="myInput   ms-4 p-3 fs-5"
-                                           id="formGroupExampleInput" placeholder="請輸入舊密碼" disabled>
+                                            name="OldPassword" placeholder="請輸入舊密碼" disabled>
                                 </div>
                                 <div class="mb-4 col-12 pb-4 " style="display: flex;">
                                     <label for=" " class="col-3 form-label ms-3 fs-3">新密碼</label>
                                     <input id="inputNewPWD" type="text"
                                            class="myInput ms-4 p-3 fs-5"
-                                           id="formGroupExampleInput" placeholder="請輸入新密碼" disabled>
+                                           name="NewPassword" placeholder="請輸入新密碼" disabled>
                                 </div>
                                 <div class="mb-4 col-12 pb-4" style="display: flex;">
                                     <label for=" " class="col-3 form-label ms-3 fs-3">確認新密碼</label>
                                     <input id="inputNewPWD2" type="text"
                                            class="myInput  ms-4 p-3 fs-5"
-                                           id="formGroupExampleInput" placeholder="請再次輸入新密碼" disabled>
+                                           name="ConfirmPassword" placeholder="請再次輸入新密碼" disabled>
                                 </div>
                             </form>
                         </div>
                     </div>
-
                 </div>
 
             </div>
@@ -123,9 +123,35 @@
         <!-- 結束 -->
     </div>
 </div>
-<link rel="stylesheet" href="~/css/MemberArea.css" />
+<dialog id="infoModal">
+    <form asp-action="UploadProfilePicture" method="post" enctype="multipart/form-data">
+        <label for="file" class="fs-2 mt-5 ms-3">選擇一個頭像圖片：</label><br><br>
+        <input type="file" id="file" name="file" accept="image/*" class="fs-5 ms-3"><br><br>
+        <input type="submit" value="上傳" class="fs-5 mb-5 ms-3">
+        <button type="button" id="cancelButton" class="fs-5 btn-close position-absolute top-0 end-0"></button>
+    </form>
+</dialog>
 
+<!-- ------------- JS ---------------- -->
 <script>
+    let btn = document.querySelector("#show");
+    let infoModal = document.querySelector("#infoModal");
+    btn.addEventListener("click", function () {
+        infoModal.showModal();
+    })
+    document.getElementById('cancelButton').addEventListener('click', function () {
+        document.getElementById('infoModal').close();
+    });
+</script>
+<!-- ------------- JS end---------------- -->
+<script>
+
+    function htmlDecode(input) {
+        var doc = new DOMParser().parseFromString(input, "text/html");
+        return doc.documentElement.textContent;
+    }
+
+
     $(document).ready(function () {
 
         var isEditing = false; // 初始編輯狀態為 false
@@ -217,6 +243,16 @@
             isEditingPwd = false;
         });
 
+
+        // alert視窗
+        var message = '@Html.Raw(TempData["Message"])';
+        if (message) {
+            alert(htmlDecode(message));
+        }
+
+
     });
 
 </script>
+<!-- ------------- CSS ---------------- -->
+<link rel="stylesheet" href="~/css/MemberArea.css" />
