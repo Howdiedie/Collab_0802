@@ -1,8 +1,12 @@
 ﻿var $ = jQuery.noConflict();
 
 $(function ($) {
+    //把資料丟給
     $(".show").click(function () {
         infoModal.showModal();
+        var missionName = $(this).data("mission-name")
+        console.log(missionName)
+        
     });
     $("#sortable1, #sortable2,#sortable3").sortable({
         placeholder: "ui-state-highlight",

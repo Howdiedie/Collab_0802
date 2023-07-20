@@ -139,7 +139,6 @@ public partial class TestBananaContext : DbContext
             entity.Property(e => e.NotifyId).HasColumnName("NotifyID");
             entity.Property(e => e.ActionName).HasMaxLength(20);
             entity.Property(e => e.MemberId).HasColumnName("MemberID");
-            entity.Property(e => e.MemberName).HasMaxLength(20);
             entity.Property(e => e.NotifyAction).HasMaxLength(5);
             entity.Property(e => e.NotifyDate).HasColumnType("datetime");
             entity.Property(e => e.NotifyType).HasMaxLength(5);
