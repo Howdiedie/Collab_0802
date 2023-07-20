@@ -31,60 +31,27 @@
                 <div class="">
                     <div class="d-flex ms-3">
                         <p class="MyTitle fs-3 ">參與成員</p>
-                        <!-- <button class="btn-start mb-2 margin-delete">刪除</button> -->
-                        <a id="" class="icon-addTarget margin-delete">
+                        <a id="DeleteMember" class="icon-addTarget margin-delete">
                             <i class="fa-sharp fa-solid fa-user-xmark fa-xl"></i>
                         </a>
                     </div>
                     <div class=" headerBody pt-2 pb-4 d-flex flex-wrap ms-3">
                         <div class=" me-5 mt-3 text-center ">
-                            <a class="Myavatar AddNewBtn">
+                            <a class="Myavatar AddNewBtn" id="addMemberButton">
                                 <i class="fa-solid fa-plus fa-xl"></i>
                             </a>
                             <p class="mt-3 fs-5">新增成員</p>
                         </div>
                         <!-- 一個人 -->
-                        <div class="me-5 mt-3 text-center ">
-                            <div class="Myavatar">
-                                <img src="~/img/MemberImg/0733ba760b29378474dea0fdbcb97107.jpg" alt="" class="">
+                        @foreach (var member in ViewBag.Members) {
+                            <div class="me-5 mt-3 text-center ">
+                                <div class="Myavatar">
+                                    <img src="@member.PhotoUrl" alt="" class="">
+                                </div>
+                                <p class="mt-3 fs-5">@member.Name</p>
                             </div>
-                            <p class="mt-3 fs-5 ">Partrick</p>
-                        </div>
-                        <!-- 一個人 -->
-                        <div class="me-5 mt-3  text-center ">
-                            <div class="Myavatar">
-                        <img src="~/img/MemberImg/33fd1f2798aba71937fc6318bc7f8a14.jpg" alt="" class="">
-                            </div>
-                            <p class="mt-3 fs-5">Tina</p>
-                        </div>
-                        <!-- 一個人 -->
-                        <div class="me-5 mt-3  text-center ">
-                            <div class="Myavatar">
-                        <img src="~/img/MemberImg/3ace294c8314e041e7c52ec31d9355d4.jpg" alt="" class="">
-                            </div>
-                            <p class="mt-3 fs-5">Jessica</p>
-                        </div>
-                        <!-- 一個人 -->
-                        <div class="me-5 mt-3  text-center ">
-                            <div class="Myavatar">
-                        <img src="~/img/MemberImg/9121f2b3c557192b6fcd234782a7c399.jpg" alt="" class="">
-                            </div>
-                            <p class="mt-3 fs-5">Jeff</p>
-                        </div>
-                        <!-- 一個人 -->
-                        <div class="me-5 mt-3  text-center ">
-                            <div class="Myavatar">
-                        <img src="~/img/MemberImg/b85e9df9e9b75bcce3a767eb894ef153.jpg" alt="" class="">
-                            </div>
-                            <p class="mt-3 fs-5">John</p>
-                        </div>
-                        <!-- 一個人 -->
-                        <div class="me-5 mt-3  text-center ">
-                            <div class="Myavatar">
-                        <img src="~/img/MemberImg/97e11a32ea41760dbb080ed692018b0c.jpg" alt="" class="">
-                            </div>
-                            <p class="mt-3 fs-5">Hana</p>
-                        </div>
+                        }
+                        <!-- 一個人END -->
                     </div>
                 </div>
 
@@ -134,7 +101,45 @@
             <!--------資料連結END------>
         </div>
 
+
+<dialog id="infoModal">
+    <form asp-action="AddMember" method="post" class="mx-3 my-3">
+        <input type="text" name="memberId" placeholder="輸入成員 ID">
+        <button type="submit">添加成員</button>
+        <button type="button" id="cancelButton" class="fs-5 btn-close position-absolute top-0 end-0"></button>
+    </form>
+</dialog>
+<dialog id="infoModalDelete">
+    <form asp-action="DeleteMember" method="post" class="mx-3 my-3">
+        <input type="text" name="memberId" placeholder="輸入成員 ID">
+        <button type="submit">刪除成員</button>
+        <button type="button" id="close" class="fs-5 btn-close position-absolute top-0 end-0"></button>
+    </form>
+</dialog>
+
+<!-- ------------- JS ---------------- -->
+<script>
+    $(document).ready(function () {
+        $("#addMemberButton").click(function () {
+            $("#infoModal")[0].showModal();
+        });
+
+        $("#cancelButton").click(function () {
+            $("#infoModal")[0].close();
+        });
+        $("#DeleteMember").click(function () {
+            $("#infoModalDelete")[0].showModal();
+        });
+        $("#close").click(function () {
+            $("#infoModalDelete")[0].close();
+        });
+    });
+</script>
+
+<!-- ------------- JS end---------------- -->
+<!-- ------------- CSS ---------------- -->
 <link rel="stylesheet" href="~/css/ProjectGeneral.css" />
+<!-- ------------- CSS end---------------- -->
 <script>
     // alert視窗
     function htmlDecode(input) {

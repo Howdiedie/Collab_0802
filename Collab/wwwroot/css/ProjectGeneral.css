@@ -110,7 +110,19 @@ textarea {
 .margin-delete {
     margin-left: 472px;
 }
+/* 彈出視窗 */
+dialog {
+    border: none;
+    box-shadow: 0 2px 6px #ccc;
+    border-radius: 10px;
+    width: 500px;
+    background-color: #f5f4f1;
+}
 
+    /* 彈出視窗背景透明 */
+    dialog::backdrop {
+        background-color: rgba(0, 0, 0, 0.1);
+    }
 /* ----------參與成員END-------- */
 /* ----------資料連結-------- */
 /* .myInput {
