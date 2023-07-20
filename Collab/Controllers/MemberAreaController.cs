@@ -75,32 +75,28 @@ namespace Collab.Controllers {
 
         //-------------更改頭貼
         [HttpPost]
-        public async Task<IActionResult> UploadProfilePicture(IFormFile file) {
+        public async Task<IActionResult> UploadProfilePicture(IFormFile file, string cropped_image) {
             var userId = 1;  // 從 Session 或 Cookie 中獲取當前登錄會員的 ID
-            
+
             // 從身份驗證 Cookie 中獲取當前登錄會員的 ID
             //var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
             // 從 Cookie 中獲取當前登錄會員的 ID
             //var userId = Request.Cookies["YourCookieName"];
 
             // 檢查是否有文件被上傳
-            if (file == null || file.Length == 0) {
+            if (string.IsNullOrEmpty(cropped_image)) {
                 TempData["Message"] = "請選擇一個文件上傳。";
                 return RedirectToAction("Index");
             }
 
-            // 檢查文件類型是否為圖片
-            if (!file.ContentType.StartsWith("image/")) {
-                TempData["Message"] = "只能上傳圖片文件。";
-                return RedirectToAction("Index");
-            }
+            // 將 base64 編碼的圖片數據轉換為 byte[]
+            var base64Data = cropped_image.Substring(cropped_image.IndexOf(',') + 1);
+            var imageBytes = Convert.FromBase64String(base64Data);
 
             // 將文件保存到某個路徑
-            var fileName = userId + Path.GetExtension(file.FileName);
+            var fileName = userId + ".jpg";  // 裁剪後的圖片將被保存為 .jpg 文件
             var filePath = Path.Combine("wwwroot", "img", "MemberImg", fileName);
-            using (var stream = new FileStream(filePath, FileMode.Create)) {
-                await file.CopyToAsync(stream);
-            }
+            await System.IO.File.WriteAllBytesAsync(filePath, imageBytes);
 
             // 更新使用者的頭像路徑
             var user = _db.Members.Find(userId);
@@ -109,6 +105,7 @@ namespace Collab.Controllers {
             TempData["Message"] = "頭像上傳成功。";
             return RedirectToAction("Index");
         }
+
 
 
 
