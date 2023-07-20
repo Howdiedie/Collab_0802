@@ -185,6 +185,9 @@ textarea {
         color: #2b3040e6;
         font-size: 25px;
         cursor: pointer;
+        background-color: transparent !important;
+
+
     }
 
 .margin-btnAddLink {
