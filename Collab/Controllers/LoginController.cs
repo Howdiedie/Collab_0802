@@ -20,8 +20,7 @@ namespace collab_00.Controllers {
         [HttpPost]
         public ActionResult LoginTest(string memberaccount, string password)
         {
-            // 在這裡進行帳號密碼驗證的邏輯
-            // 可以使用你的資料庫或其他驗證機制進行帳號密碼的比對
+            // 帳號密碼驗證
             var user = _TestBananaContext.Members.FirstOrDefault(m => m.MemberAccount == memberaccount && m.MemberPassword == password);
             // 假設這裡使用一個簡單的驗證邏輯
             if (user!=null)
