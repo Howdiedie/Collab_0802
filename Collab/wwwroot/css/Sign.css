@@ -90,10 +90,10 @@ h1 {
     font-size: 28px;
     padding-top: 5px;
     padding-bottom: 5px;
-    margin-left: 10%;
+    margin-left: 9%;
 }
 
-.MemberAccount input:focus {
+    .MemberAccount input:focus {
     width: 350px;
     background-color: #f5f5f3;
     border: 2px solid rgb(44, 43, 43);
@@ -104,7 +104,7 @@ h1 {
     padding-top: 5px;
     padding-bottom: 5px;
     box-shadow: 2px 2px 2px #cccccc;
-    margin-left: 10%;
+    margin-left: 9%;
 }
 
 /* 建立密碼 */
@@ -118,7 +118,7 @@ h1 {
     font-size: 28px;
     padding-top: 5px;
     padding-bottom: 5px;
-    margin-left: 13%;
+    margin-left: 5%;
 }
 
     .MemberPassword input:focus {
@@ -132,7 +132,7 @@ h1 {
         padding-top: 5px;
         padding-bottom: 5px;
         box-shadow: 2px 2px 2px #cccccc;
-        margin-left: 13%;
+        margin-left: 5%;
     }
 
 /* 確認密碼 */
@@ -174,3 +174,8 @@ h1 {
     margin-top: 8%;
     margin-left: 350px;
 }
+
+
+
+
+

@@ -27,13 +27,13 @@ dialog {
 }
 
 /* 任務名稱 */
-.taskName {
+.MissionName {
     margin-top: 5%;
     font-size: 30px;
     margin-left: 5%;
 }
 
-    .taskName input {
+    .MissionName input {
         width: 400px;
         background-color: #ffffff;
         border: 2px solid rgb(162, 162, 162);
@@ -45,7 +45,7 @@ dialog {
         padding-bottom: 5px;
     }
 
-        .taskName input:focus {
+        .MissionName input:focus {
             width: 400px;
             background-color: #ffffff;
             border: 2px solid rgb(44, 43, 43);
@@ -59,7 +59,7 @@ dialog {
         }
 
 /* 指派人員 */
-.member {
+.MemberID {
     margin-top: 3%;
     font-size: 30px;
     margin-left: 5%;
