@@ -3,7 +3,9 @@
     ViewData["Title"] = "Index";
     Layout = null;
 }
-
+@{
+    var optionsList = ViewBag.option as List<string>;
+}
 <script src="~/js/site.js" asp-append-version="true"></script>
     
     <!-- 計劃標題 -->
@@ -13,7 +15,7 @@
         <!-- 任務名稱 -->
         <div class="taskName">
             <label for="taskName">任務：</label>
-            <input type="text" placeholder="">
+            <input type="text" id="missionName" placeholder="">
         </div>
         <!-- 指派人員 -->
         <div class="member">
@@ -24,44 +26,45 @@
         <!-- 開始日 -->
         <div class="startDate">
             <label for="startDate">開始日：</label>
-            <input type="date" class="calendar">
+            <input id="startDate" type="date" class="calendar">
         </div>
         <!-- 截止日 -->
         <div class="endDate">
             <label for="endDate">截止日：</label>
-            <input type="date" class="calendar">
+            <input id="endDate" type="date" class="calendar">
         </div>
         <!-- 狀態 -->
         <div class="status">
             <label for="status">狀態：</label>
             <div class="btn-group-toggle" data-toggle="buttons">
                 <label class="btn btn-secondary btn-lg">
-                    <input type="radio" name="status" value="pending"> 新任務
+                    <input type="radio" name="status" value="新任務"> 新任務
                 </label>&nbsp;&nbsp;
                 <label class="btn btn-secondary btn-lg">
-                    <input type="radio" name="status" value="inProgress"> 進行中
+                    <input type="radio" name="status" value="進行中"> 進行中
                 </label>&nbsp;&nbsp;
                 <label class="btn btn-secondary btn-lg">
-                    <input type="radio" name="status" value="completed"> 已完成
+                    <input type="radio" name="status" value="已完成"> 已完成
                 </label>
             </div>
         </div>
         <!-- 目標選單 -->
         <div class="targetSelect">
             <label for="target">目標：</label>
-            <select>
+            <select id="statusSelect">
                 <option value="" selected disabled>請選擇</option>
-                <option value="文宣規劃">文宣規劃</option>
-                <option value="寫生活動">寫生活動</option>
-                <option value="派對市集">派對市集</option>
+                @if (optionsList != null && optionsList.Count > 0) {
+                    @foreach (var option in optionsList) {
+                        <option value="@option">@option</option>
+                    }
+                }
             </select>
         </div>
         <!-- 描述 -->
         <div class="description">
             <label for="description">描述：</label>
             <textarea class="form-control" id="description" rows="5" maxlength="200" placeholder="請輸入描述內容">
-            確認印製數量、費用、交件時程
-            需開發票打統編
+
             </textarea>
         </div>
         

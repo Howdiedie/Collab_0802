@@ -17,7 +17,7 @@ namespace collab_00.Controllers {
                            join mission in _TestBananaContext.Missions on intent.IntentId equals  mission.IntentId
                            select new {
                                Mission = mission,
-                               IntentName = intent.IntentName
+                               IntentName = intent.IntentName,
                            };
 
             var query = from intent in _TestBananaContext.Intents

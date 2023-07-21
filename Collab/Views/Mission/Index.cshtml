@@ -41,14 +41,17 @@
             <div class="row  gx-0">
                 <div class="col scroller" style="height:65vh">
                     <ul id="sortable1" class="connectedSortable" >
-                        <form >
-					        @foreach (var item in ViewBag.MissionWithIntent) {
+                        
+					 @foreach (var item in ViewBag.MissionWithIntent) {
 						@if (item.Mission.MisState == "新任務") {
-						<li class="ui-state show my-4 mx-4 draggable-mission" data-intent-name="@item.IntentName" data-mission-name="@item.Mission.MissionName" data-mis-state="@item.Mission.MisState">
+                        <li class="ui-state show my-4 mx-4 draggable-mission" 
+                        data-start-time="@item.Mission.MisStartTime?.ToString("yyyy-MM-dd")" data-end-time="@item.Mission.MisFinishTime?.ToString("yyyy-MM-dd")" 
+                        data-intent-name="@item.IntentName" data-mission-name="@item.Mission.MissionName"
+                        data-mis-state="@item.Mission.MisState" data-mis-describe="@item.Mission.MisDescribe">
 							<h3 class="mx-4 my-4">@item.Mission.MissionName</h3>
 							<div class="row mx-2 my-3">
 								<div class="col d-flex  align-items-center">
-									<div class=" bd-highlight">@item.Mission.MisStartTime - @item.Mission.MisFinishTime</div>
+                                    <div class=" bd-highlight">@item.Mission.MisStartTime?.ToString("yyyy/MM/dd") - @item.Mission.MisFinishTime?.ToString("yyyy/MM/dd")</div>
 								</div>
 								<div class="col-2 d-flex align-items-center">
 									<img class="MissionAvatar"
@@ -62,18 +65,21 @@
 						</li>
 						}
 					}
-                        </form>
+                        
                     </ul>
                 </div>
                 <div class="col scroller" style="height:65vh">
                     <ul id="sortable2" class="connectedSortable" >
                         @foreach (var item in ViewBag.MissionWithIntent) {
-                    @if (item.Mission.MisState == "進行中") {
-                        <li class="ui-state show my-4 mx-4 draggable-mission" data-intent-name="@item.IntentName" data-mission-name="@item.Mission.MissionName" data-mis-state="@item.Mission.MisState">
+                        @if (item.Mission.MisState == "進行中") {
+                        <li class="ui-state show my-4 mx-4 draggable-mission"
+                            data-start-time="@item.Mission.MisStartTime?.ToString("yyyy-MM-dd")" data-end-time="@item.Mission.MisFinishTime?.ToString("yyyy-MM-dd")"
+                            data-intent-name="@item.IntentName" data-mission-name="@item.Mission.MissionName"
+                            data-mis-state="@item.Mission.MisState" data-mis-describe="@item.Mission.MisDescribe">
                             <h3 class="mx-4 my-4">@item.Mission.MissionName</h3>
                             <div class="row mx-2 my-3">
                                 <div class="col d-flex  align-items-center">
-                                    <div class=" bd-highlight">@item.Mission.MisStartTime - @item.Mission.MisFinishTime</div>
+                                    <div class=" bd-highlight">@item.Mission.MisStartTime?.ToString("yyyy/MM/dd") - @item.Mission.MisFinishTime?.ToString("yyyy/MM/dd")</div>
                                 </div>
                                 <div class="col-2 d-flex align-items-center">
                                     <img class="MissionAvatar"
@@ -92,12 +98,15 @@
                 <div class="col scroller" style="height:65vh">
                     <ul id="sortable3" class="connectedSortable" >
                         @foreach (var item in ViewBag.MissionWithIntent) {
-                    @if (item.Mission.MisState == "已完成") {
-                        <li class="ui-state show my-4 mx-4 draggable-mission" data-intent-name="@item.IntentName" data-mission-name="@item.Mission.MissionName" data-mis-state="@item.Mission.MisState">
+                        @if (item.Mission.MisState == "已完成") {
+                        <li class="ui-state show my-4 mx-4 draggable-mission"
+                            data-start-time="@item.Mission.MisStartTime?.ToString("yyyy-MM-dd")" data-end-time="@item.Mission.MisFinishTime?.ToString("yyyy-MM-dd")"
+                            data-intent-name="@item.IntentName" data-mission-name="@item.Mission.MissionName"
+                            data-mis-state="@item.Mission.MisState" data-mis-describe="@item.Mission.MisDescribe">
                             <h3 class="mx-4 my-4">@item.Mission.MissionName</h3>
                             <div class="row mx-2 my-3">
                                 <div class="col d-flex  align-items-center">
-                                    <div class=" bd-highlight">@item.Mission.MisStartTime - @item.Mission.MisFinishTime</div>
+                                    <div class=" bd-highlight">@item.Mission.MisStartTime?.ToString("yyyy/MM/dd") - @item.Mission.MisFinishTime?.ToString("yyyy/MM/dd")</div>
                                 </div>
                                 <div class="col-2 d-flex align-items-center">
                                     <img class="MissionAvatar"
@@ -109,8 +118,8 @@
                                 </div>
                             </div>
                         </li>
+                        }
                     }
-                }
                     </ul>
                 </div>
 
@@ -124,6 +133,7 @@
                 <div class="position-relative">
                     <button  type="button" class="close btn-close position-absolute top-10 end-0" aria-label="Close"></button>
                 </div>
+                
                 <partial name="~/Views/MissionEdit/Index.cshtml"/>
                 <!-- 儲存按鈕 -->
                 <div class="submitBtn">
@@ -134,10 +144,7 @@
         <!-- 任務編輯 end-->
         <!-- 結束 -->
         <script>
-            let infoModal = document.querySelector("#infoModal");
-            $(".close").on("click",()=>{
-                infoModal.close();
-            })
+            
             
         </script>
 <script src="~/js/mission/JavaScript.js"></script>
