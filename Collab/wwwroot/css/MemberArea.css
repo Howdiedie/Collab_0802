@@ -55,6 +55,28 @@ label {
         background-color: #6230f7e6;
     }
 
+.btnSave {
+    /* margin-top: 3%; */
+    color: white;
+    font-size: 25px;
+    background-color: #999a9ae6;
+    border-radius: 10px 10px 10px 10px;
+    padding: 8px 18px 8px 18px;
+    border: none;
+    /* margin-left: 200px;
+    width: 200px;
+    */
+}
+
+    .btnSave:hover {
+        /* margin-top: 3%; */
+        color: white;
+        font-size: 25px;
+        border-radius: 10px 10px 10px 10px;
+        padding: 8px 18px 8px 18px;
+        border: none;
+        background-color: #0e356de6;
+    }
 /* .btnArea>button {
     font-size: 25px;
 } */
@@ -65,7 +87,7 @@ dialog {
     border: none;
     box-shadow: 0 2px 6px #ccc;
     border-radius: 10px;
-    width: 500px;
+    width:600px;
     background-color: #f5f4f1;
 }
 
@@ -224,3 +246,4 @@ dialog {
 .margin-editbtnPWD {
     margin-left: 400px;
 }
+

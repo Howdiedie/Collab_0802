@@ -125,16 +125,16 @@
     </div>
 </div>
 <dialog id="infoModal">
-    <form asp-action="UploadProfilePicture" method="post" enctype="multipart/form-data">
-        <label for="file" class="fs-2 mt-5 ms-3">選擇一個頭像圖片：</label><br><br>
-        <input type="file" id="upload_img" name="file" accept="image/*" class="fs-5 ms-3"><br><br>
+    <form asp-action="UploadProfilePicture" method="post" enctype="multipart/form-data" >
+        <label for="file" class="fs-2 mt-5 ms-4">選擇一個頭像圖片：</label><br><br>
+        <input type="file" id="upload_img" name="file" accept="image/*" class="fs-5 ms-4"><br><br>
         <input type="hidden" id="cropped_image" name="cropped_image">
-        <button type="button" id="crop_img" class="fs-5 mb-5 ms-3">裁剪圖片</button>
-        <input type="submit" value="確定上傳" class="fs-5 mb-5 ms-3">
-        <button type="button" id="cancelButton" class="fs-5 btn-close position-absolute top-0 end-0"></button>
         <div id="oldImg" style="display:none;"></div>
-        <div id="newImgInfo"></div>
-        <div id="newImg"></div>
+        <button type="button" id="crop_img" class="fs-5 mb-5 ms-4 btnSave" style="display:none;">裁剪圖片</button>
+        <button type="button" id="cancelButton" class="fs-5 btn-close position-absolute top-0 end-0"></button>
+        @*<div id="newImgInfo"></div>*@
+        <div id="newImg" class="ms-4 mb-3"></div>
+        <input id="submit" type="submit" value="確定上傳" class="fs-5 mb-5 ms-4 btnSave" style="display:none;">
     </form>
 </dialog>
 
@@ -269,10 +269,10 @@
 <script>
     (function ($) {
         var width_crop = 300, // 圖片裁切寬度 px 值
-            height_crop = 200, // 圖片裁切高度 px 值
-            type_crop = "square", // 裁切形狀: square 為方形, circle 為圓形
-            width_preview = 350, // 預覽區塊寬度 px 值
-            height_preview = 350, // 預覽區塊高度 px 值
+            height_crop = 300, // 圖片裁切高度 px 值
+            type_crop = "circle", // 裁切形狀: square 為方形, circle 為圓形
+            width_preview = 500, // 預覽區塊寬度 px 值
+            height_preview = 500, // 預覽區塊高度 px 值
             compress_ratio = 0.85, // 圖片壓縮比例 0~1
             type_img = "jpeg", // 圖檔格式 jpeg png webp
             oldImg = new Image(),
@@ -335,6 +335,11 @@
         }
 
         $("#upload_img").on("change", function () {
+            // 當用戶選擇一個文件時，顯示 "裁剪圖片" 按鈕
+            if (this.files && this.files[0]) {
+                $("#crop_img").show();
+            }
+
             $("#oldImg").show();
             readFile(this);
         });
@@ -345,9 +350,9 @@
                 fileSize = Math.round(file.size / 1000),
                 html = "";
 
-            html += "<p>原始圖片尺寸 " + width + "x" + height + "</p>";
-            html += "<p>檔案大小約 " + fileSize + "k</p>";
-            $("#oldImg").before(html);
+            //html += "<p>原始圖片尺寸 " + width + "x" + height + "</p>";
+            //html += "<p>檔案大小約 " + fileSize + "k</p>";
+            //$("#oldImg").before(html);
         };
 
         function displayNewImgInfo(src) {
@@ -360,6 +365,9 @@
         }
 
         $("#crop_img").on("click", function () {
+            // 當用戶點擊 "裁剪圖片" 按鈕時，顯示 "確定上傳" 按鈕
+            $("#submit").show();
+
             myCrop.croppie("result", {
                 type: "canvas",
                 format: type_img,

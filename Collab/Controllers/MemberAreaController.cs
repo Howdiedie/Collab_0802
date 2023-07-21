@@ -75,7 +75,7 @@ namespace Collab.Controllers {
 
         //-------------更改頭貼
         [HttpPost]
-        public async Task<IActionResult> UploadProfilePicture(IFormFile file, string cropped_image) {
+        public async Task<IActionResult> UploadProfilePicture( string cropped_image) {
             var userId = 1;  // 從 Session 或 Cookie 中獲取當前登錄會員的 ID
 
             // 從身份驗證 Cookie 中獲取當前登錄會員的 ID
