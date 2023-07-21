@@ -21,26 +21,26 @@
 <div class="container">
     <!-- 註冊標題 -->
     <h1>註冊會員</h1>
-    <form>
+    <form asp-action="Register" method="post">
         <!-- 會員名稱 -->
         <div class="MemberName">
             <label for="MemberName">會員名稱</label>
-            <input type="text" placeholder="" required>
+            <input type="text" id="MemberName" name="MemberName" placeholder="" required>
         </div>
         <!-- 建立帳號 -->
         <div class="MemberAccount">
             <label for="MemberAccount">E-mail</label>
-            <input type="email" placeholder="" required>
+            <input type="email" id="MemberAccount" name="MemberAccount" placeholder="" required>
         </div>
         <!-- 建立密碼 -->
         <div class="MemberPassword">
-            <label for="password">密碼</label>
-            <input type="password" placeholder="" minlength="6" maxlength="12" pattern="^[a-zA-Z0-9][a-zA-Z0-9]{6,12}$" required>
+            <label for="password">建立密碼</label>
+            <input type="password" id="password" name="MemberPassword" placeholder="" minlength="6" maxlength="12" pattern="^[a-zA-Z0-9]{6,12}$" required>
         </div>
         <!-- 確認密碼 -->
         <div class="confirmPassword">
             <label for="confirmPassword">確認密碼</label>
-            <input type="password" placeholder="" minlength="6" maxlength="12" pattern="^[a-zA-Z0-9]{6,12}$" required>
+            <input type="password" id="confirmPassword" name="confirmPassword" placeholder="" minlength="6" maxlength="12" pattern="^[a-zA-Z0-9]{6,12}$" required>
         </div>
 
         <!-- 註冊按鈕 -->
@@ -52,27 +52,22 @@
 <link rel="stylesheet" href="~/css/Sign.css" />
 <script>
     $(document).ready(function () {
-        // 函數用於驗證密碼和確認密碼欄位
-        function validatePassword() {
-            var password = $("input[name='password']").val();
-            var confirmPassword = $("input[name='confirmPassword']").val();
-
-            if (password !== confirmPassword) {
-                alert("密碼不相符。");
-                return false;
-            }
-
-            return true;
-        }
-        e
-        // 為表單的提交事件附加事件處理程序
         $("form").submit(function (event) {
-            // 如果密碼不匹配，阻止表單提交
-            if (!validatePassword()) {
+            // 獲取密碼和確認密碼字段的值
+            var password = $(".MemberPassword input").val();
+            var confirmPassword = $(".confirmPassword input").val();
+
+            // 如果密碼和確認密碼不同
+            if (password !== confirmPassword) {
+                // 彈出警告視窗
+                alert("密碼不同，請重新設定一次");
+                // 阻止表單提交
                 event.preventDefault();
             } else {
-                // 驗證成功，將使用者重新導向到會員登入的頁面
-                return RedirectToAction("Index", "Login"); // 替換為會員登入頁面的URL
+                // 否則，彈出註冊成功的警告視窗
+                // 注意：這個只是在客戶端顯示，並不能保證實際的註冊已經成功
+                // 真正的註冊成功需要由伺服器確認
+                alert("恭喜你註冊成功");
             }
         });
     });

@@ -26,6 +26,6 @@ app.UseAuthorization();
 
 app.MapControllerRoute(
     name: "default",
-    pattern: "{controller=MissionEdit}/{action=Index}/{id?}");
+    pattern: "{controller=Sign}/{action=Index}/{id?}");
 
 app.Run();
