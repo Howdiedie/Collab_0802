@@ -1,5 +1,8 @@
-var builder = WebApplication.CreateBuilder(args);
+using Collab.Models;
+using Microsoft.EntityFrameworkCore;
 
+var builder = WebApplication.CreateBuilder(args);
+builder.Services.AddDbContext<TestBananaContext>(options => options.UseSqlServer(builder.Configuration.GetConnectionString("TestBananaContext")));
 // Add services to the container.
 builder.Services.AddControllersWithViews();
 
@@ -21,6 +24,6 @@ app.UseAuthorization();
 
 app.MapControllerRoute(
     name: "default",
-    pattern: "{controller=Home}/{action=Index}/{id?}");
+    pattern: "{controller=Calender}/{action=CalenderPage}/{id?}");
 
 app.Run();

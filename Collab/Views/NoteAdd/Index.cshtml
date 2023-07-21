@@ -1,0 +1,59 @@
+﻿<link rel="stylesheet" href="~/css/NotebookEdit.css">
+@{
+    ViewData["Title"] = "Notebook Page";
+}
+
+<div class="scroller " style="height: 87vh;">
+    <div class="mx-4">
+        <div class=" mx-4">
+            <!-- 從這裡開始寫 -->
+            <div class="container ">
+                @*關閉按鈕*@
+                <div class="position-relative">
+                    <button id="CloseButton" type="button" class="btn-close position-absolute top-10 end-0"
+                            aria-label="Close"></button>
+                </div>
+
+                <script>
+                    var myButton = document.getElementById("CloseButton");
+                    myButton.addEventListener("click", function () {
+                        window.location.href = "@Url.Action("Index","Notebook")";
+                    });
+                </script>
+
+                @*關閉按鈕*@
+                <form asp-action="Index" asp-controller="NoteAdd" class="my-5 ">
+                    <div class="row">
+                        <div class="col-sm-12 ">
+                            <h3 class="text-center fs-2"></h3>
+                            <div class="col-sm-12 pe-5 mb-3 text-end">
+                                <button class="btnSave">儲存</button>
+                            </div>
+                        </div>
+
+
+                        <div class="col-sm-12 mb-3 pe-5  d-flex">
+                            <p class="col-1 fs-2 ">標題：</p>
+                            <input type="text" class="form-control custom-input " id="exampleInput"
+                                   placeholder="請輸入標題" style="font-size: 36px; background-color: #f5f4f1;"
+                                   maxlength="20" name="TitleAdd">
+                        </div>
+
+                        <div class="col-sm-12 ">
+                            <hr>
+                        </div>
+
+                        <div class="form-group mb-5 mt-3 pe-5 d-flex">
+                            <p class="col-1 fs-2">內容：</p>
+                            <textarea class="form-control" id="exampleTextarea" rows="10"
+                                      placeholder="请输入文章内容" name="ContentAdd"
+                                      style="font-size: 25px; background-color: #f5f4f1;"></textarea>
+                        </div>
+                    </div>
+                </form>
+            </div>
+
+            <!-- 結束 -->
+        </div>
+    </div>
+</div>
