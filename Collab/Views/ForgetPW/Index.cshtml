@@ -16,7 +16,6 @@
 <!-- CSS -->
 <link rel="stylesheet" href="~/css/ForgetPW.css" />
 
-
 <body>
     <div class="wholepage">
         <!-- <div class="colorpic"><svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
@@ -33,19 +32,33 @@
     </div>
     <div class="container">
         <h1>忘記密碼</h1>
-
         <div style="margin-top: 50px; margin-left: 7%;">
+         <form action="/ForgetPW/MemberEmail" method="post">
             <div style="display: flex;">
                 <div class="myinputtitle">
                     <label for="username">帳號</label>
                 </div>
                 <div style="width: 50%;">
-                    <input class="accountInput" type="text" placeholder="請輸入帳號(E-Mail)" required>
-                </div>
+                        @if (ViewBag.memberaccount==null)
+                        {
+                            <input class="accountInput" id="memberaccount" name="memberaccount" type="text" placeholder="請輸入帳號(E-Mail)"  required>
+                        }
+                        else
+                        {
+                            <input class="accountInput" id="memberaccount" name="memberaccount" type="text" value="@ViewBag.memberaccount">
+                            <div style="text-align: center;color: black;font-size: 20px;margin-top:10px">請接收E-Mail後輸入驗證碼</div>
+                        }
+                        @if (!string.IsNullOrEmpty(ViewBag.notfound))
+                        {
+                            <div style="text-align: center;color: red;font-size: 20px;margin-top:10px">@ViewBag.notfound</div>
+                        }
+                    </div>
                 <div style="width: 30%;">
-                    <input class="my-button" type="submit" value="發送驗證碼" style="margin-left: 55px;">
+                        <input class="my-button" type="submit" value="發送驗證碼" onclick=" return validateForm()" style="margin-left: 55px;">
                 </div>
             </div>
+                
+        </form>
 
             <div style="display: flex ;margin-top: 35px; ">
                 <div class="myinputtitle">
@@ -63,6 +76,33 @@
         <br>
     </div>
 </body>
+<script>
+    // 檢查是否有錯誤訊息
+    var encodedErrorMessage = "@ViewBag.ErrorMessage";
+    var decodedErrorMessage = decodeHTMLEntities(encodedErrorMessage);
+
+
+    // 解碼HTML實體編碼
+    function decodeHTMLEntities(encodedString) {
+        var textarea = document.createElement("textarea");
+        textarea.innerHTML = encodedString;
+        return textarea.value;
+    }
+
+    //使用者是否輸入正確Email
+    var emailRegex = /^[a-zA-Z0-9_.+-]+@@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$/;
+    function validateForm() {
+        var memberaccount = document.getElementById("memberaccount").value;
+        // 檢查帳號是否為有效的電子郵件格式
+        if (!emailRegex.test(memberaccount)) {
+            alert("請輸入有效的電子郵件地址(帳號)");
+            return false; // 防止表單提交
+        }
+        // 如果通過驗證，允許提交表單
+        return true;
+    }
+</script>
+
 
 
 
