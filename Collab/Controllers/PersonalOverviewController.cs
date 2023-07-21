@@ -4,43 +4,93 @@ using Microsoft.EntityFrameworkCore.Metadata.Internal;
 using Microsoft.EntityFrameworkCore;
 using System.Linq;
 using System.Collections.Immutable;
+using System.Diagnostics;
 
 namespace collab_00.Controllers
 {
-    public class PersonalOverviewController : Controller
-    {
-        private readonly TestBananaContext _TestBananaContext;
-        public PersonalOverviewController(TestBananaContext context)
-        {
-            _TestBananaContext = context;
-        }
-        public IActionResult Index()
-        {
-            string? stringUserID = Request.Cookies["UserID"];
-            int UserID;
-            if (int.TryParse(stringUserID, out UserID))
-            {
-                //var user  = _TestBananaContext.Members.FirstOrDefault(m => m.MemberId == UserID);
-                //if (user != null)
-                //{
-                //    ViewBag.MemberName = user.MemberName;
-                //}
-                var ingmissions = _TestBananaContext.Missions
-        .Where(m => m.MemberId == UserID & m.MisState == "進行中" || m.MemberId == UserID & m.MisState == "新任務")
-        .ToList();
-                var donemissions = _TestBananaContext.Missions
-        .Where(m => m.MemberId == UserID & m.MisState == "已完成")
-        .ToList();
+	public class PersonalOverviewController : Controller
+	{
+		private readonly TestBananaContext _TestBananaContext;
+		public PersonalOverviewController(TestBananaContext context)
+		{
+			_TestBananaContext = context;
+		}
+		public IActionResult Index()
+		{
+			string? stringUserID = Request.Cookies["UserID"];
+			int UserID;
+			if (int.TryParse(stringUserID, out UserID))
+			{
+				var ingmissions = _TestBananaContext.Missions
+				.Where(m => m.MemberId == UserID && (m.MisState == "進行中" || m.MisState == "新任務"))
+				.Join(
+				_TestBananaContext.Intents,
+				m => m.IntentId,
+				i => i.IntentId,
+				(m, i) => new
+				{
+					ProgramID = i.ProgramId,
+					MissionName=m.MissionName,
+					MisFinishTime = m.MisFinishTime,
+					MisStartTime = m.MisStartTime
 
-                ViewBag.donemissions = donemissions;
-                ViewBag.ingmissions = ingmissions;
-                return View();
-            }
-            else
-            {
-                return RedirectToAction("Error", "Shared");
-            }
+				}
+				)
+				.Join(
+				_TestBananaContext.Programs,
+				combined => combined.ProgramID,// 使用前一個 JOIN 中保留的 i.ProgramId 來關聯 Programs 資料表
+				p => p.ProgramId,
+				(combined, p) => new
+				{
+					MissionName = combined.MissionName,
+					MisFinishTime = combined.MisFinishTime,
+					MisStartTime = combined.MisStartTime,
+					ProgramColor = p.ProgramColor
+				}
+				)
+				.OrderBy(item => item.MisStartTime)
+				.ToList();
 
-        }
-    }
+
+				var donemissions = _TestBananaContext.Missions
+				.Where(m => m.MemberId == UserID && m.MisState == "已完成")
+				.Join(
+				_TestBananaContext.Intents,
+				m => m.IntentId,
+				i => i.IntentId,
+				(m, i) => new
+				{
+					ProgramID = i.ProgramId,
+					MissionName = m.MissionName,
+					MisFinishTime=m.MisFinishTime,
+					MisStartTime=m.MisStartTime
+
+				}
+				)
+				.Join(
+				_TestBananaContext.Programs,
+				combined => combined.ProgramID,// 使用前一個 JOIN 中保留的 i.ProgramId 來關聯 Programs 資料表
+				p => p.ProgramId,
+				(combined, p) => new {
+					MissionName = combined.MissionName,
+					MisFinishTime = combined.MisFinishTime, 
+					MisStartTime = combined.MisStartTime ,
+					ProgramColor = p.ProgramColor
+				}
+				)
+				.OrderBy(item => item.MisStartTime)
+				.ToList();
+
+				ViewBag.ingmissions = ingmissions;
+				ViewBag.donemissions = donemissions;
+				return View();
+			}
+			else
+			{
+				return RedirectToAction("Error", "Shared");
+			}
+
+		}
+		
+	}
 }

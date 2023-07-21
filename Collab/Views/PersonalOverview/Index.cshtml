@@ -1,14 +1,14 @@
-﻿@{
+﻿@using System.Text.Json;
+@{
 	ViewData["Title"] = "Index";
+	var jsonIngMissions = Newtonsoft.Json.JsonConvert.SerializeObject(ViewBag.ingmissions);
 }
 <!-- css -->
 <link rel="stylesheet" href="~/css/PersonalOverview.css" />
 <!-- js -->
 <script src='https://cdn.jsdelivr.net/npm/fullcalendar@6.1.8/index.global.min.js'></script>
 <script>
-
 	document.addEventListener('DOMContentLoaded', function () {
-
 		var calendarEl = document.getElementById('calendar');
 		var calendar = new FullCalendar.Calendar(calendarEl, {
 			eventClick: function (info) {
@@ -16,77 +16,16 @@
 			},
 
 			initialView: 'dayGridMonth',
-			// locale:'zh-tw',//這行是自己加的，更改語言為繁中 使用版本6.1.8有些按鈕翻譯不全
-			navLink: true, //增加導覽列進入月曆，自己出現並不會更改樣式 要配合下面headerToolbar
-			// editable: true,
-			// dayMaxEvents: true,
-			// selectable: true,
-			// businessHours: true,
-
-			headerToolbar: {//headToolbar可以根據自己需求 增加行事曆的功能於上方導覽列
-				left: 'prev,next,today',//left:為在左方增加元件 冒號右邊給予 '關鍵字' 增加元件 注意使用關鍵字時不要亂加空格會顯示在前端按鈕上很醜!~~
-				//prev為 新增上一頁按鈕 || next為 新增下一頁按鈕 || today為 新增回到看得到今天頁面的按鈕
-				center: 'title', //中心的地方 放入月份(title)
-				//   right:'dayGridMonth,timeGridWeek,timeGridDay' //月曆右側 加入月(dayGrinMouth)
-				//周(timeGridWeek),日(timerGridDay)
+			// locale:'zh-tw',
+			navLink: true,
+			headerToolbar: {
+				left: 'prev,next,today',
+				center: 'title',
 			},
 
-			//下方用events來在行事曆格子中新增 '活動'
-			//屆時加入後端資料庫來新增活動 此處先自行輸入熟悉events用法
-			//格式為 events:[{},{},{}...以此類推] 字要打對= = 是Ｅ　Ｖ　Ｅ　Ｎ　Ｔ　Ｓ
-			events: [
-				{ //框框內部設定每個活動的細項
-					title: '練習某某某',   //設定活動標題　格式 title:'活動標題字串'
-					start: '2023-06-14',  //設定此項活動開始時間 格式 start:'西元年-月-日'
-					end: '2023-06-19',
+			// 注意這裡的 events 不用加分號，直接呼叫 generateEvents() 函式
+			events: generateEvents(),
 
-					//設定此項活動結束時間 格式 end:'西元年-月-日'
-					// url:'https://www.youtube.com/watch?v=NcDX7XIQ40c&t=341s'
-				},
-				{
-					title: '介紹Calender',   //設定活動標題　title:活動標題字串'
-					start: '2023-06-18T16:30:00',  //精確設定開始時間 格式 start:'西元年-月-日T幾點:幾分:幾秒'
-					end: '2023-06-18T17:00:00',   //精確設定結束時間 格式 start:'西元年-月-日T幾點:幾分:幾秒'
-					// url:'https://www.youtube.com/watch?v=NcDX7XIQ40c&t=341s'
-				},
-				{
-					title: '介紹整日活動',
-					start: '2023-06-18',
-					allDay: true //此活動顯示整日 格式allDay:布林值
-				},
-				{ //框框內部設定每個活動的細項
-					title: '藝起生活寫生派對-刻板',   //設定活動標題　格式 title:'活動標題字串'
-					start: '2023-07-12',  //設定此項活動開始時間 格式 start:'西元年-月-日'
-					end: '2023-07-15',    //設定此項活動結束時間 格式 end:'西元年-月-日'
-					pcolor: 'rgb(241, 193, 96)',
-					// url:'https://www.youtube.com/watch?v=NcDX7XIQ40c&t=341s'
-				},
-				{ //框框內部設定每個活動的細項
-					title: '電影節網站-資料庫建立',   //設定活動標題　格式 title:'活動標題字串'
-					start: '2023-07-17',  //設定此項活動開始時間 格式 start:'西元年-月-日'
-					end: '2023-07-20',    //設定此項活動結束時間 格式 end:'西元年-月-日'
-					// url:'https://www.youtube.com/watch?v=NcDX7XIQ40c&t=341s'
-				},
-				{ //框框內部設定每個活動的細項
-					title: '電影節網站-資料庫建立',   //設定活動標題　格式 title:'活動標題字串'
-					start: '2023-07-01',  //設定此項活動開始時間 格式 start:'西元年-月-日'
-					end: '2023-07-05',    //設定此項活動結束時間 格式 end:'西元年-月-日'
-					// url:'https://www.youtube.com/watch?v=NcDX7XIQ40c&t=341s'
-				},
-				{ //框框內部設定每個活動的細項
-					title: '藝起生活寫生派對-前端CS建立',   //設定活動標題　格式 title:'活動標題字串'
-					start: '2023-07-02',  //設定此項活動開始時間 格式 start:'西元年-月-日'
-					end: '2023-07-08',    //設定此項活動結束時間 格式 end:'西元年-月-日'
-					// url:'https://www.youtube.com/watch?v=NcDX7XIQ40c&t=341s'
-				},
-				{ //框框內部設定每個活動的細項
-					title: '電影節網站-資料庫建立',   //設定活動標題　格式 title:'活動標題字串'
-					start: '2023-07-12',  //設定此項活動開始時間 格式 start:'西元年-月-日'
-					end: '2023-07-15',
-					//設定此項活動結束時間 格式 end:'西元年-月-日'
-					// url:'https://www.youtube.com/watch?v=NcDX7XIQ40c&t=341s'
-				}
-			],
 			eventClick: function (info) {
 				info.jsEvent.preventDefault(); // don't let the browser navigate
 				if (info.event.url) {
@@ -95,11 +34,34 @@
 			}
 		});
 		calendar.render();
-	});
-	const eventElements = document.getElementsByClassName('fc-event-title');
-	const backgroundcolor = document.getElementsByClassName('fc-event');
-						//從事件抓顏色套用到行事曆
 
+		function generateEvents() {
+			var events = [];
+			var missionElements = document.querySelectorAll('[data-MissionCount]');
+
+			// 使用 forEach 迴圈來處理每個元素
+			missionElements.forEach(function (element) {
+				var missionCount = element.getAttribute('data-MissionCount');
+
+				var eventObj = {
+					title: element.getAttribute('data-MissionName'),
+					start: element.getAttribute('data-MisStartTime'),
+					end: element.getAttribute('data-MisFinishTime'),
+					backgroundColor: element.getAttribute('data-background-color'),
+				};
+
+				// 這裡你可以根據不同的 missionCount 做一些邏輯處理，例如：
+				// if (missionCount === '1') {
+				//     eventObj.someProperty = 'Some Value';
+				// }
+
+				events.push(eventObj);
+			});
+
+			return events;
+		}
+		
+	});
 </script>
 
 
@@ -113,20 +75,29 @@
 			<div class="grid-item">
 				@*<div style="background-color:rgb(241, 193, 96); ">藝起生活寫生派對-刻板</div>*@
 				@{
-					List<Mission>? ingMissions = ViewBag.ingmissions as List<Mission>;
-					if (ingMissions != null)
+					if (ViewBag.ingmissions != null)
 					{
-						List<string> ingmisDescribeList = ingMissions.Select(m => m.MisDescribe).ToList();
-
-						foreach (var item in ingmisDescribeList)
+						var count = 1;
+						foreach (var item in ViewBag.ingmissions)
 						{
-							<div style="background-color: rgb(241, 193, 96);">@item.ToString()</div>
+							<div data-MissionCount="@count"
+								 data-MissionName="@item.MissionName"
+								 data-MisStartTime="@item.MisStartTime?.ToString("yyyy-MM-dd")"
+								 data-MisFinishTime="@item.MisFinishTime?.ToString("yyyy-MM-dd")"
+								 data-background-color="rgb@{@item.ProgramColor}"
+								 style="background-color: rgb@{
+										@item.ProgramColor
+		}">
+								@item.MissionName
+							</div>
+							count++;
 						}
 					}
 					else
 					{
 						<div style="background-color: rgb(241, 193, 96);">無進行中任務</div>
 					}
+
 				}
 
 			</div>
@@ -134,19 +105,21 @@
 		</div>
 
 	</div>
+
 	<div class="column">
 		<div class="missions">已完成</div>
 		<div class="grid-topcontainer">
 			<div class="grid-item">
 				@{
-					List<Mission>? donemissions = ViewBag.donemissions as List<Mission>;
-					if (donemissions != null)
+					if (ViewBag.donemissions != null)
 					{
-						List<string> donemisDescribeList = donemissions.Select(m => m.MisDescribe).ToList();
-
-						foreach (var item in donemisDescribeList)
+						foreach (var item in ViewBag.donemissions)
 						{
-							<div style="background-color: rgb(241, 193, 96);">@item.ToString()</div>
+							<div style="background-color:rgb@{
+												@item.ProgramColor
+			}">
+								@item.MissionName
+							</div>
 						}
 					}
 					else
@@ -164,6 +137,7 @@
 
 <!-- 行事曆開頭 -->
 <div class="fs-3 calendartitle">行事曆</div>
+
 <!-- 此處新增區塊並加入類別選擇器來方便使用自創的css檔案(MyStyle.css操控月曆的大小) -->
 <div class="container">
 	<div id='calendar'></div>

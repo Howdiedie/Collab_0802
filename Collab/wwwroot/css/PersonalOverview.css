@@ -106,3 +106,26 @@
         color: brown;
     }
 }
+a {
+    text-decoration: none;
+    color: rgb(0, 0, 0);
+    font-weight: 900;
+}
+
+.fc-event {
+    background-color: #bd7878;
+    font-size: 18px;
+    /* 调整字体大小 */
+    padding: 1px 1px;
+    /* 调整内边距 */
+    border: none;
+}
+
+.fc-event-title {
+    color: black;
+    font-weight: 500;
+}
+
+.custom-event {
+    background-color: #b8b7b7;
+}
