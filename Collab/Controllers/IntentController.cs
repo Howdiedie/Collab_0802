@@ -30,8 +30,10 @@ namespace collab_00.Controllers {
 			var newTarget = new Intent
 			{
 				IntentName = target,
-				ProgramId = 1
-			};
+				ProgramId = 1,
+                MissionCountTotal = 0,
+                MissionCountFinish = 0
+            };
 
 			_bananaContext.Intents.Add(newTarget);
 			_bananaContext.SaveChanges();
@@ -56,8 +58,8 @@ namespace collab_00.Controllers {
 					sortList = sortList.OrderBy(item => item.targetID);
 					break;
 				case 2:
-					// 按進度排序
-					sortList = sortList.OrderByDescending(item => item.missionCount != 0 ? item.missionFinish / item.missionCount : 0);
+                    // 按進度排序
+                    sortList = sortList.OrderByDescending(item => item.missionCount != 0 && item.missionFinish != 0 ? (double)(item.missionFinish) / (double)(item.missionCount) * 100 : 0);
 					break;
 				case 3:
 					// 按任務數量排序

@@ -18,10 +18,12 @@ public partial class Mission
     public string? MisDescribe { get; set; }
 
     public int? IntentId { get; set; }
-
+    public int IntentID { get; internal set; }
     public int? MemberId { get; set; }
-
+    public int MemberID { get; internal set; }
     public virtual Intent? Intent { get; set; }
 
     public virtual Member? Member { get; set; }
+
+
 }
