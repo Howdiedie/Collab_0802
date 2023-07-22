@@ -27,6 +27,7 @@
     @*<link rel="stylesheet" href="//code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css">*@
     <script src="//apps.bdimg.com/libs/jquery/1.10.2/jquery.min.js"></script>
     <script src="//apps.bdimg.com/libs/jqueryui/1.10.4/jquery-ui.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <!-- CSS Files -->
     <link rel="stylesheet" href="~/css/style.css">
     
@@ -48,29 +49,21 @@
                         </button>
                     </div>
                     <!-- left personal -->
-                    <div class="col-8  truncate mt-4">
+                    <div class="leftbarbtn col-8  truncate mt-4">
                         <!-- <span class="material-symbols-outlined ">home</span> -->
                         <!-- <i class="fa-solid fa-user fa-xl divHome"></i> -->
                         <i class="fa-regular fa-user fa-xl divHome" style="color: #ffffff; "></i>
-                        <a href="#" class="ms-2  projectName  fs-4">個人總覽</a>
+                        <a href="@Url.Action("Index", "PersonalOverview")" class="ms-2 projectName fs-4">個人總覽</a>
+
                     </div>
                     <!-- left projects-->
                     <h3 class="col-8   projectTitle fs-4">計劃名稱</h3>
-                    <div class="col-8  truncate circleRed active">
-                        <a href="#" class=" projectName fs-4">藝起派對寫生活動</a>
-                    </div>
-                    <div class="col-8  truncate circleBlue ">
-                        <a href="#" class=" projectName fs-4">電影節網站設計</a>
-                    </div>
-                    <div class="col-8  truncate circle3 ">
-                        <a href="#" class=" projectName fs-4">電影節網站設計</a>
-                    </div>
-                    <div class="col-8  truncate circle4 ">
-                        <a href="#" class=" projectName fs-4">電影節網站設計</a>
-                    </div>
-                    <div class="col-8  truncate circle5 ">
-                        <a href="#" class=" projectName fs-4">電影節網站設計</a>
-                    </div>
+                    <!-- 左側欄 -->
+                    @foreach (var program in ViewBag.Programs) {
+                        <div class="leftbarbtn col-8 truncate circleBlue" style="--circle-color: @program.ProgramColor" data-bgcolor="@program.ProgramColor" data-programname="@program.ProgramName">
+                            <a href="@Url.Action("Index", "ProjectGeneral", new { id = program.ProgramId })" class="projectName fs-4" data-id="@program.ProgramId">@program.ProgramName</a>
+                        </div>
+                    }
                 </div>
                 <!-- left bar end-->
             </div>
@@ -79,20 +72,21 @@
                 <nav class="navbar navbar-expand-lg navbar-dark  py-3 "
                      style="background-color: #ffffff; box-shadow: 0 2px 5px rgba(181, 181, 181, 0.144) ">
                     <div class="container-fluid d-flex justify-content-between ">
-                        <div class=" mx-auto circleyellow-Title">
-                            <span class="mx-auto fs-2 fw-bolder navbarTitle ">藝起派對寫生活動</span>
+                        <div id="spanColor" class="mx-auto circleyellow-Title" >
+                            <span id="spanName" class="mx-auto fs-2 fw-bold navbarTitle"></span>
                         </div>
+
                         <!-- ----------------大頭貼下拉選單區------------ -->
 
                         <div class="avatar ">
-                            <img src="~/img/MemberImg/0733ba760b29378474dea0fdbcb97107.jpg" alt="頭像">
+                            <img src="@ViewBag.ProfilePicturePath" alt="頭像">
                         </div>
                         <ul class="navbar-nav me-5">
                             <li class="nav-item dropdown me-4 ">
                                 <a class="nav-link dropdown-toggle " href="#" id="navbarDarkDropdownMenuLink"
                                    role="button" data-bs-toggle="dropdown" aria-expanded="false"
                                    style="color: #2b3040e6;  font-size: 24px;  ">
-                                    Patrick
+                                    @ViewBag.MemberName
                                 </a>
                                 <ul class="dropdown-menu dropdown-menu-secondary "
                                     aria-labelledby="navbarDarkDropdownMenuLink">
@@ -109,37 +103,36 @@
                 <div class="btn-grouop ms-4">
                     <ul class="nav nav-tabs mx-4 fs-4" role="tablist">
                         <li class="nav-item" role="presentation">
-                            <button class="nav-link active" data-bs-toggle="tab" data-bs-target="#home" type="button"
-                                    role="tab" aria-controls="home" aria-selected="true">
+                            <button class="nav-link active pagebtn" data-url="@Url.Action("Index", "ProjectGeneral", new { id = ViewBag.ProgramId })" onclick="window.location.href=this.dataset.url" data-bs-toggle="tab" data-bs-target="#home" type="button" role="tab" aria-controls="home" aria-selected="true">
                                 總覽
                             </button>
                         </li>
                         <li class="nav-item" role="presentation">
-                            <button class="nav-link" data-bs-toggle="tab" data-bs-target="#profile" type="button"
+                            <button class="nav-link pagebtn" data-url="@Url.Action("Index", "Intent")" onclick="window.location.href=this.dataset.url" data-bs-toggle="tab" data-bs-target="#profile" type="button"
                                     role="tab" aria-controls="profile" aria-selected="false">
                                 目標
                             </button>
                         </li>
                         <li class="nav-item" role="presentation">
-                            <button class="nav-link" data-bs-toggle="tab" data-bs-target="#contact" type="button"
+                            <button class="nav-link pagebtn" data-url="@Url.Action("Index", "Mission")" onclick="window.location.href=this.dataset.url" data-bs-toggle="tab" data-bs-target="#contact" type="button"
                                     role="tab" aria-controls="contact" aria-selected="false">
                                 任務
                             </button>
                         </li>
                         <li class="nav-item" role="presentation">
-                            <button class="nav-link" data-bs-toggle="tab" data-bs-target="#contact" type="button"
+                            <button class="nav-link pagebtn" data-url="@Url.Action("Index", "行事曆")" onclick="window.location.href=this.dataset.url" data-bs-toggle="tab" data-bs-target="#contact" type="button"
                                     role="tab" aria-controls="contact" aria-selected="false">
                                 行事曆
                             </button>
                         </li>
                         <li class="nav-item" role="presentation">
-                            <button class="nav-link" data-bs-toggle="tab" data-bs-target="#contact" type="button"
+                            <button class="nav-link pagebtn" data-url="@Url.Action("Index", "Notebook")" onclick="window.location.href=this.dataset.url" data-bs-toggle="tab" data-bs-target="#contact" type="button"
                                     role="tab" aria-controls="contact" aria-selected="false">
                                 記事本
                             </button>
                         </li>
                         <li class="nav-item" role="presentation">
-                            <button class="nav-link" data-bs-toggle="tab" data-bs-target="#contact" type="button"
+                            <button id="pagebtn" class="nav-link pagebtn" data-url="@Url.Action("Index", "Notify")" onclick="window.location.href=this.dataset.url" data-bs-toggle="tab" data-bs-target="#contact" type="button"
                                     role="tab" aria-controls="contact" aria-selected="false">
                                 通知
                             </button>
@@ -172,6 +165,60 @@
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
     @await RenderSectionAsync("Scripts", required: false)
+
+    <script>
+        
+
+        $(document).ready(function () {
+
+
+
+            // 获取当前页面的 URL 路径
+            var url = window.location.pathname;
+
+            // 根据 URL 路径设置 active 类
+            $('.nav-item button').each(function () {
+                var linkUrl = $(this).data('url');
+                if (url == linkUrl) {
+                    $(this).addClass('active');
+                } else {
+                    $(this).removeClass('active');
+                }
+            });
+
+
+            $('.leftbarbtn a').each(function () {
+                var linkUrl = $(this).attr('href');
+                if (url.indexOf(linkUrl) === 0) {  // 如果當前 URL 以 linkUrl 為開頭
+                    $(this).parent().addClass('active');
+                } else {
+                    $(this).parent().removeClass('active');
+                }
+            });
+
+            $('.leftbarbtn').click(function(){
+                var bgColor = $(this).data("bgcolor")
+                var programName = $(this).data("programname")
+
+                //console.log(bgColor);
+                localStorage.setItem("bgcolor", bgColor);
+                localStorage.setItem("ProgramName", programName);
+                
+            })
+
+            var spanColor = localStorage.getItem("bgcolor");
+            var spanName = localStorage.getItem("ProgramName");
+            $("#spanColor").css("--circle-color-title", spanColor);
+            $("#spanName").text(spanName);
+
+        });
+
+
+        
+    </script>
+
+
+
 </body>
 
 

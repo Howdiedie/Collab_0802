@@ -1,4 +1,5 @@
-﻿using Collab.Models;
+﻿using Collab.Filters;
+using Collab.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -16,7 +17,7 @@ namespace Collab.Controllers {
             _logger = logger;
             _TestBananaContext = testBananaContext;
         }
-
+        [ServiceFilter(typeof(ProfilePicturePathFilter))]
         public IActionResult Index() {
             var notifies = _TestBananaContext.Notifies.ToList(); // 檢索Notifies資料表中的所有資料
             // 若要取得Notifies資料表的所有欄位，您可以使用反射：

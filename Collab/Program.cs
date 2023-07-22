@@ -1,3 +1,4 @@
+using Collab.Filters;
 using Collab.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
@@ -8,6 +9,8 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 builder.Services.AddControllersWithViews();
 builder.Services.AddDbContext<TestBananaContext>(options => options.UseSqlServer(builder.Configuration.GetConnectionString("TestBananaContext")));
+builder.Services.AddScoped<ProfilePicturePathFilter>();
+builder.Services.AddSession();
 
 var app = builder.Build();
 
@@ -18,6 +21,7 @@ if (!app.Environment.IsDevelopment()) {
     app.UseHsts();
 }
 
+app.UseSession();
 app.UseHttpsRedirection();
 app.UseStaticFiles();
 
@@ -30,3 +34,4 @@ app.MapControllerRoute(
     pattern: "{controller=MemberArea}/{action=Index}/{id?}");
 
 app.Run();
+

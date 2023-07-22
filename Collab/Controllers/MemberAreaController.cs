@@ -1,8 +1,10 @@
-﻿using Collab.Models;
+﻿using Collab.Filters;
+using Collab.Models;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Internal;
+using System.Drawing;
 using System.Security.Claims;
 
 namespace Collab.Controllers {
@@ -18,6 +20,7 @@ namespace Collab.Controllers {
             _db = context;  
         }
 
+        [ServiceFilter(typeof(ProfilePicturePathFilter))]
         public IActionResult Index() {
             var userId =1;  // 從 Session 或 Cookie 中獲取當前登錄會員的 ID
             var user = _db.Members.Find(userId);  // 從資料庫中查詢該會員的資料
@@ -25,6 +28,8 @@ namespace Collab.Controllers {
             var member = _db.Members.FirstOrDefault();
 
             ViewBag.ProfilePicturePath = user.MemberPhoto;
+
+
 
             return View(member);
         }

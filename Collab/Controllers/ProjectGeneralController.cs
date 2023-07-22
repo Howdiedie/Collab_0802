@@ -1,4 +1,5 @@
-﻿using Collab.Models;
+﻿using Collab.Filters;
+using Collab.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
@@ -15,14 +16,21 @@ namespace Collab.Controllers {
             _db = context;
         }
 
-
-        public IActionResult Index() {
-            var program = _db.Programs.Find(1);  // 假設您想要查詢的 Program 的 ID 是 1
+        [ServiceFilter(typeof(ProfilePicturePathFilter))]
+        public IActionResult Index(int id) {
+            
+            var program = _db.Programs.Find(id);  // 假設您想要查詢的 Program 的 ID 是 1
 
             if (program == null) {
                 // 找不到該 Program，返回錯誤訊息
                 TempData["Message"] = "該計劃不存在。";
+                ViewBag.ProgramName = "該計劃不存在";
                 return View();
+            }
+            else {
+                // Program found, set the ProgramName in the ViewBag
+                ViewBag.ProgramName = program.ProgramName;
+                ViewBag.ProgramColor = program.ProgramColor;
             }
 
             ViewBag.ProgramOverview = program.ProgramOverview;
