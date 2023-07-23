@@ -13,13 +13,16 @@ namespace collab_00.Controllers {
         }
 
         public IActionResult Index() {
-            var missions = from intent in _TestBananaContext.Intents
-                           join mission in _TestBananaContext.Missions on intent.IntentId equals  mission.IntentId
+            
+            var missions = from mission in _TestBananaContext.Missions
+                           join intent in _TestBananaContext.Intents on mission.IntentId equals intent.IntentId
+                           join member in _TestBananaContext.Members on mission.MemberId equals member.MemberId
                            select new {
                                Mission = mission,
                                IntentName = intent.IntentName,
+                               MemberPhoto = member.MemberPhoto,
+                               MemberAccount = member.MemberAccount,
                            };
-
             var query = from intent in _TestBananaContext.Intents
                         join program in _TestBananaContext.Programs on intent.ProgramId equals program.ProgramId
                         where intent.ProgramId == 1

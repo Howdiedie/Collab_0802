@@ -1,6 +1,10 @@
 ﻿var $ = jQuery.noConflict();
 
 $(function ($) {
+    //阻止mail的冒泡
+    $(".mail").on("click", (event) => {
+        event.stopPropagation(); // 阻止事件冒泡
+    })
     //把資料丟給missionEdit
     $(".show").click(function () {
         infoModal.showModal();
@@ -10,8 +14,10 @@ $(function ($) {
         var misState = $(this).data("mis-state")
         var intentName = $(this).data("intent-name")
         var MisDescribe = $(this).data("mis-describe")
+        var memberPhoto = $(this).data("member-photo")
         console.log(MisDescribe)
         $("#missionName").val(missionName)
+        $("#memberPhoto").attr("src", memberPhoto)
         $("#startDate").val(startTime)
         $("#endDate").val(endTime)
 
