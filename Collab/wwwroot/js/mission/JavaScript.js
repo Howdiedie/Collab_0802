@@ -1,28 +1,43 @@
 ﻿var $ = jQuery.noConflict();
-
+let infoModal = document.querySelector("#infoModal");
 $(function ($) {
     //阻止mail的冒泡
     $(".mail").on("click", (event) => {
         event.stopPropagation(); // 阻止事件冒泡
     })
-    //把資料丟給missionEdit
+    //只把任務狀態丟給missionEdit
+    $("#newTask").click(function () {
+        infoModal.showModal();
+        $("input[name='status'][value='新任務']").prop("checked", true);
+    })
+    $("#inProgress").click(function () {
+        infoModal.showModal();
+        $("input[name='status'][value='進行中']").prop("checked", true);
+    })
+    $("#completed").click(function () {
+        infoModal.showModal();
+        $("input[name='status'][value='已完成']").prop("checked", true);
+    })
+    //把全部資料丟給missionEdit
     $(".show").click(function () {
         infoModal.showModal();
+        //取值
+        var missionId = $(this).data("mission-id")
         var missionName = $(this).data("mission-name")
+        var memberId = $(this).data("member-id")
         var startTime = $(this).data("start-time")
         var endTime = $(this).data("end-time")
         var misState = $(this).data("mis-state")
-        var intentName = $(this).data("intent-name")
+        var intentId = $(this).data("intent-id")
         var MisDescribe = $(this).data("mis-describe")
-        var memberPhoto = $(this).data("member-photo")
-        console.log(MisDescribe)
+        //放值
+        $("#missionId").val(missionId)
         $("#missionName").val(missionName)
-        $("#memberPhoto").attr("src", memberPhoto)
+        $("#memberStatus").val(memberId)
         $("#startDate").val(startTime)
         $("#endDate").val(endTime)
-
         $("input[name='status'][value='" + misState + "']").prop("checked", true);
-        $("#statusSelect").val(intentName)
+        $("#statusSelect").val(intentId)
         $("#description").val(MisDescribe);
     });
     /*不會閃一下 但是有bug*/
@@ -84,6 +99,8 @@ $(function ($) {
     //    }
     //}).disableSelection();
     //}).disableSelection();
+
+    /* 移動li 的post函式 */
     function sendAjaxRequest(missionName, misState) {
         return new Promise(function (resolve, reject) {
             $.ajax({
@@ -103,7 +120,7 @@ $(function ($) {
             });
         });
     }
-
+    //li可以移動的函式
     $("#sortable1, #sortable2, #sortable3").sortable({
         placeholder: "ui-state-highlight",
         connectWith: ".connectedSortable",
@@ -146,20 +163,52 @@ $(function ($) {
     //select option 渲染頁面
     $("#selector").on("change", function () {
         $("#selector option:selected").each(function () {
-            console.log($(this).val())
-            var target = $(this).val()
+            console.log($(this).text())
+            var target = $(this).text()
             //$(".ui-state").css("display", "none");
             $(".ui-state").each(function () {
                 var intentName = $(this).data("intent-name");
                 console.log(intentName)
-                if (intentName == target || target == "all") { $(this).css("display", "block") }
+                if (intentName == target || target == "全部目標分類") { $(this).css("display", "block") }
                 else { $(this).css("display", "none") }
             })
             
         });
     });
 });
-let infoModal = document.querySelector("#infoModal");
-$(".close").on("click", () => {
+
+/* 送出按鈕 將資料傳給controller */
+$("#sendValue").click(function () {
     infoModal.close();
+    var postMissionId = $("#missionId").val()
+    var postMissionName = $("#missionName").val()
+    var postMemberStatus = $("#memberStatus").val()
+    var postStartDate = $("#startDate").val()
+    var postEndDate = $("#endDate").val()
+    var postSelectedValue = $("input[name='status']:checked").val();
+    var postStatusSelect = $("#statusSelect").val()
+    var postDescription = $("#description").val();
+    console.log(postMissionId, postMissionName, postMemberStatus, postStartDate, postEndDate, postSelectedValue, postStatusSelect, postDescription)
+
+
+    /* 清空 */
+    $("#missionId").val("")
+    $("#missionName").val("")
+    $("#memberStatus").val("請選擇")
+    $("#startDate").val("")
+    $("#endDate").val("")
+    $("#statusSelect").val("請選擇")
+    $("#description").val("");
+})
+//控制 Modal開關
+$(".close").on("click", () => {
+    infoModal.close();  
+    /* 清空 */
+    $("#missionId").val("")
+    $("#missionName").val("")
+    $("#memberStatus").val("請選擇")
+    $("#startDate").val("")
+    $("#endDate").val("")
+    $("#statusSelect").val("請選擇")
+    $("#description").val("");
 })

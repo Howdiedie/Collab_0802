@@ -13,21 +13,37 @@ namespace collab_00.Controllers {
         }
 
         public IActionResult Index() {
-            
+            //全部的mission
             var missions = from mission in _TestBananaContext.Missions
                            join intent in _TestBananaContext.Intents on mission.IntentId equals intent.IntentId
                            join member in _TestBananaContext.Members on mission.MemberId equals member.MemberId
                            select new {
                                Mission = mission,
-                               IntentName = intent.IntentName,
+                               IntentId = intent.IntentId,
                                MemberPhoto = member.MemberPhoto,
                                MemberAccount = member.MemberAccount,
+                               MemberId = member.MemberId
                            };
+            //全部的Intent
             var query = from intent in _TestBananaContext.Intents
                         join program in _TestBananaContext.Programs on intent.ProgramId equals program.ProgramId
                         where intent.ProgramId == 1
-                        select intent.IntentName;
+                        select new {
+                            IntentName = intent.IntentName,
+                            IntentId = intent.IntentId
+                        };
+            //這個專案裡面全部的人員
+            var membersInProgram = from member in _TestBananaContext.Members
+                                   join programMember in _TestBananaContext.ProgramMembers
+                                   on member.MemberId equals programMember.MemberId
+                                   where programMember.ProgramId == 1 && programMember.MemberState == "還在"
+                                   select new {
+                                       MemberAccount = member.MemberAccount,
+                                       MemberId = member.MemberId
+                                   };
 
+
+            ViewBag.membersInProgram = membersInProgram.ToList();
             ViewBag.option = query.ToList();
             var result = missions.ToList();
 

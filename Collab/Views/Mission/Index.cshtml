@@ -1,5 +1,4 @@
 ﻿@{
-    var optionsList = ViewBag.option as List<string>;
 }
         <!-- 從這裡開始寫 -->
         <br>
@@ -9,11 +8,11 @@
                 <div class="col-4">
                 <select id="selector" class="form-select" aria-label="Default select example">
                 <option value="all" selected>全部目標分類</option>
-                @if (optionsList != null && optionsList.Count > 0) {
-                            @foreach (var option in optionsList) {
-                                <option  value="@option">@option</option>
-                            }
+                    @if (ViewBag.option != null && ViewBag.option.Count > 0) {
+                        @foreach (var option in ViewBag.option) {
+                            <option value="@option.IntentId">@option.IntentName</option>
                         }
+                    }
                     </select>
                 </div>
                 <div class="col"></div>
@@ -25,15 +24,15 @@
             <div class="row gx-0">
                 <div class="col d-flex justify-content-center align-items-start">
                     <h2>新任務</h2>
-                    <button class="addIcon border-0 bg-white" type="submit"><i class="fa-regular fa-square-plus fa-2xl"></i></button>
+                    <button id="newTask" class="addIcon border-0 bg-white" type="submit"><i class="fa-regular fa-square-plus fa-2xl"></i></button>
                 </div>
                 <div class="col d-flex justify-content-center align-items-start">
                     <h2>進行中</h2>
-                    <button class="addIcon border-0 bg-white" type="submit"><i class="fa-regular fa-square-plus fa-2xl"></i></button>
+                    <button id="inProgress" class="addIcon border-0 bg-white" type="submit"><i class="fa-regular fa-square-plus fa-2xl"></i></button>
                 </div>
                 <div class="col d-flex justify-content-center align-items-start">
                     <h2>已完成</h2>
-                    <button class="addIcon border-0 bg-white" type="submit"><i class="fa-regular fa-square-plus fa-2xl"></i></button>
+                    <button id="completed" class="addIcon border-0 bg-white" type="submit"><i class="fa-regular fa-square-plus fa-2xl"></i></button>
                 </div>
             </div>
             <!-- 任務分類 end-->
@@ -45,10 +44,10 @@
 					 @foreach (var item in ViewBag.MissionWithIntent) {
 						@if (item.Mission.MisState == "新任務") {
                         <li class="ui-state show my-4 mx-4 draggable-mission" 
-                            data-start-time="@item.Mission.MisStartTime?.ToString("yyyy-MM-dd")" data-end-time="@item.Mission.MisFinishTime?.ToString("yyyy-MM-dd")" 
-                            data-intent-name="@item.IntentName" data-mission-name="@item.Mission.MissionName"
+                            data-start-time="@item.Mission.MisStartTime?.ToString("yyyy-MM-dd")" data-end-time="@item.Mission.MisFinishTime?.ToString("yyyy-MM-dd")"
+                            data-intent-id="@item.IntentId" data-mission-name="@item.Mission.MissionName"
                             data-mis-state="@item.Mission.MisState" data-mis-describe="@item.Mission.MisDescribe"
-                            data-member-photo="@item.MemberPhoto">
+                            data-member-id="@item.MemberId" data-mission-id="@item.Mission.MissionId">
 							<h3 class="mx-4 my-4">@item.Mission.MissionName</h3>
 							<div class="row mx-2 my-3">
 								<div class="col d-flex  align-items-center">
@@ -77,9 +76,9 @@
                         @if (item.Mission.MisState == "進行中") {
                         <li class="ui-state show my-4 mx-4 draggable-mission"
                             data-start-time="@item.Mission.MisStartTime?.ToString("yyyy-MM-dd")" data-end-time="@item.Mission.MisFinishTime?.ToString("yyyy-MM-dd")"
-                            data-intent-name="@item.IntentName" data-mission-name="@item.Mission.MissionName"
+                            data-intent-id="@item.IntentId" data-mission-name="@item.Mission.MissionName"
                             data-mis-state="@item.Mission.MisState" data-mis-describe="@item.Mission.MisDescribe"
-                            data-member-photo="@item.MemberPhoto">
+                            data-member-id="@item.MemberId" data-mission-id="@item.Mission.MissionId">
                             <h3 class="mx-4 my-4">@item.Mission.MissionName</h3>
                             <div class="row mx-2 my-3">
                                 <div class="col d-flex  align-items-center">
@@ -107,9 +106,9 @@
                         @if (item.Mission.MisState == "已完成") {
                         <li class="ui-state show my-4 mx-4 draggable-mission"
                             data-start-time="@item.Mission.MisStartTime?.ToString("yyyy-MM-dd")" data-end-time="@item.Mission.MisFinishTime?.ToString("yyyy-MM-dd")"
-                            data-intent-name="@item.IntentName" data-mission-name="@item.Mission.MissionName"
+                            data-intent-id="@item.IntentId" data-mission-name="@item.Mission.MissionName"
                             data-mis-state="@item.Mission.MisState" data-mis-describe="@item.Mission.MisDescribe"
-                            data-member-photo="@item.MemberPhoto">
+                            data-member-id="@item.MemberId" data-mission-id="@item.Mission.MissionId">
                             <h3 class="mx-4 my-4">@item.Mission.MissionName</h3>
                             <div class="row mx-2 my-3">
                                 <div class="col d-flex  align-items-center">
@@ -138,7 +137,7 @@
         <!-- 任務清單 end -->
         <!-- 任務編輯-->
         <dialog id="infoModal">
-            <form action="/mission/index">
+            
                 <div class="position-relative">
                     <button  type="button" class="close btn-close position-absolute top-10 end-0" aria-label="Close"></button>
                 </div>
@@ -146,16 +145,13 @@
                 <partial name="~/Views/MissionEdit/Index.cshtml"/>
                 <!-- 儲存按鈕 -->
                 <div class="submitBtn">
-                    <input type="submit" class="close btn btn-secondary btn-lg" value="儲存">
+                    @*<input type="submit" class="close btn btn-secondary btn-lg" value="儲存">*@
+                    <button id="sendValue" class="btn btn-secondary btn-lg">儲存</button>
                 </div>
-             </form>
+             
         </dialog>
         <!-- 任務編輯 end-->
-        <!-- 結束 -->
-        <script>
-            
-            
-        </script>
+        <!-- 結束 --> 
 <script src="~/js/mission/JavaScript.js"></script>
 <link rel="stylesheet" href="~/css/Mission.css" />
 

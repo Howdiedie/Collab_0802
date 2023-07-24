@@ -9,7 +9,8 @@
 <script src="~/js/site.js" asp-append-version="true"></script>
     
     <!-- 計劃標題 -->
-    <h1 class="projectName">藝起派對寫生活動</h1>
+        <h1 class="projectName">藝起派對寫生活動</h1>
+        <input type="text" id="missionId" style="display:none" />
     <!-- 編輯內容 -->
     
         <!-- 任務名稱 -->
@@ -18,10 +19,16 @@
             <input type="text" id="missionName" placeholder="">
         </div>
         <!-- 指派人員 -->
-        <div class="member">
+        <div class="targetSelect">
             <label for="personnel" class="col-md-2 col-form-label">人員：</label>
-            <img id="memberPhoto" src="~/img/MemberImg/0733ba760b29378474dea0fdbcb97107.jpg" class="rounded-circle" alt="頭像" width="60px"
-                 height="60px">
+            <select id="memberStatus">
+                <option value="" selected disabled>請選擇</option>
+                @if (ViewBag.membersInProgram != null) {
+                    @foreach (var item in ViewBag.membersInProgram) {
+                <option value="@item.MemberId">@item.MemberAccount</option>
+                    }
+                }
+            </select>
         </div>
         <!-- 開始日 -->
         <div class="startDate">
@@ -53,9 +60,9 @@
             <label for="target">目標：</label>
             <select id="statusSelect">
                 <option value="" selected disabled>請選擇</option>
-                @if (optionsList != null && optionsList.Count > 0) {
-                    @foreach (var option in optionsList) {
-                        <option value="@option">@option</option>
+                @if (ViewBag.option != null && ViewBag.option.Count > 0) {
+                    @foreach (var option in ViewBag.option) {
+                        <option value="@option.IntentId">@option.IntentName</option>
                     }
                 }
             </select>
@@ -68,9 +75,7 @@
             </textarea>
         </div>
 <!-- ------------- JS ---------------- -->
-
-
-
+<script src="~/js/missionEdit/JavaScript.js"></script>
 <!-- ------------- JS end---------------- -->
 
 <link rel="stylesheet" href="~/css/MissionEdit.css" />
