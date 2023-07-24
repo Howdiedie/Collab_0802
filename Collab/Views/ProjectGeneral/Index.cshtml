@@ -104,14 +104,15 @@
 
 <dialog id="infoModal">
     <form asp-action="AddMember" method="post" class="mx-3 my-3">
-        <input type="text" name="memberId" placeholder="輸入成員 ID">
+        <input type="text" name="memberAccount" placeholder="輸入成員賬號">
         <button type="submit">添加成員</button>
         <button type="button" id="cancelButton" class="fs-5 btn-close position-absolute top-0 end-0"></button>
     </form>
 </dialog>
+
 <dialog id="infoModalDelete">
     <form asp-action="DeleteMember" method="post" class="mx-3 my-3">
-        <input type="text" name="memberId" placeholder="輸入成員 ID">
+        <input type="text" name="memberAccount" placeholder="輸入成員賬號">
         <button type="submit">刪除成員</button>
         <button type="button" id="close" class="fs-5 btn-close position-absolute top-0 end-0"></button>
     </form>
@@ -200,4 +201,5 @@
 
 
 </script>
+
 

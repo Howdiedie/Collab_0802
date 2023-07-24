@@ -20,11 +20,14 @@ namespace Collab.Controllers {
         public IActionResult Index(int id) {
             
             var program = _db.Programs.Find(id);  // 查詢的 Program 的 ID 
+            int programId = id;  
+            Response.Cookies.Append("ProgramId", programId.ToString());// 將 ProgramId 儲存到 Cookie
+
 
             if (program == null) {
                 // 找不到該 Program，返回錯誤訊息
                 TempData["Message"] = "該計劃不存在。";
-                ViewBag.ProgramName = "該計劃不存在";
+                //ViewBag.ProgramName = "該計劃不存在";
                 return View();
             }
             else {
@@ -50,13 +53,16 @@ namespace Collab.Controllers {
 
             ViewBag.Members = members;
 
-            return View(program);
+            return View();
         }
 
         [HttpPost]
         public IActionResult UpdateProgramOverview(string newOverview) {
-            int programId = 1;  // 從 Session 或 Cookie 中獲取當前的 Program ID
-            int EditMemberId = 3;//誰編輯這個計畫概述的
+            // 從 Session 或 Cookie 中獲取當前的 Program ID
+            string programIdStr = Request.Cookies["ProgramId"];
+            int.TryParse(programIdStr, out int programId);
+
+            int EditMemberId = 3; //誰編輯這個計畫概述的
             var program = _db.Programs.Find(programId);  // 從資料庫中查詢該計劃的資料
 
             if (program == null) {
@@ -83,27 +89,31 @@ namespace Collab.Controllers {
 
             // 返回成功訊息
             TempData["Message"] = "計劃概述更新成功。";
-            return RedirectToAction("Index");
 
-
+            return RedirectToAction("Index", new { id = programId });
 
         }
 
 
+
         [HttpPost]
         public IActionResult AddLink(string linkTitle, string linkUrl) {
+            // 從 Session 或 Cookie 中獲取當前的 Program ID
+            string programIdStr = Request.Cookies["ProgramId"];
+            int.TryParse(programIdStr, out int programId);
+
+
             if (string.IsNullOrEmpty(linkTitle) || string.IsNullOrEmpty(linkUrl)) {
                 TempData["Message"] = "請輸入名稱和 URL。";
-                return RedirectToAction("Index");
+                return RedirectToAction("Index", new { id = programId });
             }
 
-            int programId = 1;  // 從 Session 或 Cookie 中獲取當前的 Program ID
             var program = _db.Programs.Find(programId);
 
             if (program == null) {
                 // 找不到該 Program，返回錯誤訊息
                 TempData["Message"] = "該計劃不存在。";
-                return RedirectToAction("Index");
+                return RedirectToAction("Index", new { id = programId });
             }
 
             var newLink = new ProgramLinkList { LinkTitle = linkTitle, LinkUrl = linkUrl, ProgramId = programId };
@@ -111,69 +121,87 @@ namespace Collab.Controllers {
             _db.SaveChanges();
 
             TempData["Message"] = "連結添加成功。";
-            return RedirectToAction("Index");
+            return RedirectToAction("Index", new { id = programId });
         }
 
         [HttpPost]
         public IActionResult DeleteLink(int linkId) {
+            // 從 Session 或 Cookie 中獲取當前的 Program ID
+            string programIdStr = Request.Cookies["ProgramId"];
+            int.TryParse(programIdStr, out int programId);
+
             var link = _db.ProgramLinkLists.Find(linkId);
             if (link == null) {
                 // 找不到該連結，返回錯誤訊息
                 TempData["Message"] = "該連結不存在。";
-                return RedirectToAction("Index");
+                return RedirectToAction("Index", new { id = programId });
             }
 
             _db.ProgramLinkLists.Remove(link);
             _db.SaveChanges();
 
             TempData["Message"] = "連結刪除成功。";
-            return RedirectToAction("Index");
+            return RedirectToAction("Index", new { id = programId });
         }
 
 
         [HttpPost]
-        public IActionResult AddMember(int memberId) {
-            int programId = 1;  // 這裡假設你想要添加成員的 Program 的 ID 是 1
+        public IActionResult AddMember(string memberAccount) {
+            // 從 Session 或 Cookie 中獲取當前的 Program ID
+            string programIdStr = Request.Cookies["ProgramId"];
+            int.TryParse(programIdStr, out int programId);
 
             // 檢查是否存在該成員
-            var member = _db.Members.Find(memberId);
+            var member = _db.Members.FirstOrDefault(m => m.MemberAccount == memberAccount);
             if (member == null) {
                 TempData["Message"] = "該成員不存在。";
-                return RedirectToAction("Index");
+                return RedirectToAction("Index", new { id = programId });
             }
 
             // 檢查是否該成員已經是計劃的成員
-            var programMember = _db.ProgramMembers.FirstOrDefault(pm => pm.ProgramId == programId && pm.MemberId == memberId);
+            var programMember = _db.ProgramMembers.FirstOrDefault(pm => pm.ProgramId == programId && pm.MemberId == member.MemberId);
             if (programMember != null) {
                 TempData["Message"] = "該成員已經是計劃的成員。";
-                return RedirectToAction("Index");
+                return RedirectToAction("Index", new { id = programId });
             }
 
             // 創建一個新的 ProgramMember 實例並儲存
-            var newProgramMember = new ProgramMember { ProgramId = programId, MemberId = memberId, MemberState = "Active" };
+            var newProgramMember = new ProgramMember { ProgramId = programId, MemberId = member.MemberId, MemberState = "Active" };
             _db.ProgramMembers.Add(newProgramMember);
             _db.SaveChanges();
 
             TempData["Message"] = "成功添加成員。";
-            return RedirectToAction("Index");
+            return RedirectToAction("Index", new { id = programId });
         }
 
 
+
         [HttpPost]
-        public IActionResult DeleteMember(int memberId) {
+        public IActionResult DeleteMember(string memberAccount) {
+            // 從 Session 或 Cookie 中獲取當前的 Program ID
+            string programIdStr = Request.Cookies["ProgramId"];
+            int.TryParse(programIdStr, out int programId);
+
+            // 檢查是否存在該成員
+            var member = _db.Members.FirstOrDefault(m => m.MemberAccount == memberAccount);
+            if (member == null) {
+                TempData["Message"] = "該成員不存在。";
+                return RedirectToAction("Index", new { id = programId });
+            }
+
             // 檢查成員是否有未完成的任務
             var unfinishedMissions = _db.Missions
-                .Where(m => m.MemberId == memberId && (m.MisState == "新任務" || m.MisState == "進行中"))
+                .Where(m => m.MemberId == member.MemberId && (m.MisState == "新任務" || m.MisState == "進行中"))
                 .Any();
 
             if (unfinishedMissions) {
                 // 如果成員有未完成的任務，返回錯誤訊息
                 TempData["Message"] = "該成員還有未完成的任務。請先完成所有任務再刪除該成員。";
-                return RedirectToAction("Index");
+                return RedirectToAction("Index", new { id = programId });
             }
 
             // 從計劃成員中刪除該成員
-            var memberInProgram = _db.ProgramMembers.FirstOrDefault(pm => pm.MemberId == memberId && pm.ProgramId == 1);
+            var memberInProgram = _db.ProgramMembers.FirstOrDefault(pm => pm.MemberId == member.MemberId && pm.ProgramId == programId);
             if (memberInProgram != null) {
                 _db.ProgramMembers.Remove(memberInProgram);
                 _db.SaveChanges();
@@ -183,8 +211,9 @@ namespace Collab.Controllers {
                 TempData["Message"] = "找不到該成員在計劃中的記錄。";
             }
 
-            return RedirectToAction("Index");
+            return RedirectToAction("Index", new { id = programId });
         }
+
 
 
     }

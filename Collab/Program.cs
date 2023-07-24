@@ -31,7 +31,7 @@ app.UseAuthorization();
 
 app.MapControllerRoute(
     name: "default",
-    pattern: "{controller=MemberArea}/{action=Index}/{id?}/{page?}");
+    pattern: "{controller=Notify}/{action=Index}/{id?}");
 
 app.Run();
 

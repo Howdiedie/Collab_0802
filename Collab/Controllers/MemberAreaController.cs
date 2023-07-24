@@ -30,9 +30,9 @@ namespace Collab.Controllers {
             ViewBag.ProfilePicturePath = user.MemberPhoto;
 
 
-
             return View(member);
         }
+
         //-------------編輯會員名稱
         [HttpPost] 
         public IActionResult Edit(Member updatedMember) {
