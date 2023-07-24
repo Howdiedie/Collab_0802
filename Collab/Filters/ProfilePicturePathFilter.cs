@@ -15,8 +15,6 @@ namespace Collab.Filters {
         }
         public override void OnActionExecuting(ActionExecutingContext filterContext) {
 
-
-
             var userId = 1;  // 從 Session 或 Cookie 中獲取當前登錄會員的 ID
             var db = filterContext.HttpContext.RequestServices.GetService<TestBananaContext>();
             var user = db.Members.Find(userId);
@@ -30,10 +28,9 @@ namespace Collab.Filters {
             }
             ((Controller)filterContext.Controller).ViewBag.MemberName = user.MemberName;  // 設置會員名稱
 
-
             var programs = _db.Programs.ToList();
             ((Controller)filterContext.Controller).ViewBag.Programs = programs;
-
+            
             base.OnActionExecuting(filterContext);
         }
 

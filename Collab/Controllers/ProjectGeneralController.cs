@@ -19,7 +19,7 @@ namespace Collab.Controllers {
         [ServiceFilter(typeof(ProfilePicturePathFilter))]
         public IActionResult Index(int id) {
             
-            var program = _db.Programs.Find(id);  // 假設您想要查詢的 Program 的 ID 是 1
+            var program = _db.Programs.Find(id);  // 查詢的 Program 的 ID 
 
             if (program == null) {
                 // 找不到該 Program，返回錯誤訊息
@@ -29,8 +29,8 @@ namespace Collab.Controllers {
             }
             else {
                 // Program found, set the ProgramName in the ViewBag
-                ViewBag.ProgramName = program.ProgramName;
-                ViewBag.ProgramColor = program.ProgramColor;
+                //ViewBag.ProgramName = program.ProgramName;
+                //ViewBag.ProgramColor = program.ProgramColor;
             }
 
             ViewBag.ProgramOverview = program.ProgramOverview;
@@ -50,14 +50,13 @@ namespace Collab.Controllers {
 
             ViewBag.Members = members;
 
-            return View();
+            return View(program);
         }
-
-
 
         [HttpPost]
         public IActionResult UpdateProgramOverview(string newOverview) {
             int programId = 1;  // 從 Session 或 Cookie 中獲取當前的 Program ID
+            int EditMemberId = 3;//誰編輯這個計畫概述的
             var program = _db.Programs.Find(programId);  // 從資料庫中查詢該計劃的資料
 
             if (program == null) {
@@ -68,11 +67,26 @@ namespace Collab.Controllers {
 
             // 更新計劃概述
             program.ProgramOverview = newOverview;
+
+            //新增通知
+            var NotifyAdd = new Notify {
+                NotifyDate = DateTime.Now,
+                NotifyAction = "修改",
+                NotifyType = "計畫",
+                ActionName = program.ProgramName.ToString(),
+                ProgramId = program.ProgramId,
+                MemberId = EditMemberId
+            };
+            _db.Notifies.Add(NotifyAdd);
+
             _db.SaveChanges();  // 儲存變更
 
             // 返回成功訊息
             TempData["Message"] = "計劃概述更新成功。";
             return RedirectToAction("Index");
+
+
+
         }
 
 

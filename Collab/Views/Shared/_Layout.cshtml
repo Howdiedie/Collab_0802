@@ -58,12 +58,14 @@
                     </div>
                     <!-- left projects-->
                     <h3 class="col-8   projectTitle fs-4">計劃名稱</h3>
+                    @*<button id="NewProjectBtn">新增計劃</button>*@
                     <!-- 左側欄 -->
                     @foreach (var program in ViewBag.Programs) {
                         <div class="leftbarbtn col-8 truncate circleBlue" style="--circle-color: @program.ProgramColor" data-bgcolor="@program.ProgramColor" data-programname="@program.ProgramName">
-                            <a href="@Url.Action("Index", "ProjectGeneral", new { id = program.ProgramId })" class="projectName fs-4" data-id="@program.ProgramId">@program.ProgramName</a>
+                            <a href="javascript:void(0);" onclick="navigateToProjectGeneral(@program.ProgramId)" class="projectName fs-4" data-id="@program.ProgramId">@program.ProgramName</a>
                         </div>
                     }
+
                 </div>
                 <!-- left bar end-->
             </div>
@@ -95,7 +97,7 @@
                                 </ul>
                             </li>
                         </ul>
-                        <!-- ----------------大頭貼下拉選單區end------------ -->
+                        <!-- ----------------大頭貼下拉選單區end-------------->
                     </div>
                 </nav>
                 <!-- navbar end-->
@@ -103,36 +105,40 @@
                 <div class="btn-grouop ms-4">
                     <ul class="nav nav-tabs mx-4 fs-4" role="tablist">
                         <li class="nav-item" role="presentation">
-                            <button class="nav-link active pagebtn" data-url="@Url.Action("Index", "ProjectGeneral", new { id = ViewBag.ProgramId })" onclick="window.location.href=this.dataset.url" data-bs-toggle="tab" data-bs-target="#home" type="button" role="tab" aria-controls="home" aria-selected="true">
+                            @*<button id="projectGeneralButton" class="nav-link active pagebtn"  onclick="navigateToProjectGeneralFromButton()" data-bs-toggle="tab" data-bs-target="#home" type="button" role="tab" aria-controls="home" aria-selected="true">
+                                總覽
+                            </button>*@
+                            <button id="projectGeneralButton" class="nav-link active pagebtn" data-url="@Url.Action("Index", "ProjectGeneral")" data-bs-toggle="tab" data-bs-target="#profile" type="button"
+                                    role="tab" aria-controls="profile" aria-selected="false">
                                 總覽
                             </button>
                         </li>
                         <li class="nav-item" role="presentation">
-                            <button class="nav-link pagebtn" data-url="@Url.Action("Index", "Intent")" onclick="window.location.href=this.dataset.url" data-bs-toggle="tab" data-bs-target="#profile" type="button"
+                            <button id="projectIntentButton" class="nav-link pagebtn" data-url="@Url.Action("Index", "Intent")" data-bs-toggle="tab" data-bs-target="#profile" type="button"
                                     role="tab" aria-controls="profile" aria-selected="false">
                                 目標
                             </button>
                         </li>
                         <li class="nav-item" role="presentation">
-                            <button class="nav-link pagebtn" data-url="@Url.Action("Index", "Mission")" onclick="window.location.href=this.dataset.url" data-bs-toggle="tab" data-bs-target="#contact" type="button"
+                            <button class="nav-link pagebtn" data-url="@Url.Action("Index", "Mission")"  data-bs-toggle="tab" data-bs-target="#contact" type="button"
                                     role="tab" aria-controls="contact" aria-selected="false">
                                 任務
                             </button>
                         </li>
                         <li class="nav-item" role="presentation">
-                            <button class="nav-link pagebtn" data-url="@Url.Action("Index", "行事曆")" onclick="window.location.href=this.dataset.url" data-bs-toggle="tab" data-bs-target="#contact" type="button"
+                            <button class="nav-link pagebtn" data-url="@Url.Action("Index", "行事曆")"  data-bs-toggle="tab" data-bs-target="#contact" type="button"
                                     role="tab" aria-controls="contact" aria-selected="false">
                                 行事曆
                             </button>
                         </li>
                         <li class="nav-item" role="presentation">
-                            <button class="nav-link pagebtn" data-url="@Url.Action("Index", "Notebook")" onclick="window.location.href=this.dataset.url" data-bs-toggle="tab" data-bs-target="#contact" type="button"
+                            <button class="nav-link pagebtn" data-url="@Url.Action("Index", "Notebook")"  data-bs-toggle="tab" data-bs-target="#contact" type="button"
                                     role="tab" aria-controls="contact" aria-selected="false">
                                 記事本
                             </button>
                         </li>
                         <li class="nav-item" role="presentation">
-                            <button id="pagebtn" class="nav-link pagebtn" data-url="@Url.Action("Index", "Notify")" onclick="window.location.href=this.dataset.url" data-bs-toggle="tab" data-bs-target="#contact" type="button"
+                            <button id="pagebtn" class="nav-link pagebtn" data-url="@Url.Action("Index", "Notify")"  data-bs-toggle="tab" data-bs-target="#contact" type="button"
                                     role="tab" aria-controls="contact" aria-selected="false">
                                 通知
                             </button>
@@ -167,7 +173,34 @@
     @await RenderSectionAsync("Scripts", required: false)
 
     <script>
-        
+        function navigateToProjectGeneral(programId) {
+            // Store the programId in localStorage
+            localStorage.setItem('CurrentProgramId', programId);
+
+            // Construct the new URL for the ProjectGeneral action
+            var newUrl = '@Url.Action("Index", "ProjectGeneral")' + '?id=' + programId;
+
+            // Navigate to the new URL
+            window.location.href = newUrl;
+        }
+
+        function navigateToProjectGeneralFromButton() {
+            // Get the CurrentProgramId from localStorage
+            var currentProgramId = localStorage.getItem('CurrentProgramId');
+
+            // Construct the new URL for the ProjectGeneral action
+            var newUrl = '@Url.Action("Index", "ProjectGeneral")' + '?id=' + currentProgramId;
+
+            // Set the data-url attribute of the button to the new URL
+            $('#projectGeneralButton').data('url', newUrl);
+
+            
+        }
+
+
+
+
+
 
         $(document).ready(function () {
 
@@ -177,24 +210,24 @@
             var url = window.location.pathname;
 
             // 根据 URL 路径设置 active 类
-            $('.nav-item button').each(function () {
-                var linkUrl = $(this).data('url');
-                if (url == linkUrl) {
-                    $(this).addClass('active');
-                } else {
-                    $(this).removeClass('active');
-                }
-            });
+            //$('.nav-item button').each(function () {
+            //    var linkUrl = $(this).data('url');
+            //    if (url == linkUrl) {
+            //        $(this).addClass('active');
+            //    } else {
+            //        $(this).removeClass('active');
+            //    }
+            //});
 
 
-            $('.leftbarbtn a').each(function () {
-                var linkUrl = $(this).attr('href');
-                if (url.indexOf(linkUrl) === 0) {  // 如果當前 URL 以 linkUrl 為開頭
-                    $(this).parent().addClass('active');
-                } else {
-                    $(this).parent().removeClass('active');
-                }
-            });
+            //$('.leftbarbtn a').each(function () {
+            //    var linkUrl = $(this).attr('href');
+            //    if (url.indexOf(linkUrl) === 0) {  // 如果當前 URL 以 linkUrl 為開頭
+            //        $(this).parent().addClass('active');
+            //    } else {
+            //        $(this).parent().removeClass('active');
+            //    }
+            //});
 
             $('.leftbarbtn').click(function(){
                 var bgColor = $(this).data("bgcolor")
@@ -210,6 +243,53 @@
             var spanName = localStorage.getItem("ProgramName");
             $("#spanColor").css("--circle-color-title", spanColor);
             $("#spanName").text(spanName);
+            // 获取当前页面的 URL 路径
+            var currentPath = window.location.pathname;
+
+            // 判断是否为 PersonalOverview 页面
+            if (currentPath.endsWith('/PersonalOverview')) {
+                var spanName = '個人總覽';
+                localStorage.setItem("ProgramName", spanName);
+                $("#spanName").text(spanName);
+            }
+
+
+
+            $(".pagebtn").click(function(){
+                //取得localStorage的CurrentProgramId
+                var programId = localStorage.getItem('CurrentProgramId');
+                //獲取按鈕的data-url 屬性
+                var oldUrl = $(this).data('url');
+                // 新的 URL，後面加上 programId
+                var newUrl = oldUrl + '?id=' + programId;
+                //頁面導向新的url
+                window.location.href = newUrl;
+            })
+
+
+            // 获取当前页面的 URL 路径
+            var currentPath = window.location.pathname;
+
+            // 遍历所有 .pagebtn 元素
+            $('.pagebtn').each(function () {
+                // 获取按钮的 data-url 属性
+                var btnUrl = $(this).data('url');
+                //console.log(btnUrl);
+                //console.log(newUrl);
+                console.log(currentPath);
+                // 如果按钮的 URL 和当前页面的 URL 路径匹配，则添加 active 类
+                if (btnUrl == currentPath) {
+                    $(this).addClass('active');
+                } else {
+                    $(this).removeClass('active');
+                }
+            });
+
+            
+
+
+
+
 
         });
 
