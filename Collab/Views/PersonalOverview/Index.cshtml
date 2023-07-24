@@ -75,8 +75,7 @@
 			<div class="grid-item">
 				@*<div style="background-color:rgb(241, 193, 96); ">藝起生活寫生派對-刻板</div>*@
 				@{
-					if (ViewBag.ingmissions != null)
-					{
+					
 						var count = 1;
 						bool dataFound = false;
 
@@ -108,12 +107,9 @@
 							<div style="background-color: rgb(241, 193, 96);">無進行中任務</div>
 						}
 					}
-					else
-					{
-						<div style="background-color: rgb(241, 193, 96);">無進行中任務</div>
-					}
+					
 
-				}
+				
 
 			</div>
 
@@ -126,18 +122,19 @@
 		<div class="grid-topcontainer">
 			<div class="grid-item">
 				@{
+					bool donedataFound = false;
 					@if (ViewBag.donemissions != null)
 					{
 						@foreach (var item in ViewBag.donemissions)
 						{
-							<div style="background-color: rgb@{
-						@item.ProgramColor
-}">
+							<div style="background-color: rgb@{@item.ProgramColor}">
 								@item.MissionName
 							</div>
+							donedataFound = true;
 						}
 					}
-					else
+					
+					if (!donedataFound)
 					{
 						<div style="background-color: rgb(241, 193, 96);">近一周內無已完成任務</div>
 					}

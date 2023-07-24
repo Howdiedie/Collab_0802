@@ -51,9 +51,10 @@ namespace collab_00.Controllers
 				.OrderBy(item => item.MisStartTime)
 				.ToList();
 
-
+				//----------------------------------------------------------------------------------
+				DateTime sevenDaysAgo = DateTime.Now.AddDays(-7);
 				var donemissions = _TestBananaContext.Missions
-				.Where(m => m.MemberId == UserID && m.MisState == "已完成")
+				.Where(m => m.MemberId == UserID && m.MisState == "已完成" && DateTime.Compare((DateTime)m.MisFinishTime, sevenDaysAgo) >= 0)
 				.Join(
 				_TestBananaContext.Intents,
 				m => m.IntentId,
