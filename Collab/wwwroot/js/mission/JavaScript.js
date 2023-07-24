@@ -186,11 +186,33 @@ $("#sendValue").click(function () {
     var postStartDate = $("#startDate").val()
     var postEndDate = $("#endDate").val()
     var postSelectedValue = $("input[name='status']:checked").val();
-    var postStatusSelect = $("#statusSelect").val()
+    var postIntentSelect = $("#statusSelect").val()
     var postDescription = $("#description").val();
-    console.log(postMissionId, postMissionName, postMemberStatus, postStartDate, postEndDate, postSelectedValue, postStatusSelect, postDescription)
-
-
+    console.log(postMissionId, postMissionName, postMemberStatus, postStartDate, postEndDate, postSelectedValue, postIntentSelect, postDescription)
+    var data = {
+        MissionId: parseInt(postMissionId),
+        MissionName: postMissionName,
+        MisStartTime: new Date(postStartDate),
+        MisFinishTime: new Date(postEndDate),
+        MisState: postSelectedValue,
+        MisDescribe: postDescription,
+        IntentId: parseInt(postIntentSelect),
+        MemberId: parseInt(postMemberStatus)
+    };
+    console.log(JSON.stringify(data))
+    $.ajax({
+        url: "/MissionEdit/UpsertMission", // 請根據您的Controller路由進行調整
+        type: "POST",
+        data: data,
+        success: function (result) {
+            // 處理成功回傳的結果
+            console.log(result);
+        },
+        error: function (xhr, status, error) {
+            // 處理錯誤
+            console.error("發生錯誤:", error);
+        }
+    });
     /* 清空 */
     $("#missionId").val("")
     $("#missionName").val("")
