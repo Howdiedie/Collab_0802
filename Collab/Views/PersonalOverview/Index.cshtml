@@ -60,7 +60,7 @@
 
 			return events;
 		}
-		
+
 	});
 </script>
 
@@ -78,19 +78,34 @@
 					if (ViewBag.ingmissions != null)
 					{
 						var count = 1;
+						bool dataFound = false;
+
 						foreach (var item in ViewBag.ingmissions)
 						{
-							<div data-MissionCount="@count"
-								 data-MissionName="@item.MissionName"
-								 data-MisStartTime="@item.MisStartTime?.ToString("yyyy-MM-dd")"
-								 data-MisFinishTime="@item.MisFinishTime?.ToString("yyyy-MM-dd")"
-								 data-background-color="rgb@{@item.ProgramColor}"
-								 style="background-color: rgb@{
-										@item.ProgramColor
-		}">
-								@item.MissionName
-							</div>
-							count++;
+							// 檢查是否存在所需資料，例如：MissionName 不為空
+							if (!string.IsNullOrEmpty(item.MissionName))
+							{
+								<div data-MissionCount="@count"
+									 data-MissionName="@item.MissionName"
+									 data-MisStartTime="@item.MisStartTime?.ToString("yyyy-MM-dd")"
+									 data-MisFinishTime="@item.MisFinishTime?.ToString("yyyy-MM-dd")"
+									 data-background-color="rgb@{
+									@item.ProgramColor
+								}"
+									 style="background-color: rgb@{
+								@item.ProgramColor
+	}">
+									@item.MissionName
+								</div>
+								dataFound = true;
+								count++;
+							}
+						}
+
+						// 處理未找到所需資料的情況
+						if (!dataFound)
+						{
+							<div style="background-color: rgb(241, 193, 96);">無進行中任務</div>
 						}
 					}
 					else
@@ -111,13 +126,13 @@
 		<div class="grid-topcontainer">
 			<div class="grid-item">
 				@{
-					if (ViewBag.donemissions != null)
+					@if (ViewBag.donemissions != null)
 					{
-						foreach (var item in ViewBag.donemissions)
+						@foreach (var item in ViewBag.donemissions)
 						{
-							<div style="background-color:rgb@{
-												@item.ProgramColor
-			}">
+							<div style="background-color: rgb@{
+						@item.ProgramColor
+}">
 								@item.MissionName
 							</div>
 						}
@@ -126,6 +141,7 @@
 					{
 						<div style="background-color: rgb(241, 193, 96);">近一周內無已完成任務</div>
 					}
+
 				}
 			</div>
 

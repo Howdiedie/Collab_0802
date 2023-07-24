@@ -76,7 +76,7 @@
 } */
 
 .fc-toolbar-title { /*從網頁對標題案檢查 得知內建標題的選擇器為fc-toolbar-title*/
-    color: rgb(173, 54, 54);
+    color: #2b3040e6;
     font-weight: 900;
 }
 

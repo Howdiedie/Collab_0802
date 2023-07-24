@@ -45,8 +45,8 @@
                         }
                         else
                         {
-                            <input class="accountInput" id="memberaccount" name="memberaccount" type="text" value="@ViewBag.memberaccount">
-                            <div style="text-align: center;color: black;font-size: 20px;margin-top:10px">@ViewBag.ResultMsg</div>
+                            <input class="accountInput"value="@ViewBag.memberaccount">
+                            <div style="text-align: center;color: black;font-size: 20px;margin-top:10px">驗證碼已寄出</div>
                         }
                         @if (!string.IsNullOrEmpty(ViewBag.notfound))
                         {
@@ -59,19 +59,24 @@
             </div>
                 
         </form>
-
+        <form action="/ForgetPW/CheckVerificationCode" method="post">
             <div style="display: flex ;margin-top: 35px; ">
                 <div class="myinputtitle">
                     <label for="password">驗證碼</label>
                 </div>
                 <div style="width: 50%;">
-                    <input class="passwordInput" placeholder="請輸入驗證碼" required>
+                        <input class="passwordInput" placeholder="請輸入驗證碼" name="CheckVerificationCode" type="number"  required>
+                        @if (!string.IsNullOrEmpty(ViewBag.VerificationCodeError))
+                        {
+                            <div style="text-align: center;color: red;font-size: 20px;margin-top:10px">@ViewBag.VerificationCodeError</div>
+                        }
                 </div>
                 <div style="width: 30%;">
                     <input class="my-button" type="submit" value="確認" style="margin-left: 30px;">
-                </div>
+                    </div>
             </div>
             <br>
+        </form>
         </div>
         <br>
     </div>
@@ -102,54 +107,7 @@
         return true;
     }
 </script>
-@section scripts{
-    <script>
-        var VuePage = new Vue({
-            el: '#VuePage'
-            , data: function () {
-                var data = {
-                    form: {}
-                };
-                return data;
-            }
-            , methods: {
-                // 前端驗證權杖
-                GetToken: function () {
-                    var token = '@Html.AntiForgeryToken()';
-                    token = $(token).val();
-                    return token;
-                }
-                // 寄送驗證碼
-                , SendMailToken: function () {
-                    var self = this;
 
-                    // 組合表單資料
-                    var postData = {};
-                    postData['UserID'] = self.form.UserID;
-
-                    // 使用 jQuery Ajax 傳送至後端
-                    $.ajax({
-                        url: '@Url.Action("SendMailToken", "Member")',
-                        method: 'POST',
-                        dataType: 'json',
-                        data: { inModel: postData, __RequestVerificationToken: self.GetToken() },
-                        success: function (datas) {
-                            if (datas.ErrMsg) {
-                                alert(datas.ErrMsg);
-                                return;
-                            }
-                            alert(datas.ResultMsg);
-                        },
-                        error: function (err) {
-                            $('#ErrorMsg').html(err.responseText);
-                            $('#ErrorAlert').modal('toggle');
-                        }
-                    });
-                }
-            }
-        })
-    </script>
-}
 
 
 
