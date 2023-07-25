@@ -1,88 +1,161 @@
-﻿
-@{
-    ViewData["Title"] = "Index";
+﻿@{
+	ViewData["Title"] = "Index";
 }
+@model List<TestBananaContext>;
 
-            <div class="section1">
-                <div class="addTarget">
-                    <a class="icon-addTarget"><i class="fa-regular fa-square-plus fa-2xl"></i></a>
-                    <input class="addInput" type="text" placeholder="新增目標" name=""
-                           onfocus="this.placeholder = ''" onblur="this.placeholder = '新增目標'">
-                </div>
-                <div class="sort">
-                    <button class="btn dropdown-toggle" type="button" id="dropdownMenuButton1"
-                            data-bs-toggle="dropdown" aria-expanded="false">
-                        排序方式
-                    </button>
-                    <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-                        <li><a class="dropdown-item" href="#">依新增日期</a></li>
-                        <li><a class="dropdown-item" href="#">依進度</a></li>
-                        <li><a class="dropdown-item" href="#">依任務數量</a></li>
-                    </ul>
+
+<div class="section1">
+	<div class="addTarget">
+		<form asp-action="AddTarget" method="post">
+			<button class="icon-addTarget" type="submit" style="border:none; background-color:white"><i class="fa-regular fa-square-plus fa-2xl"></i></button>
+			<input class="addInput" type="text" placeholder="新增目標" name="target" />
+		</form>
+	</div>
+
+	<div class="sort">
+		<button class="btn dropdown-toggle" type="button" id="dropdownMenuButton1"
+				data-bs-toggle="dropdown" aria-expanded="false">
+			排序方式
+		</button>
+		<ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+
+			<li><a class="dropdown-item" href="@Url.Action("Sort", new { sortOrder = 1 })">依新增日期</a></li>
+			<li><a class="dropdown-item" href="@Url.Action("Sort", new { sortOrder = 2 })">依進度</a></li>
+			<li><a class="dropdown-item" href="@Url.Action("Sort", new { sortOrder = 3 })">依任務數量</a></li>
+
+		</ul>
+	</div>
+</div>
+</div>
+
+<div class="progressArea">
+	@foreach (var targetItem in Model) {
+
+		double MC = Convert.ToDouble(targetItem.missionCount);
+		double MF = Convert.ToDouble(targetItem.missionFinish);
+		int Count;
+
+		if (MC == 0 || MF == 0) {
+			Count = 0;
+		}
+		else {
+			Count = Convert.ToInt32(Math.Round((MF / MC) * 100));
+		}
+
+		<div class="targetItem">
+			<div class="targeTittle">
+				<div>
+					<p for="">@targetItem.targetName</p>
+				</div>
+				<div class="target-addMission">
+					<button class="icon-addMission showDialog" style="border:none; background-color:white">
+						<i class="fa-solid fa-plus fa-lg"></i>&nbsp;新增任務
+					</button>
+				</div>
+			</div>
+			<progress class="progress-bar" max="100" min="0" value="@Count"></progress>
+			<label class="missionAmount">任務數量：@targetItem.missionCount</label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<label>/</label>&nbsp;&nbsp;&nbsp;&nbsp;<label class="missionAmount">已完成：@targetItem.missionFinish</label>
+		</div>
+	}
+
+
+	<div>
+		<img src="~/img/Intent/9812.png" alt="" class="bgImg">
+	</div>
+
+	<dialog id="infoModal">
+        <div class="position-relative">
+            <button type="button" class="btn-close position-absolute top-10 end-0 closeDialog" aria-label="Close"></button>
+        </div>
+        <!-- 計劃標題 -->
+        <h1 class="missionEdit-projectName">藝起派對寫生活動</h1>
+        <!-- 編輯內容 -->
+        <form>
+            <!-- 任務名稱 -->
+            <div class="taskName">
+                <label for="taskName">任務：</label>
+                <input type="text" placeholder="">
+            </div>
+            <!-- 指派人員 -->
+            <div class="missionMember">
+                <label for="personnel" class="col-md-2 col-form-label">人員：</label>
+                <img src="~/img/MemberImg/0733ba760b29378474dea0fdbcb97107.jpg" class="rounded-circle" alt="頭像" width="60px"
+                     height="60px">
+            </div>
+            <!-- 開始日 -->
+            <div class="startDate">
+                <label for="startDate">開始日：</label>
+                <input type="date" class="calendar">
+            </div>
+            <!-- 截止日 -->
+            <div class="endDate">
+                <label for="endDate">截止日：</label>
+                <input type="date" class="calendar">
+            </div>
+            <!-- 狀態 -->
+            <div class="status">
+                <label for="status">狀態：</label>
+                <div class="btn-group-toggle" data-toggle="buttons">
+                    <label class="btn btn-secondary btn-lg">
+                        <input type="radio" name="status" value="pending"> 新任務
+                    </label>&nbsp;&nbsp;
+                    <label class="btn btn-secondary btn-lg">
+                        <input type="radio" name="status" value="inProgress"> 進行中
+                    </label>&nbsp;&nbsp;
+                    <label class="btn btn-secondary btn-lg">
+                        <input type="radio" name="status" value="completed"> 已完成
+                    </label>
                 </div>
             </div>
-
-            <div class="progressArea">
-                <div class="targetItem">
-                    <div class="targeTittle">
-                        <div>
-                            <p for="">文宣規劃設計及製作</p>
-                        </div>
-                        <div class="target-addMission">
-                            <a class="icon-addMission">
-                                <i class="fa-solid fa-plus fa-lg"></i>&nbsp;新增任務
-                            </a>
-                        </div>
-                    </div>
-                    <progress class="target-1" max="100" value="70">70%</progress>
-                    <label>任務數量：5</label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<label>/</label>&nbsp;&nbsp;&nbsp;&nbsp;<label>已完成：3</label>
-                </div>
-                <div class="targetItem">
-                    <div class="targeTittle">
-                        <div>
-                            <p for="">寫生活動用品準備</p>
-                        </div>
-                        <div class="target-addMission">
-                            <a class="icon-addMission">
-                                <i class="fa-solid fa-plus fa-lg"></i>&nbsp;新增任務
-                            </a>
-                        </div>
-                    </div>
-                    <progress class="target-2" max="100" value="50">50%</progress>
-                    <label>任務數量：4</label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<label>/</label>&nbsp;&nbsp;&nbsp;&nbsp;<label>已完成：2</label>
-                </div>
-                <div class="targetItem">
-                    <div class="targeTittle">
-                        <div>
-                            <p for="">派對市集:安排至少20攤市集</p>
-                        </div>
-                        <div class="target-addMission">
-                            <a class="icon-addMission">
-                                <i class="fa-solid fa-plus fa-lg"></i>&nbsp;新增任務
-                            </a>
-                        </div>
-                    </div>
-                    <progress class="target-3" max="100" value="20">20%</progress>
-                    <label>任務數量：6</label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<label>/</label>&nbsp;&nbsp;&nbsp;&nbsp;<label>已完成：2</label>
-                </div>
-                <div class="targetItem">
-                    <div class="targeTittle">
-                        <div>
-                            <p for="">表演節目:至少2場或2組表演團隊/街頭藝人</p>
-                        </div>
-                        <div class="target-addMission">
-                            <a class="icon-addMission">
-                                <i class="fa-solid fa-plus fa-lg"></i>&nbsp;新增任務
-                            </a>
-                        </div>
-                    </div>
-                    <progress class="target-4" max="100" value="0">0%</progress>
-                    <label>任務數量：3</label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<label>/</label>&nbsp;&nbsp;&nbsp;&nbsp;<label>已完成：0</label>
-                </div>
-                <div>
-                    <img src="~/img/Intent/9812.png" alt="" class="bgImg">
-                </div>
+            <!-- 目標選單 -->
+            <div class="targetSelect">
+                <label for="target">目標：</label>
+                <select>
+                    <option value="" selected disabled>請選擇</option>
+                    <option value="文宣規劃">文宣規劃</option>
+                    <option value="寫生活動">寫生活動</option>
+                    <option value="派對市集">派對市集</option>
+                </select>
             </div>
+            <!-- 描述 -->
+            <div class="description">
+                <label for="description">描述：</label>
+                <textarea class="form-control" id="description" rows="5" maxlength="200" placeholder="請輸入描述內容">
+確認印製數量、費用、交件時程
+需開發票打統編
+                    </textarea>
+            </div>
+            <!-- 儲存按鈕 -->
+            <div class="missionEdit-submitBtn">
+                <button type="submit" class="btn btn-secondary btn-lg">儲存</button>
+            </div>
+        </form>
+	</dialog>
 
+</div>
+
+<!-- ------------- JS ---------------- -->
+
+<script>
+	let showBtns = document.querySelectorAll(".showDialog");
+	let infoModal = document.querySelector("#infoModal");
+	let closeBtns = document.querySelectorAll(".closeDialog");
+
+	showBtns.forEach(function (showBtn) {
+		showBtn.addEventListener("click", function () {
+			infoModal.showModal();
+		});
+	});
+
+	closeBtns.forEach(function (closeBtn) {
+		closeBtn.addEventListener("click", function () {
+			infoModal.close();
+		});
+	});
+</script>
+
+
+<!-- ------------- JS end---------------- -->
 
 <link rel="stylesheet" href="~/css/Intent.css" />
+<link rel="stylesheet" href="~/css/MissionEdit.css" />

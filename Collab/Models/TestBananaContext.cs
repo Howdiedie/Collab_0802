@@ -14,7 +14,13 @@ public partial class TestBananaContext : DbContext
     internal string? MisEnd;
     internal string? MisSta;
 
-    public TestBananaContext()
+
+    internal string? targetName;
+	internal int? missionCount;
+	internal int? missionFinish;
+	internal int targetID;
+
+	public TestBananaContext()
     {
     }
 

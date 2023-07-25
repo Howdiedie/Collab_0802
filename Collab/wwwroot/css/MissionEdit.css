@@ -1,10 +1,4 @@
-﻿#show {
-    margin-top: 3%;
-    margin-left: 3%;
-}
-
-/* --------------------------------------- */
-/* 彈出視窗 */
+﻿/* 彈出視窗 */
 dialog {
     border: none;
     box-shadow: 0 2px 6px #ccc;
@@ -59,7 +53,7 @@ dialog {
         }
 
 /* 指派人員 */
-.MemberID {
+.missionMember {
     margin-top: 3%;
     font-size: 30px;
     margin-left: 5%;
