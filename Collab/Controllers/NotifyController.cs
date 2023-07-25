@@ -21,6 +21,7 @@ namespace Collab.Controllers {
         public IActionResult Index() {
             var query = from notify in _TestBananaContext.Notifies
                         join member in _TestBananaContext.Members on notify.MemberId equals member.MemberId
+                        orderby notify.NotifyDate descending
                         select new NotifyWithMember {
                             NotifyId = notify.NotifyId,
                             NotifyDate = notify.NotifyDate,
