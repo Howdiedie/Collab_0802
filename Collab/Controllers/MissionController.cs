@@ -14,6 +14,7 @@ namespace collab_00.Controllers {
         }
         [ServiceFilter(typeof(ProfilePicturePathFilter))]
         public IActionResult Index() {
+            
             //全部的mission
             var missions = from mission in _TestBananaContext.Missions
                            join intent in _TestBananaContext.Intents on mission.IntentId equals intent.IntentId
@@ -45,8 +46,8 @@ namespace collab_00.Controllers {
 
 
             ViewBag.membersInProgram = membersInProgram.ToList();
-            ViewBag.option = query.ToList();
             var result = missions.ToList();
+            ViewBag.option = query.ToList();
 
             if (result != null && result.Count > 0) {
                 ViewBag.MissionWithIntent = result;

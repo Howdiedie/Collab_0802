@@ -5,7 +5,6 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Options;
 
 var builder = WebApplication.CreateBuilder(args);
-builder.Services.AddDbContext<TestBananaContext>(options => options.UseSqlServer(builder.Configuration.GetConnectionString("TestBananaContext")));
 
 
 // Add services to the container.

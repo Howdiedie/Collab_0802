@@ -1,16 +1,19 @@
 ﻿using Collab.Models;
-using Microsoft.AspNetCore.Components.Forms;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
 namespace collab_00.Controllers {
-    
-    public class MissionEditController : Controller {
-        private readonly TestBananaContext _bananaContext;
 
-        public MissionEditController(TestBananaContext bananaContext)
-        {
-            _bananaContext = bananaContext;
+    public class MissionEditController : Controller {
+        private readonly ILogger<MissionEditController> _logger;
+        private readonly TestBananaContext _TestBananaContext;
+        public MissionEditController(ILogger<MissionEditController> logger, TestBananaContext testBananaContext) {
+            _logger = logger;
+            _TestBananaContext = testBananaContext;
+        }
+
+        public IActionResult Index() {
+            return View();
         }
         [HttpPost]
         public IActionResult UpsertMission(int MissionId, string MissionName, DateTime? MisStartTime, DateTime? MisFinishTime, string MisState, string? MisDescribe, int? IntentId, int? MemberId) {
@@ -18,8 +21,9 @@ namespace collab_00.Controllers {
             Console.WriteLine(MissionName);
             if (MissionId > 0) {
                 // MissionId大於0，表示要進行更新
-                return UpdateMission(MissionId,MissionName,MisStartTime,MisFinishTime,MisState,MisDescribe,IntentId,MemberId);
-            } else {
+                return UpdateMission(MissionId, MissionName, MisStartTime, MisFinishTime, MisState, MisDescribe, IntentId, MemberId);
+            }
+            else {
                 // MissionId為0或null，表示要進行新增
                 return CreateMission(MissionName, MisStartTime, MisFinishTime, MisState, MisDescribe, IntentId, MemberId);
             }
@@ -47,7 +51,8 @@ namespace collab_00.Controllers {
                 _TestBananaContext.SaveChanges();
 
                 return Ok("Mission更新成功");
-            } catch (Exception ex) {
+            }
+            catch (Exception ex) {
                 return StatusCode(500, $"更新Mission時發生錯誤: {ex.Message}");
             }
         }
@@ -69,5 +74,11 @@ namespace collab_00.Controllers {
                 _TestBananaContext.Missions.Add(mission);
                 _TestBananaContext.SaveChanges();
 
+                return Ok("Mission新增成功");
+            }
+            catch (Exception ex) {
+                return StatusCode(500, $"新增Mission時發生錯誤: {ex.Message}");
+            }
+        }
     }
 }
