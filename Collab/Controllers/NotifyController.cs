@@ -19,14 +19,22 @@ namespace Collab.Controllers {
         }
         [ServiceFilter(typeof(ProfilePicturePathFilter))]
         public IActionResult Index() {
-            var notifies = _TestBananaContext.Notifies.ToList(); // 檢索Notifies資料表中的所有資料
-            // 若要取得Notifies資料表的所有欄位，您可以使用反射：
-            var properties = typeof(Notify).GetProperties().Select(p => p.Name);
-            ViewBag.Properties = properties;
+            var query = from notify in _TestBananaContext.Notifies
+                        join member in _TestBananaContext.Members on notify.MemberId equals member.MemberId
+                        select new NotifyWithMember {
+                            NotifyId = notify.NotifyId,
+                            NotifyDate = notify.NotifyDate,
+                            NotifyAction = notify.NotifyAction,
+                            NotifyType = notify.NotifyType,
+                            ActionName = notify.ActionName,
+                            ProgramId = notify.ProgramId,
+                            MemberId = notify.MemberId,
+                            MemberName = member.MemberName
+                        };
 
-            return View(notifies);
+            return View(query.ToList());
         }
-        
+
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error() {
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });

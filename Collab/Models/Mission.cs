@@ -9,9 +9,9 @@ public partial class Mission
 
     public string? MissionName { get; set; }
 
-    public DateTime? MisStartTime { get; set; }
+    public string? MisStartTime { get; set; }
 
-    public DateTime? MisFinishTime { get; set; }
+    public string? MisFinishTime { get; set; }
 
     public string MisState { get; set; } = null!;
 
@@ -24,4 +24,10 @@ public partial class Mission
     public virtual Intent? Intent { get; set; }
 
     public virtual Member? Member { get; set; }
+}
+public class MissionViewModel {
+    public string? MissionName { get; set; }
+    public DateTime? MisStartTime { get; set; }
+    public DateTime? MisFinishTime { get; set; }
+    public string? MisState { get; set; }
 }

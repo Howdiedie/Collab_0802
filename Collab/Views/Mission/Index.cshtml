@@ -1,18 +1,18 @@
 ﻿@{
-    ViewData["Title"] = "Home Page";
 }
-
         <!-- 從這裡開始寫 -->
         <br>
         <!-- select option -->
-        <div class="sele">
+        <div class="">
             <div class="row  gx-0">
                 <div class="col-4">
-                    <select class="form-select" aria-label="Default select example">
-                        <option selected>全部目標分類</option>
-                        <option value="1">One</option>
-                        <option value="2">Two</option>
-                        <option value="3">Three</option>
+                <select id="selector" class="form-select" aria-label="Default select example">
+                <option value="all" selected>全部目標分類</option>
+                    @if (ViewBag.option != null && ViewBag.option.Count > 0) {
+                        @foreach (var option in ViewBag.option) {
+                            <option value="@option.IntentId">@option.IntentName</option>
+                        }
+                    }
                     </select>
                 </div>
                 <div class="col"></div>
@@ -24,132 +24,110 @@
             <div class="row gx-0">
                 <div class="col d-flex justify-content-center align-items-start">
                     <h2>新任務</h2>
-                    <a class="addIcon"><i class="fa-regular fa-square-plus fa-2xl"></i></a>
+                    <button id="newTask" class="addIcon border-0 bg-white" type="submit"><i class="fa-regular fa-square-plus fa-2xl"></i></button>
                 </div>
                 <div class="col d-flex justify-content-center align-items-start">
                     <h2>進行中</h2>
-                    <a class="addIcon"><i class="fa-regular fa-square-plus fa-2xl"></i></a>
-
+                    <button id="inProgress" class="addIcon border-0 bg-white" type="submit"><i class="fa-regular fa-square-plus fa-2xl"></i></button>
                 </div>
                 <div class="col d-flex justify-content-center align-items-start">
                     <h2>已完成</h2>
-                    <a class="addIcon"><i class="fa-regular fa-square-plus fa-2xl"></i></a>
-
+                    <button id="completed" class="addIcon border-0 bg-white" type="submit"><i class="fa-regular fa-square-plus fa-2xl"></i></button>
                 </div>
             </div>
             <!-- 任務分類 end-->
             <!-- 清單 -->
             <div class="row  gx-0">
-
-                <div class="col scroller">
-                    <ul id="sortable1" class="connectedSortable w-100 " style="height:65vh">
-                        <li class="ui-state my-4 mx-4">
-                            <h3 class="mx-4 my-4">校稿並與主管確認1</h3>
-                            <div class="row mx-2 my-3">
-                                <div class="col d-flex  align-items-center">
-                                    <div class=" bd-highlight">2023/06/13 - 2023/06/20</div>
-                                </div>
-                                <div class="col-2 d-flex align-items-center">
-                                    <img class="MissionAvatar"
-                                         src="~/img/MemberImg/0733ba760b29378474dea0fdbcb97107.jpg" alt="頭像">
-                                </div>
-                                <div class="col-2 d-flex align-items-center">
-                                    <i class="fa-regular fa-envelope fa-2xl"
-                                       style="color:#696c71"></i>
-                                </div>
-                            </div>
-                        </li>
-                        <li class="ui-state my-4 mx-4">
-                            <h3 class="mx-4 my-4">校稿並與主管確認1</h3>
-                            <div class="row mx-2 my-3">
-                                <div class="col d-flex  align-items-center">
-                                    <div class=" bd-highlight">2023/06/13 - 2023/06/20</div>
-                                </div>
-                                <div class="col-2 d-flex align-items-center">
-                                    <img class="MissionAvatar"
-                                         src="~/img/MemberImg/0733ba760b29378474dea0fdbcb97107.jpg" alt="頭像">
-                                </div>
-                                <div class="col-2 d-flex align-items-center">
-                                    <i class="fa-regular fa-envelope fa-2xl"
-                                       style="color:#696c71"></i>
-                                </div>
-                            </div>
-                        </li>
-                        <li class="ui-state my-4 mx-4">
-                            <h3 class="mx-4 my-4">校稿並與主管確認1</h3>
-                            <div class="row mx-2 my-3">
-                                <div class="col d-flex  align-items-center">
-                                    <div class=" bd-highlight">2023/06/13 - 2023/06/20</div>
-                                </div>
-                                <div class="col-2 d-flex align-items-center">
-                                    <img class="MissionAvatar"
-                                         src="~/img/MemberImg/0733ba760b29378474dea0fdbcb97107.jpg" alt="頭像">
-                                </div>
-                                <div class="col-2 d-flex align-items-center">
-                                    <i class="fa-regular fa-envelope fa-2xl"
-                                       style="color:#696c71"></i>
-                                </div>
-                            </div>
-                        </li>
-                        <li class="ui-state my-4 mx-4">
-                            <h3 class="mx-4 my-4">校稿並與主管確認1</h3>
-                            <div class="row mx-2 my-3">
-                                <div class="col d-flex  align-items-center">
-                                    <div class=" bd-highlight">2023/06/13 - 2023/06/20</div>
-                                </div>
-                                <div class="col-2 d-flex align-items-center">
-                                    <img class="MissionAvatar"
-                                         src="~/img/MemberImg/0733ba760b29378474dea0fdbcb97107.jpg" alt="頭像">
-                                </div>
-                                <div class="col-2 d-flex align-items-center">
-                                    <i class="fa-regular fa-envelope fa-2xl"
-                                       style="color:#696c71"></i>
-                                </div>
-                            </div>
-                        </li>
-
+                <div class="col scroller" style="height:65vh">
+                    <ul id="sortable1" class="connectedSortable" >
+                        
+					 @foreach (var item in ViewBag.MissionWithIntent) {
+						@if (item.Mission.MisState == "新任務") {
+                        <li class="ui-state show my-4 mx-4 draggable-mission" 
+                            data-start-time="@item.Mission.MisStartTime" data-end-time="@item.Mission.MisFinishTime"
+                            data-intent-id="@item.IntentId" data-mission-name="@item.Mission.MissionName"
+                            data-mis-state="@item.Mission.MisState" data-mis-describe="@item.Mission.MisDescribe"
+                            data-member-id="@item.MemberId" data-mission-id="@item.Mission.MissionId">
+							<h3 class="mx-4 my-4">@item.Mission.MissionName</h3>
+							<div class="row mx-2 my-3">
+								<div class="col d-flex  align-items-center">
+                                    <div class=" bd-highlight">@item.Mission.MisStartTime - @item.Mission.MisFinishTime</div>
+								</div>
+								<div class="col-2 d-flex align-items-center">
+									<img class="MissionAvatar"
+                                         src="@item.MemberPhoto" alt="頭像">
+								</div>
+								<div class="col-2 d-flex align-items-center">
+                                    <a class="mail" href="mailto:\@item.MemberAccount">
+                                        <i class="fa-regular fa-envelope fa-2xl"
+									        style="color:#696c71"></i>
+                                    </a>
+								</div>
+							</div>
+						</li>
+						}
+					}
+                        
                     </ul>
                 </div>
-                <div class="col scroller">
-                    <ul id="sortable2" class="connectedSortable w-100" style="height:65vh">
-                        <li class="ui-state my-4 mx-4">
-                            <h3 class="mx-4 my-4">校稿並與主管確認1</h3>
+                <div class="col scroller" style="height:65vh">
+                    <ul id="sortable2" class="connectedSortable" >
+                        @foreach (var item in ViewBag.MissionWithIntent) {
+                        @if (item.Mission.MisState == "進行中") {
+                        <li class="ui-state show my-4 mx-4 draggable-mission"
+                            data-start-time="@item.Mission.MisStartTime" data-end-time="@item.Mission.MisFinishTime"
+                            data-intent-id="@item.IntentId" data-mission-name="@item.Mission.MissionName"
+                            data-mis-state="@item.Mission.MisState" data-mis-describe="@item.Mission.MisDescribe"
+                            data-member-id="@item.MemberId" data-mission-id="@item.Mission.MissionId">
+                            <h3 class="mx-4 my-4">@item.Mission.MissionName</h3>
                             <div class="row mx-2 my-3">
                                 <div class="col d-flex  align-items-center">
-                                    <div class=" bd-highlight">2023/06/13 - 2023/06/20</div>
+                                    <div class=" bd-highlight">@item.Mission.MisStartTime - @item.Mission.MisFinishTime</div>
                                 </div>
                                 <div class="col-2 d-flex align-items-center">
                                     <img class="MissionAvatar"
-                                         src="~/img/MemberImg/0733ba760b29378474dea0fdbcb97107.jpg" alt="頭像">
+                                         src="@item.MemberPhoto" alt="頭像">
                                 </div>
                                 <div class="col-2 d-flex align-items-center">
-                                    <i class="fa-regular fa-envelope fa-2xl"
-                                       style="color:#696c71"></i>
+                                    <a class="mail" href="mailto:\@item.MemberAccount">
+                                        <i class="fa-regular fa-envelope fa-2xl"
+                                           style="color:#696c71"></i>
+                                    </a>
                                 </div>
                             </div>
                         </li>
-
+                    }
+                }
                     </ul>
                 </div>
-                <div class="col scroller">
-                    <ul id="sortable3" class="connectedSortable w-100" style="height:65vh">
-                        <li class="ui-state my-4 mx-4">
-                            <h3 class="mx-4 my-4">校稿並與主管確認1</h3>
+                <div class="col scroller" style="height:65vh">
+                    <ul id="sortable3" class="connectedSortable" >
+                        @foreach (var item in ViewBag.MissionWithIntent) {
+                        @if (item.Mission.MisState == "已完成") {
+                        <li class="ui-state show my-4 mx-4 draggable-mission"
+                            data-start-time="@item.Mission.MisStartTime" data-end-time="@item.Mission.MisFinishTime"
+                            data-intent-id="@item.IntentId" data-mission-name="@item.Mission.MissionName"
+                            data-mis-state="@item.Mission.MisState" data-mis-describe="@item.Mission.MisDescribe"
+                            data-member-id="@item.MemberId" data-mission-id="@item.Mission.MissionId">
+                            <h3 class="mx-4 my-4">@item.Mission.MissionName</h3>
                             <div class="row mx-2 my-3">
                                 <div class="col d-flex  align-items-center">
-                                    <div class=" bd-highlight">2023/06/13 - 2023/06/20</div>
+                                    <div class=" bd-highlight">@item.Mission.MisStartTime - @item.Mission.MisFinishTime</div>
                                 </div>
                                 <div class="col-2 d-flex align-items-center">
                                     <img class="MissionAvatar"
-                                         src="~/img/MemberImg/0733ba760b29378474dea0fdbcb97107.jpg" alt="頭像">
+                                         src="@item.MemberPhoto" alt="頭像">
                                 </div>
                                 <div class="col-2 d-flex align-items-center">
-                                    <i class="fa-regular fa-envelope fa-2xl"
-                                       style="color:#696c71"></i>
+                                    <a class="mail" href="mailto:\@item.MemberAccount">
+                                        <i class="fa-regular fa-envelope fa-2xl"
+                                           style="color:#696c71"></i>
+                                    </a>
                                 </div>
                             </div>
                         </li>
-
+                        }
+                    }
                     </ul>
                 </div>
 
@@ -157,8 +135,23 @@
             <!-- 清單 end-->
         </div>
         <!-- 任務清單 end -->
-        <!-- 結束 -->
-
+        <!-- 任務編輯-->
+        <dialog id="infoModal">
+            
+                <div class="position-relative">
+                    <button  type="button" class="close btn-close position-absolute top-10 end-0" aria-label="Close"></button>
+                </div>
+                
+                <partial name="~/Views/MissionEdit/Index.cshtml"/>
+                <!-- 儲存按鈕 -->
+                <div class="submitBtn">
+                    @*<input type="submit" class="close btn btn-secondary btn-lg" value="儲存">*@
+                    <button id="sendValue" class="btn btn-secondary btn-lg">儲存</button>
+                </div>
+             
+        </dialog>
+        <!-- 任務編輯 end-->
+        <!-- 結束 --> 
 <script src="~/js/mission/JavaScript.js"></script>
 <link rel="stylesheet" href="~/css/Mission.css" />
 

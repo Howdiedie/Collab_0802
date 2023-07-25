@@ -7,10 +7,11 @@
 #sortable1,
 #sortable2,
 #sortable3 {
+    
     list-style-type: none;
     margin: 0;
     padding: 0 0 2.5em;
-    float: left;
+    /*float: left;*/
     margin-right: 10px;
 }
 
