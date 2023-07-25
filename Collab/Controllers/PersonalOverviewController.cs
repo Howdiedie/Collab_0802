@@ -7,7 +7,7 @@ using System.Linq;
 using System.Collections.Immutable;
 using System.Diagnostics;
 
-namespace collab_00.Controllers
+namespace collab.Controllers
 {
 	public class PersonalOverviewController : Controller
 	{

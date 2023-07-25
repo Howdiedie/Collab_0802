@@ -40,8 +40,7 @@ namespace collab_00.Controllers {
 			};
 
 			//新增通知
-			var NotifyAdd = new Notify
-			{
+			var NotifyAdd = new Notify {
 				NotifyDate = DateTime.Now,
 				NotifyAction = "新增",
 				NotifyType = "目標",

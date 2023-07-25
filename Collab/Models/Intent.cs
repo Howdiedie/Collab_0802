@@ -15,7 +15,7 @@ public partial class Intent
 
     public int? ProgramId { get; set; }
 
-    public double? MissionCountRatio { get; set; }
+    //public double? MissionCountRatio { get; set; }
 
     public virtual ICollection<Mission> Missions { get; set; } = new List<Mission>();
 
