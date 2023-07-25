@@ -1,6 +1,6 @@
 ﻿
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "註冊頁面";
     Layout = null;
 }
 <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
@@ -12,6 +12,7 @@
 <script src="~/lib/jquery/dist/jquery.min.js"></script>
 <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
 <script src="~/js/site.js" asp-append-version="true"></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
 
 
 <!-- logo -->
@@ -21,26 +22,26 @@
 <div class="container">
     <!-- 註冊標題 -->
     <h1>註冊會員</h1>
-    <form>
+    <form asp-action="Register" method="post">
         <!-- 會員名稱 -->
-        <div class="userName">
-            <label for="userName">會員名稱</label>
-            <input type="text" placeholder="" required>
+        <div class="MemberName">
+            <label for="MemberName">會員名稱</label>
+            <input type="text" id="MemberName" name="MemberName" placeholder="" required>
         </div>
         <!-- 建立帳號 -->
-        <div class="account">
-            <label for="account">E-mail</label>
-            <input type="email" placeholder="" required>
+        <div class="MemberAccount">
+            <label for="MemberAccount">E-mail</label>
+            <input type="email" id="MemberAccount" name="MemberAccount" placeholder="" required>
         </div>
         <!-- 建立密碼 -->
-        <div class="password">
-            <label for="password">密碼</label>
-            <input type="password" placeholder="" minlength="6" maxlength="12" pattern="^[a-zA-Z0-9]$" required>
+        <div class="MemberPassword">
+            <label for="password">建立密碼</label>
+            <input type="password" id="password" name="MemberPassword" placeholder="" minlength="6" maxlength="12" pattern="^[a-zA-Z0-9]{6,12}$" required>
         </div>
         <!-- 確認密碼 -->
         <div class="confirmPassword">
             <label for="confirmPassword">確認密碼</label>
-            <input type="password" placeholder="" required>
+            <input type="password" id="confirmPassword" name="confirmPassword" placeholder="" minlength="6" maxlength="12" pattern="^[a-zA-Z0-9]{6,12}$" required>
         </div>
 
         <!-- 註冊按鈕 -->
@@ -50,4 +51,46 @@
     </form>
 </div>
 <link rel="stylesheet" href="~/css/Sign.css" />
+<script>
+    $(document).ready(function () {
+        $("form").submit(function (event) {
+            // 獲取密碼和確認密碼字段的值
+            var password = $(".MemberPassword input").val();
+            var confirmPassword = $(".confirmPassword input").val();
 
+            // 如果密碼和確認密碼不相同
+            if (password !== confirmPassword) {
+                // 彈出警告視窗
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Oops...',
+                    text: '密碼不同，請重新設定一次'
+                });
+                // 阻止表單提交
+                event.preventDefault();
+
+                //// 彈出警告視窗
+                //alert("密碼不同，請重新設定一次");
+                //// 阻止表單提交
+                //event.preventDefault();
+
+            } else {
+
+                
+                // 否則，彈出註冊成功的警告視窗
+                // 注意：這只是在客戶端顯示，並不能保證實際的註冊已經成功
+                // 真正的註冊成功需要由服務器端的資料庫確認
+               //alert("恭喜你註冊成功");
+
+                Swal.fire({
+                    position: 'center',
+                    icon: 'success',
+                    title: '恭喜你註冊成功!',
+                    text:'將重新導向登入頁面，請重新登入。',
+                    showConfirmButton: false,
+                    timer: 2000
+                });
+            }
+        });
+    });
+</script>
