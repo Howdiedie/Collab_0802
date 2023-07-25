@@ -70,3 +70,62 @@
     font-weight: 800;
     color: #2b3040e6;
 }
+
+/* body{
+    background-color: aqua;
+} */
+
+.fc-toolbar-title { /*從網頁對標題案檢查 得知內建標題的選擇器為fc-toolbar-title*/
+    color: #2b3040e6;
+    font-weight: 900;
+}
+
+.container {
+    background-color: rgba(226, 196, 135, 0);
+    /* 調整區塊長寬 */
+    width: 90%;
+    height: 1050px;
+    /* 增加邊框樣式 */
+    border: 1px white;
+    box-shadow: 5px 10px 7px gray;
+    top: 400px;
+    padding: 20px;
+}
+
+/* 下方手刻響應式網頁 */
+@media(max-width:600px) { /*當網頁寬度小於600時做{}內部的css*/
+    .container { /*透過class選擇container類別將區塊寬度改為400*/
+        width: 400px;
+    }
+
+    .fc th {
+        font-size: 18px;
+    }
+
+    .fc-toolbar-title {
+        color: brown;
+    }
+}
+a {
+    text-decoration: none;
+    color: rgb(0, 0, 0);
+    font-weight: 900;
+}
+
+.fc-event {
+    background-color: #bd7878;
+    font-size: 18px;
+    /* 调整字体大小 */
+    padding: 1px 1px;
+    /* 调整内边距 */
+    border: none;
+}
+
+.fc-event-title {
+    color: black;
+    font-weight: 500;
+}
+
+.custom-event {
+    background-color: #b8b7b7;
+}

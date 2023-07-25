@@ -1,5 +1,4 @@
-﻿
-@{
+﻿@{
     ViewData["Title"] = "Index";
     Layout = null;
 }
@@ -15,30 +14,31 @@
 <script src="~/js/site.js" asp-append-version="true"></script>
 
 <div class="wholepage">
-        <!-- <div class="colorpic">
-            <svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
-                <path fill="#BAE6FF"
-                    d="M40.4,-58C50.7,-48.2,56.2,-34.1,62.2,-19.4C68.1,-4.6,74.4,10.8,71.9,24.9C69.5,39.1,58.3,52,44.9,55C31.4,58.1,15.7,51.3,3.7,46.2C-8.3,41.1,-16.6,37.7,-24.7,32.9C-32.8,28.1,-40.8,22,-41.9,14.6C-42.9,7.2,-37.1,-1.5,-34.4,-11.6C-31.7,-21.7,-32.1,-33.2,-26.9,-44.7C-21.7,-56.1,-10.8,-67.5,2.1,-70.4C15.1,-73.3,30.1,-67.8,40.4,-58Z"
-                    transform="translate(100 100)" />
-            </svg>
-        </div> -->
-        <!-- <div class="background"><img src="/登入忘記/notebook-pencil.jpg" alt=""></div> -->
-        <div class="logo">
+    <!-- <div class="colorpic">
+        <svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+            <path fill="#BAE6FF"
+                d="M40.4,-58C50.7,-48.2,56.2,-34.1,62.2,-19.4C68.1,-4.6,74.4,10.8,71.9,24.9C69.5,39.1,58.3,52,44.9,55C31.4,58.1,15.7,51.3,3.7,46.2C-8.3,41.1,-16.6,37.7,-24.7,32.9C-32.8,28.1,-40.8,22,-41.9,14.6C-42.9,7.2,-37.1,-1.5,-34.4,-11.6C-31.7,-21.7,-32.1,-33.2,-26.9,-44.7C-21.7,-56.1,-10.8,-67.5,2.1,-70.4C15.1,-73.3,30.1,-67.8,40.4,-58Z"
+                transform="translate(100 100)" />
+        </svg>
+    </div> -->
+    <!-- <div class="background"><img src="/登入忘記/notebook-pencil.jpg" alt=""></div> -->
+    <div class="logo">
         <div>
             <img src="/img/Login/logo_black.png" alt="" style="width: 300px; background-color: rgba(255, 255, 255, 0.586);">
-            </div>
         </div>
-        <div class="container">
-            <h1>會員登入</h1>
+    </div>
+    <div class="container">
+        <h1>會員登入</h1>
 
+        <form action="/Login/LoginTest" method="post">
             <div class="text_btn">
                 <div class="rows">
                     <div class="myinputtitle">
-                        <label for="username">帳號</label>
+                        <label for="memberaccount">帳號</label>
                     </div>
                     <div class="wid90">
-                        <input class="myinput" type="text" id="username" name="username" placeholder="請輸入E-mail"
-                            required pattern="[a-zA-Z0-9._%+-]+@@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}">
+                        <input class="myinput" type="text" id="memberaccount" name="memberaccount" placeholder="請輸入E-mail"
+                               required>
                     </div>
 
                 </div>
@@ -48,23 +48,63 @@
                     </div>
                     <div class="wid90">
                         <input class="myinput" type="password" id="password" name="password" placeholder="請輸入密碼"
-                            required>
+                               required>
                     </div>
                 </div>
                 <br>
                 <div class="submitinput">
-                    <input class="btn_submit" type="submit" value="登錄">
+                    <input class="btn_submit" type="submit" value="登錄" onclick="return validateForm()">
                 </div>
-            </div>
+                @if (!string.IsNullOrEmpty(ViewBag.ErrorMessage))
+                {
+                    <div style="text-align: center;color: red;font-size: 20px;margin-top:10px">@ViewBag.ErrorMessage</div>
+                }
 
-            <br>
-            <div class="bot_btn">
-                <a href="">忘記密碼</a>
-                <a class="m_l80" href="">註冊會員</a>
             </div>
+        </form>
+        <br>
+        <div class="bot_btn">
+            <a href="@Url.Action("Index","ForgetPW")">忘記密碼</a>
+            <a class="m_l80" href="@Url.Action("Index","Sign")">註冊會員</a>
         </div>
-
-
     </div>
+
+
+</div>
+<script>
+    // 檢查是否有錯誤訊息
+    var encodedErrorMessage = "@ViewBag.ErrorMessage";
+    var decodedErrorMessage = decodeHTMLEntities(encodedErrorMessage);
+
+
+    // 解碼HTML實體編碼
+    function decodeHTMLEntities(encodedString) {
+        var textarea = document.createElement("textarea");
+        textarea.innerHTML = encodedString;
+        return textarea.value;
+    }
+
+    //使用者是否輸入正確Email
+    var emailRegex = /^[a-zA-Z0-9_.+-]+@@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$/;
+    function validateForm() {
+        var memberaccount = document.getElementById("memberaccount").value;
+        var password = document.getElementById("password").value;
+
+        // 檢查帳號是否為有效的電子郵件格式
+        if (!emailRegex.test(memberaccount)) {
+            alert("請輸入有效的電子郵件地址(帳號)");
+            return false; // 防止表單提交
+        }
+
+        // 檢查密碼是否有輸入
+        if (password === "") {
+            alert("請輸入密碼");
+            return false; // 防止表單提交
+        }
+
+        // 如果通過驗證，允許提交表單
+        return true;
+    }
+</script>
 <link rel="stylesheet" href="~/css/Login.css" />
 
