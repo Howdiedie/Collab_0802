@@ -31,6 +31,7 @@ $(function ($) {
         var intentId = $(this).data("intent-id")
         var MisDescribe = $(this).data("mis-describe")
         //放值
+        console.log(startTime, endTime)
         $("#missionId").val(missionId)
         $("#missionName").val(missionName)
         $("#memberStatus").val(memberId)
@@ -163,13 +164,13 @@ $(function ($) {
     //select option 渲染頁面
     $("#selector").on("change", function () {
         $("#selector option:selected").each(function () {
-            console.log($(this).text())
-            var target = $(this).text()
+            console.log($(this).val())
+            var target = $(this).val()
             //$(".ui-state").css("display", "none");
             $(".ui-state").each(function () {
-                var intentName = $(this).data("intent-name");
-                console.log(intentName)
-                if (intentName == target || target == "全部目標分類") { $(this).css("display", "block") }
+                var intentId = $(this).data("intent-id");
+                console.log(intentId)
+                if (intentId == target || target == "all") { $(this).css("display", "block") }
                 else { $(this).css("display", "none") }
             })
             
@@ -192,8 +193,8 @@ $("#sendValue").click(function () {
     var data = {
         MissionId: parseInt(postMissionId),
         MissionName: postMissionName,
-        MisStartTime: new Date(postStartDate),
-        MisFinishTime: new Date(postEndDate),
+        MisStartTime:postStartDate,
+        MisFinishTime:postEndDate,
         MisState: postSelectedValue,
         MisDescribe: postDescription,
         IntentId: parseInt(postIntentSelect),
@@ -207,6 +208,12 @@ $("#sendValue").click(function () {
         success: function (result) {
             // 處理成功回傳的結果
             console.log(result);
+            // alert視窗
+            var message = '成功';
+            if (message) {
+                alert(message);
+            }
+            window.location.href = window.location.href;
         },
         error: function (xhr, status, error) {
             // 處理錯誤

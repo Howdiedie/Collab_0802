@@ -33,7 +33,7 @@ public partial class TestBananaContext : DbContext
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
 #warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see http://go.microsoft.com/fwlink/?LinkId=723263.
-        => optionsBuilder.UseSqlServer("Server=localhost;Database=TestBanana;Trusted_Connection=True;TrustServerCertificate=true;MultipleActiveResultSets=true");
+        => optionsBuilder.UseSqlServer("Server=MSI;Database=TestBanana;Trusted_Connection=True;TrustServerCertificate=true;");
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
@@ -41,11 +41,7 @@ public partial class TestBananaContext : DbContext
         {
             entity.HasKey(e => e.IntentId).HasName("PK__Intent__C3B052A7FD13C3AF");
 
-            entity.ToTable("Intent", tb =>
-                {
-                    tb.HasTrigger("TR_Intent_Insret");
-                    tb.HasTrigger("TR_Intent_Update");
-                });
+            entity.ToTable("Intent");
 
             entity.HasIndex(e => e.IntentName, "UQ__Intent__A65767F5D8CF3CE7").IsUnique();
 
@@ -77,12 +73,7 @@ public partial class TestBananaContext : DbContext
         {
             entity.HasKey(e => e.MissionId).HasName("PK__Mission__66DFB854B02C4DCE");
 
-            entity.ToTable("Mission", tb =>
-                {
-                    tb.HasTrigger("TR_Mission_Insert");
-                    tb.HasTrigger("TR_Mission_Update");
-                    tb.HasTrigger("UpdateMissionCountTotal");
-                });
+            entity.ToTable("Mission", tb => tb.HasTrigger("UpdateMissionCountTotal"));
 
             entity.HasIndex(e => e.MissionName, "UQ__Mission__FA0F0F0B715AC3B0").IsUnique();
 
@@ -90,8 +81,8 @@ public partial class TestBananaContext : DbContext
             entity.Property(e => e.IntentId).HasColumnName("IntentID");
             entity.Property(e => e.MemberId).HasColumnName("MemberID");
             entity.Property(e => e.MisDescribe).HasMaxLength(500);
-            entity.Property(e => e.MisFinishTime).HasColumnType("date");
-            entity.Property(e => e.MisStartTime).HasColumnType("date");
+            entity.Property(e => e.MisFinishTime).HasMaxLength(20);
+            entity.Property(e => e.MisStartTime).HasMaxLength(20);
             entity.Property(e => e.MisState).HasMaxLength(10);
             entity.Property(e => e.MissionName).HasMaxLength(50);
 
@@ -108,11 +99,7 @@ public partial class TestBananaContext : DbContext
         {
             entity.HasKey(e => e.NotebookId).HasName("PK__Notebook__0CBEE8A41A051395");
 
-            entity.ToTable("Notebook", tb =>
-                {
-                    tb.HasTrigger("TR_Notebook_Insert");
-                    tb.HasTrigger("TR_Notebook_Update");
-                });
+            entity.ToTable("Notebook");
 
             entity.Property(e => e.NotebookId).HasColumnName("NotebookID");
             entity.Property(e => e.MemberId).HasColumnName("MemberID");
@@ -157,11 +144,7 @@ public partial class TestBananaContext : DbContext
         {
             entity.HasKey(e => e.ProgramId).HasName("PK__Program__752560386F1A0420");
 
-            entity.ToTable("Program", tb =>
-                {
-                    tb.HasTrigger("TR_Program_Insert");
-                    tb.HasTrigger("TR_Program_Update");
-                });
+            entity.ToTable("Program");
 
             entity.Property(e => e.ProgramId).HasColumnName("ProgramID");
             entity.Property(e => e.ProgramColor)
@@ -195,11 +178,7 @@ public partial class TestBananaContext : DbContext
         {
             entity.HasKey(e => e.ProgramMemberId).HasName("PK__ProgramM__A6D4D87A63907D2B");
 
-            entity.ToTable("ProgramMember", tb =>
-                {
-                    tb.HasTrigger("TR_ProgramMember_Delete");
-                    tb.HasTrigger("TR_ProgramMember_Insert");
-                });
+            entity.ToTable("ProgramMember");
 
             entity.Property(e => e.ProgramMemberId).HasColumnName("ProgramMemberID");
             entity.Property(e => e.MemberId).HasColumnName("MemberID");
