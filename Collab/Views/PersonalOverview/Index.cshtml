@@ -88,14 +88,9 @@
 								 data-MissionName="@item.MissionName"
 								 data-MisStartTime="@item.MisStartTime?.ToString("yyyy-MM-dd")"
 								 data-MisFinishTime="@item.MisFinishTime?.ToString("yyyy-MM-dd")"
-								 data-background-color="rgb@{
-								@item.ProgramColor
-							}"
+								 data-background-color="@item.ProgramColor"
 								 data-missionid="@item.MissionId"
-								 style="background-color: rgb@{
-						@item.ProgramColor
-}
-											">
+								 style="background-color:@item.ProgramColor">
 								@item.MissionName
 							</div>
 							dataFound = true;
