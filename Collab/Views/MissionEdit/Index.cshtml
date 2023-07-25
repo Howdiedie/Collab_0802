@@ -1,4 +1,4 @@
-﻿
+﻿@model Collab.Models.Mission
 @{
     ViewData["Title"] = "Index";
     Layout = null;
@@ -23,64 +23,58 @@
     <!-- 計劃標題 -->
     <h1 class="missionEdit-projectName"> 藝起派對</h1>
     <!-- 編輯內容 -->
-    <form>
+    <form asp-action="SaveMission" asp-controller="MissionEdit" method="post">
         <!-- 任務名稱 -->
         <div class="MissionName">
             <label for="MissionName">任務：</label>
-            <input type="text" placeholder="">
+            <input asp-for="MissionName" type="text" placeholder="">
         </div>
         <!-- 指派人員 -->
         <div class="MemberID">
-            <label for="personnel" class="col-md-2 col-form-label">人員：</label>
+            <label for="MemberId" class="col-md-2 col-form-label">人員：</label>
             <img src="~/img/MemberImg/0733ba760b29378474dea0fdbcb97107.jpg" class="rounded-circle" alt="頭像" width="60px"
                  height="60px">
         </div>
+  
         <!-- 開始日 -->
         <div class="startDate">
-            <label for="startDate">開始日：</label>
-            <input type="date" class="calendar">
+            <label for="MisStartTime">開始日：</label>
+            <input type="date" asp-for="MisStartTime" class="calendar">
         </div>
         <!-- 截止日 -->
         <div class="endDate">
-            <label for="endDate">截止日：</label>
-            <input type="date" class="calendar">
+            <label for="MisFinishTime">截止日：</label>
+            <input type="date" asp-for="MisFinishTime" class="calendar">
         </div>
         <!-- 狀態 -->
         <div class="status">
-            <label for="status">狀態：</label>
+            <label for="MisState">狀態：</label>
             <div class="btn-group-toggle" data-toggle="buttons">
                 <label class="btn btn-secondary btn-lg">
-                    <input type="radio" name="status" value="pending"> 新任務
+                    <input type="radio" name="MisState" value="pending"> 新任務
                 </label>&nbsp;&nbsp;
                 <label class="btn btn-secondary btn-lg">
-                    <input type="radio" name="status" value="inProgress"> 進行中
+                    <input type="radio" name="MisState" value="inProgress"> 進行中
                 </label>&nbsp;&nbsp;
                 <label class="btn btn-secondary btn-lg">
-                    <input type="radio" name="status" value="completed"> 已完成
+                    <input type="radio" name="MisState" value="completed"> 已完成
                 </label>
             </div>
         </div>
         <!-- 目標選單 -->
         <div class="targetSelect">
-            <label for="Intent">目標：</label>
-            <select name="Intent">
+            <label for="IntentId">目標：</label>
+            <select>
                 <option value="" selected disabled>請選擇</option>
-                @if (ViewBag.IntentName != null)
-                {
-                    foreach (var IntentName in ViewBag.IntentName)
-                    {
-                        <option value="@IntentName">@IntentName</option>
-                    }
-                }
+                <option value="文宣規劃">文宣規劃</option>
+                <option value="寫生活動">寫生活動</option>
+                <option value="派對市集">派對市集</option>
             </select>
         </div>
         <!-- 描述 -->
         <div class="description">
-            <label for="description">描述：</label>
-            <textarea class="form-control" id="description" rows="5" maxlength="200" placeholder="請輸入描述內容">
-確認印製數量、費用、交件時程
-需開發票打統編
-                    </textarea>
+            <label for="MisDescribe">描述：</label>
+            <textarea asp-for="MisDescribe" class="form-control" rows="5" maxlength="200" placeholder="請輸入描述內容"></textarea>
         </div>
         <!-- 儲存按鈕 -->
         <div class="missionEdit-submitBtn">
@@ -103,6 +97,7 @@
     closeBtn.addEventListener("click", function () {
         infoModal.close();
     });
+
 </script>
 
 <!-- ------------- JS end---------------- -->

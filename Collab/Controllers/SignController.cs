@@ -16,11 +16,13 @@ namespace collab_00.Controllers
         public IActionResult Index()
         {
             return View();
-        }
+        } 
 
         [HttpPost]
         public async Task<IActionResult> Register(Member member)
         {
+
+             member.MemberPhoto = "/img/MemberImg/memberphotoex.jpg";
             
             _TestBananaContext.Members.Add(member);
             await _TestBananaContext.SaveChangesAsync();
