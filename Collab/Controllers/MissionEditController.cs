@@ -16,7 +16,7 @@ namespace collab_00.Controllers {
             return View();
         }
         [HttpPost]
-        public IActionResult UpsertMission(int MissionId, string MissionName, string? MisStartTime, string? MisFinishTime, string MisState, string? MisDescribe, int? IntentId, int? MemberId) {
+        public IActionResult UpsertMission(int MissionId, string MissionName, DateTime? MisStartTime, DateTime? MisFinishTime, string MisState, string? MisDescribe, int? IntentId, int? MemberId) {
             Console.WriteLine(MissionId);
             Console.WriteLine(MissionName);
             if (MissionId > 0) {
@@ -29,7 +29,7 @@ namespace collab_00.Controllers {
         }
 
         // 更新Mission
-        private IActionResult UpdateMission(int MissionId, string MissionName, string? MisStartTime, string? MisFinishTime, string MisState, string? MisDescribe, int? IntentId, int? MemberId) {
+        private IActionResult UpdateMission(int MissionId, string MissionName, DateTime? MisStartTime, DateTime? MisFinishTime, string MisState, string? MisDescribe, int? IntentId, int? MemberId) {
             try {
                 // 使用MissionId查詢資料庫中對應的Mission
                 var existingMission = _TestBananaContext.Missions.Find(MissionId);
@@ -56,7 +56,7 @@ namespace collab_00.Controllers {
         }
 
         // 新增Mission
-        private IActionResult CreateMission(string MissionName, string? MisStartTime, string? MisFinishTime, string MisState, string? MisDescribe, int? IntentId, int? MemberId) {
+        private IActionResult CreateMission(string MissionName, DateTime? MisStartTime, DateTime? MisFinishTime, string MisState, string? MisDescribe, int? IntentId, int? MemberId) {
             try {
 
                 var mission = new Mission {

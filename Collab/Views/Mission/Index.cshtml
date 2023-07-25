@@ -43,15 +43,15 @@
                         
 					 @foreach (var item in ViewBag.MissionWithIntent) {
 						@if (item.Mission.MisState == "新任務") {
-                        <li class="ui-state show my-4 mx-4 draggable-mission" 
-                            data-start-time="@item.Mission.MisStartTime" data-end-time="@item.Mission.MisFinishTime"
+                        <li class="ui-state show my-4 mx-4 draggable-mission"
+                            data-start-time="@item.Mission.MisStartTime?.ToString("yyyy-MM-dd")" data-end-time="@item.Mission.MisFinishTime?.ToString("yyyy-MM-dd")"
                             data-intent-id="@item.IntentId" data-mission-name="@item.Mission.MissionName"
                             data-mis-state="@item.Mission.MisState" data-mis-describe="@item.Mission.MisDescribe"
                             data-member-id="@item.MemberId" data-mission-id="@item.Mission.MissionId">
 							<h3 class="mx-4 my-4">@item.Mission.MissionName</h3>
 							<div class="row mx-2 my-3">
 								<div class="col d-flex  align-items-center">
-                                    <div class=" bd-highlight">@item.Mission.MisStartTime - @item.Mission.MisFinishTime</div>
+                                    <div class=" bd-highlight">@item.Mission.MisStartTime?.ToString("yyyy-MM-dd") - @item.Mission.MisFinishTime?.ToString("yyyy-MM-dd")</div>
 								</div>
 								<div class="col-2 d-flex align-items-center">
 									<img class="MissionAvatar"
@@ -75,14 +75,14 @@
                         @foreach (var item in ViewBag.MissionWithIntent) {
                         @if (item.Mission.MisState == "進行中") {
                         <li class="ui-state show my-4 mx-4 draggable-mission"
-                            data-start-time="@item.Mission.MisStartTime" data-end-time="@item.Mission.MisFinishTime"
+                            data-start-time="@item.Mission.MisStartTime?.ToString("yyyy-MM-dd")" data-end-time="@item.Mission.MisFinishTime?.ToString("yyyy-MM-dd")"
                             data-intent-id="@item.IntentId" data-mission-name="@item.Mission.MissionName"
                             data-mis-state="@item.Mission.MisState" data-mis-describe="@item.Mission.MisDescribe"
                             data-member-id="@item.MemberId" data-mission-id="@item.Mission.MissionId">
                             <h3 class="mx-4 my-4">@item.Mission.MissionName</h3>
                             <div class="row mx-2 my-3">
                                 <div class="col d-flex  align-items-center">
-                                    <div class=" bd-highlight">@item.Mission.MisStartTime - @item.Mission.MisFinishTime</div>
+                                    <div class=" bd-highlight">@item.Mission.MisStartTime?.ToString("yyyy-MM-dd") - @item.Mission.MisFinishTime?.ToString("yyyy-MM-dd")</div>
                                 </div>
                                 <div class="col-2 d-flex align-items-center">
                                     <img class="MissionAvatar"
@@ -105,14 +105,14 @@
                         @foreach (var item in ViewBag.MissionWithIntent) {
                         @if (item.Mission.MisState == "已完成") {
                         <li class="ui-state show my-4 mx-4 draggable-mission"
-                            data-start-time="@item.Mission.MisStartTime" data-end-time="@item.Mission.MisFinishTime"
+                            data-start-time="@item.Mission.MisStartTime?.ToString("yyyy-MM-dd")" data-end-time="@item.Mission.MisFinishTime?.ToString("yyyy-MM-dd")"
                             data-intent-id="@item.IntentId" data-mission-name="@item.Mission.MissionName"
                             data-mis-state="@item.Mission.MisState" data-mis-describe="@item.Mission.MisDescribe"
                             data-member-id="@item.MemberId" data-mission-id="@item.Mission.MissionId">
                             <h3 class="mx-4 my-4">@item.Mission.MissionName</h3>
                             <div class="row mx-2 my-3">
                                 <div class="col d-flex  align-items-center">
-                                    <div class=" bd-highlight">@item.Mission.MisStartTime - @item.Mission.MisFinishTime</div>
+                                    <div class=" bd-highlight">@item.Mission.MisStartTime?.ToString("yyyy-MM-dd") - @item.Mission.MisFinishTime?.ToString("yyyy-MM-dd")</div>
                                 </div>
                                 <div class="col-2 d-flex align-items-center">
                                     <img class="MissionAvatar"
