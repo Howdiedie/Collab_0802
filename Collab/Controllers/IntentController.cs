@@ -27,14 +27,27 @@ namespace collab_00.Controllers {
 		[HttpPost]
 		public IActionResult AddTarget(string target)
 		{
+			int NowProgramId = 1;
+			int EditMemberId = 2; //操作這個頁面的member的memberID傳進來，這裡預設為2
 			var newTarget = new Intent
 			{
 				IntentName = target,
-				ProgramId = 1,
-                MissionCountTotal = 0,
-                MissionCountFinish = 0
-            };
+				ProgramId = NowProgramId,
+				MissionCountTotal = 0,
+				MissionCountFinish = 0
+			};
 
+			//新增通知
+			var NotifyAdd = new Notify
+			{
+				NotifyDate = DateTime.Now,
+				NotifyAction = "新增",
+				NotifyType = "目標",
+				ActionName = newTarget.IntentName,
+				ProgramId = newTarget.ProgramId,
+				MemberId = EditMemberId
+			};
+			_bananaContext.Notifies.Add(NotifyAdd);
 			_bananaContext.Intents.Add(newTarget);
 			_bananaContext.SaveChanges();
 
@@ -71,6 +84,7 @@ namespace collab_00.Controllers {
 
 			return View("Index", sortList.ToList());
 		}
+
 
 	}
 }

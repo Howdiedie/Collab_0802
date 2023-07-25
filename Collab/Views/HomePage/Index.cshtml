@@ -4,88 +4,180 @@
     Layout = null;
 }
 
-<<!-------------------Navbar------------------->
-<div class="navbar navbar-light bg-light">
-    <div class="container">
-        <img class="logo" src="~/img/HomePageImg/logo/logo_black.png " alt="logo">
-        <button class="btn-start">開始使用</button>
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    @*<link rel="stylesheet" href="./style.css">*@
+    <link rel="stylesheet" href="~/css/HomePage.css" />
+    <title>Collab</title>
+</head>
+
+<body>
+    <!-------------------Navbar------------------->
+    <div id="nav" class="navbar navbar-light bg-light">
+        <div class="container">
+            <img class="logo" src="~/img/logo_black.png" alt="logo">
+            <div class="navBtns">
+                <button class="btn-logIn">登入</button>
+                <button class="btn-signUp">註冊</button>
+            </div>
+        </div>
     </div>
-</div>
-<!---------------Navbar end------------------->
-<!-------------- Section 1-------------------->
-<section class="section1">
-    <div class="content-left">
-        <svg class="colorgraphic" viewBox="20 0 160 200" xmlns="http://www.w3.org/2000/svg">
-            <path fill="#D0E2FF"
-                  d="M32.3,-40.8C44.3,-35.7,58.2,-29.5,64.4,-18.9C70.6,-8.3,69.1,6.8,65.8,22.6C62.4,38.4,57.1,54.9,45.8,66.4C34.6,77.8,17.3,84.3,3.3,79.7C-10.6,75.1,-21.2,59.5,-36.4,49.2C-51.5,39,-71.2,34.3,-81.3,22C-91.3,9.7,-91.7,-10.1,-82.1,-22.7C-72.5,-35.2,-52.9,-40.5,-37.5,-44.6C-22.2,-48.6,-11.1,-51.4,-0.5,-50.8C10.1,-50.1,20.2,-45.9,32.3,-40.8Z"
-                  transform="translate(100 100)" />
-        </svg>
-        <div class="intro1">
-            <h1>這是一個計劃管理工具，</h1>
-            <p>目的是讓使用者能夠創建計劃、指派任務並根據排程逐步實現任務內容，幫助使用者有效地組織、追蹤及管理。</p>
+    <!---------------Navbar end------------------->
+    <shadow></shadow>
+
+    <div class="bc-color1"></div>
+
+    <!-------------- Section 1-------------------->
+    <section id="s1" class="section1">
+        <div class="content-left">
+            <div class="intro1">
+                <h1 id="typing-text"></h1>
+                <br>
+                <p>
+                    這是一個全新的計劃管理工具，旨在幫助個人和團隊更有效地組織和協作。從行事曆和目標管理到任務追蹤和筆記功能，Collab提供了一個統一的平台，讓您將所有重要的事務集中在一處。<br>無論您是個人還是團體使用，Collab都能為您提供一個無縫的工作體驗，讓您專注於實現目標。
+                </p>
+                <br>
+                <button class="btn-start">開始使用</button>
+            </div>
+        </div>
+        <div class="content-right">
+            <img src="~/img/Intent/team meeting in conference room_5416761.png" alt="meeting" style="width: 900px;">
+        </div>
+    </section>
+    <!--------------- Section 1 end -------------------->
+    <!-------------- Section 2 -------------------->
+    <section class="section2 reveal">
+        <div class="bc-color2"></div>
+        <div class="toolImg">
+            <img class="img1" src="~/img/Intent/4.jpg">
+            <img class="img2" src="~/img/Intent/3.jpg">
+            <img class="img3" src="~/img/Intent/1.jpg">
+            <img class="img4" src="~/img/Intent/2.jpg">
+        </div>
+        <div class="intro2">
+            <h3>Collab的功能豐富多樣，<br>可以根據您的需求來安排和管理各種任務。</h3>
+            <p></p>
+            <!-- <p>強大的行事曆和目標管理，協助追蹤任務進度，並輕鬆指派任務給團隊成員。通過記事本功能，您可以隨時記錄想法和重要信息。Collab的通知功能確保您及時獲取計劃和任務的最新更新。不論工作還是個人項目，Collab都是提高生產力並實現目標的理想選擇。
+            </p> -->
+            <p>
+                簡單直觀的用戶界面和豐富的功能，這將使您的工作流程更加流暢和高效。Collab提供了行事曆、目標管理、任務追蹤、記事本、通知等多種功能，讓您可以輕鬆地安排和追蹤重要的事件、制定目標、指派任務、記錄想法，並隨時獲取最新的更新和提醒。
+            </p>
+        </div>
+    </section>
+    <!-------------- Section 2 end ------------------->
+    <!-------------- Section 3 -------------------->
+    <section class="section3 reveal">
+        <div class="intro3-Img">
+            <img class="intro3-Img1" style="height: 500px;"
+                 src="~/img/Intent/cartoon work efficiency office worker_4119542.jpg" alt="">
+            <img class="intro3-Img2" style="height: 500px;" src="~/img/Intent/self work.png" alt="">
+        </div>
+        <div class="bc-color3a"></div>
+        <div class="bc-color3b"></div>
+        <ul class="intro3-1">
+            <li>統一管理：Collab提供行事曆、目標、任務、記事本等功能，幫助個人集中管理生活和工作中的各種計劃與任務，使個人生活更有組織性。</li>
+            <br>
+            <li>自主安排：個人可以自由制定目標、計劃和任務，設定個人進度追蹤，讓自己更有動力去完成目標。</li>
+            <br>
+            <li>
+                高效追蹤：透過Collab的提醒與通知功能，個人能夠及時追蹤進度，確保不錯過重要時間點和事務。
+            </li>
+        </ul>
+        <ul class="intro3-2">
+            <li>協作共享：Collab的團隊功能讓成員可以共享行事曆、目標和任務，有助於團隊成員之間的協調與合作。</li>
+            <br>
+            <li>透明度：所有團隊成員能夠即時了解各項目標進展情況，確保每個人都在同一頁面，避免信息落差。</li>
+            <br>
+            <li>任務分配：團隊領導可以輕鬆將任務指派給成員，並追蹤任務執行情況，確保項目按時完成。</li>
+        </ul>
+    </section>
+
+    <!-------------- Section 3 end ------------------->
+    <!-------------- Section 4 -------------------->
+    <section class="section4 reveal">
+        <div class="bc-color4"></div>
+        <img class="img5" src="~/img/Intent/high five_7257104.png" alt="">
+        <div class="intro4">
+            <h1>Collab，讓工作事半功倍。</h1>
+            <p>立即註冊並開始體驗Collab，將您的計劃管理和協作提升到一個全新的水平！</p>
             <button class="btn-start">開始使用</button>
         </div>
 
-    </div>
-    <div class="content-right">
-        <img src="~/img/HomePageImg/team meeting in conference room_5416761.png" alt="meeting" style="width: 800px;">
-    </div>
-</section>
-<!--------------- Section 1 end -------------------->
-<!-------------- Section 2 -------------------->
-<section class="section2">
-    <div class="toolImg">
-        <img class="img1" src="~/img/HomePageImg/dashboard/dachboard_1.jpg">
-        <img class="img2" src="~/img/HomePageImg/dashboard/dachboard_2.jpg">
-        <img class="img3" src="~/img/HomePageImg/dashboard/dachboard_3.jpg">
-        <img class="img4" src="~/img/HomePageImg/dashboard/dachboard_4.jpg">
-    </div>
-    <div class="intro2">
-        <svg class="colorgraphic" viewBox="0 0 120 200" xmlns="http://www.w3.org/2000/svg">
-            <path fill="#E8DAFF"
-                  d="M27.4,-32.9C35,-26.4,40.2,-17.2,41.3,-7.7C42.4,1.7,39.5,11.4,34.5,19.9C29.6,28.4,22.6,35.6,11.7,45.3C0.8,54.9,-14,67,-22.5,63.3C-30.9,59.5,-33,39.9,-39.3,24.7C-45.6,9.6,-56,-1.1,-59.4,-15.4C-62.7,-29.7,-58.9,-47.7,-47.8,-53.6C-36.7,-59.5,-18.4,-53.4,-4.2,-48.4C9.9,-43.4,19.9,-39.4,27.4,-32.9Z"
-                  transform="translate(100 100)" />
-        </svg>
-        <div class="intro2-content">
-            <p>多樣化的介面讓使用者有效追蹤計劃的進度和日期，並快速查看計劃的概觀和詳細資訊。</p>
-        </div>
-    </div>
-</section>
-<!-------------- Section 2 end ------------------->
-<!-------------- Section 3 -------------------->
-<section class="section3">
-    <div class="circleImg">
-        <img class="circleImg-1" src="~/img/HomePageImg/team1.png" alt="">
-        <img class="circleImg-2" src="~/img/HomePageImg/team2.png" alt="">
-        <img class="circleImg-3" src="~/img/HomePageImg/team3.png" alt="">
-    </div>
-    <div class="intro3">
-        <p>此工具支持團隊協作功能，使用者可以邀請團隊成員參與計劃，共享資源、討論任務、建立記事本等，以便更好地合作和提高生產力。</p>
-    </div>
+    </section>
 
-</section>
-
-<!-------------- Section 3 end ------------------->
-<!-------------- Section 4 -------------------->
-<section class="section4">
-    <div class="intro4">
-        <h1>Let's get started!</h1>
-        <p>Collab，讓工作事半功倍。</p>
-        <button class="btn-start">開始使用</button>
+    <!-------------- Section 4 end ------------------->
+    <!-------------- footer -------------------->
+    <div class="footer">
+        <div class="bc-color5"></div>
+        <!-- <svg class="colorgraphic" viewBox="60 0 200 80" xmlns="http://www.w3.org/2000/svg">
+            <path fill="#BAE6FF"
+                d="M44.6,-54C59,-50.9,72.8,-39.5,69.4,-27.8C66.1,-16,45.7,-3.9,34.3,4.9C22.9,13.8,20.5,19.4,16.3,26.6C12.1,33.7,6.1,42.5,-4.8,49.1C-15.7,55.7,-31.4,60.2,-37.8,53.8C-44.2,47.3,-41.2,29.9,-45,15.3C-48.8,0.8,-59.2,-10.9,-61,-24.3C-62.8,-37.6,-55.9,-52.5,-44.3,-56.6C-32.7,-60.7,-16.3,-54,-0.6,-53.1C15.1,-52.2,30.1,-57.2,44.6,-54Z"
+                transform="translate(100 100)" />
+        </svg> -->
+        <p>Copyright © 2023 Collab. All rights reserved.</p>
     </div>
-    <img class="img5" src="~/img/HomePageImg/cheers.png" alt="">
-</section>
+    <!-------------- footer end-------------------->
 
-<!-------------- Section 4 end ------------------->
-<!-------------- footer -------------------->
-<div class="footer">
-    <!-- <svg class="colorgraphic" viewBox="60 0 200 80" xmlns="http://www.w3.org/2000/svg">
-        <path fill="#BAE6FF"
-            d="M44.6,-54C59,-50.9,72.8,-39.5,69.4,-27.8C66.1,-16,45.7,-3.9,34.3,4.9C22.9,13.8,20.5,19.4,16.3,26.6C12.1,33.7,6.1,42.5,-4.8,49.1C-15.7,55.7,-31.4,60.2,-37.8,53.8C-44.2,47.3,-41.2,29.9,-45,15.3C-48.8,0.8,-59.2,-10.9,-61,-24.3C-62.8,-37.6,-55.9,-52.5,-44.3,-56.6C-32.7,-60.7,-16.3,-54,-0.6,-53.1C15.1,-52.2,30.1,-57.2,44.6,-54Z"
-            transform="translate(100 100)" />
-    </svg> -->
-    <p>Copyright © 2023 Collab. All rights reserved.</p>
-</div>
-<!-------------- footer end-------------------->
-<link rel="stylesheet" href="~/css/HomePage.css" />
+</body>
+
+<script>
+    window.addEventListener("scroll", function () {
+        var navbar = document.getElementById("nav");
+        var content = document.getElementById("s1");
+        var threshold = s1.offsetTop; //
+
+        if (window.pageYOffset >= threshold) {
+            navbar.style.backgroundColor = "white";
+            navbar.style.boxShadow = "0px 5px 25px rgb(230, 229, 229)";
+        } else {
+            navbar.style.backgroundColor = "transparent"; // 回復為透明背景
+            navbar.style.boxShadow = "none";
+        }
+    });
+
+    var textToType = "歡迎來到Collab！";
+    var typingSpeed = 100; // 調整這個值來控制打字速度
+    var typingTextElement = document.getElementById("typing-text");
+    var currentText = "";
+    var currentTextIndex = 0;
+
+    function typeText() {
+        currentText += textToType[currentTextIndex];
+        typingTextElement.innerHTML = currentText;
+        currentTextIndex++;
+
+        if (currentTextIndex < textToType.length) {
+            setTimeout(typeText, typingSpeed);
+        }
+    }
+    // 開始文字打字效果
+    typeText();
+
+    /* scroll down */
+    window.addEventListener('scroll', reveal);
+
+    function reveal() {
+        var reveals = document.querySelectorAll('.reveal');
+
+        for (var i = 0; i < reveals.length; i++) {
+            var windowheight = window.innerHeight;
+            var revealtop = reveals[i].getBoundingClientRect().top;
+            var revealpoint = 150;
+
+            if (revealtop < windowheight - revealpoint) {
+                reveals[i].classList.add('active');
+            } else {
+                reveals[i].classList.remove('active');
+            }
+        }
+    }
+
+</script>
+
+</html>
+
 
