@@ -29,6 +29,7 @@ namespace collab_00.Controllers
 				i => i.IntentId,
 				(m, i) => new
 				{
+					MissionId=m.MissionId,
 					ProgramID = i.ProgramId,
 					MissionName=m.MissionName,
 					MisFinishTime = m.MisFinishTime,
@@ -42,6 +43,7 @@ namespace collab_00.Controllers
 				p => p.ProgramId,
 				(combined, p) => new
 				{
+					MissionId = combined.MissionId,
 					MissionName = combined.MissionName,
 					MisFinishTime = combined.MisFinishTime,
 					MisStartTime = combined.MisStartTime,
@@ -61,6 +63,7 @@ namespace collab_00.Controllers
 				i => i.IntentId,
 				(m, i) => new
 				{
+					MissionId = m.MissionId,
 					ProgramID = i.ProgramId,
 					MissionName = m.MissionName,
 					MisFinishTime=m.MisFinishTime,
@@ -73,6 +76,7 @@ namespace collab_00.Controllers
 				combined => combined.ProgramID,// 使用前一個 JOIN 中保留的 i.ProgramId 來關聯 Programs 資料表
 				p => p.ProgramId,
 				(combined, p) => new {
+					MissionId = combined.MissionId,
 					MissionName = combined.MissionName,
 					MisFinishTime = combined.MisFinishTime, 
 					MisStartTime = combined.MisStartTime ,

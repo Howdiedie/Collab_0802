@@ -75,41 +75,43 @@
 			<div class="grid-item">
 				@*<div style="background-color:rgb(241, 193, 96); ">藝起生活寫生派對-刻板</div>*@
 				@{
-					
-						var count = 1;
-						bool dataFound = false;
 
-						foreach (var item in ViewBag.ingmissions)
+					var count = 1;
+					bool dataFound = false;
+
+					foreach (var item in ViewBag.ingmissions)
+					{
+						// 檢查是否存在所需資料，例如：MissionName 不為空
+						if (!string.IsNullOrEmpty(item.MissionName))
 						{
-							// 檢查是否存在所需資料，例如：MissionName 不為空
-							if (!string.IsNullOrEmpty(item.MissionName))
-							{
-								<div data-MissionCount="@count"
-									 data-MissionName="@item.MissionName"
-									 data-MisStartTime="@item.MisStartTime?.ToString("yyyy-MM-dd")"
-									 data-MisFinishTime="@item.MisFinishTime?.ToString("yyyy-MM-dd")"
-									 data-background-color="rgb@{
-									@item.ProgramColor
-								}"
-									 style="background-color: rgb@{
+							<div data-MissionCount="@count"
+								 data-MissionName="@item.MissionName"
+								 data-MisStartTime="@item.MisStartTime?.ToString("yyyy-MM-dd")"
+								 data-MisFinishTime="@item.MisFinishTime?.ToString("yyyy-MM-dd")"
+								 data-background-color="rgb@{
 								@item.ProgramColor
-	}">
-									@item.MissionName
-								</div>
-								dataFound = true;
-								count++;
-							}
-						}
-
-						// 處理未找到所需資料的情況
-						if (!dataFound)
-						{
-							<div style="background-color: rgb(241, 193, 96);">無進行中任務</div>
+							}"
+								 data-missionid="@item.MissionId"
+								 style="background-color: rgb@{
+						@item.ProgramColor
+}
+											">
+								@item.MissionName
+							</div>
+							dataFound = true;
+							count++;
 						}
 					}
-					
 
-				
+					// 處理未找到所需資料的情況
+					if (!dataFound)
+					{
+						<div style="background-color: rgb(119, 118, 115);color:white; ">無進行中任務</div>
+					}
+				}
+
+
+
 
 			</div>
 
@@ -127,16 +129,19 @@
 					{
 						@foreach (var item in ViewBag.donemissions)
 						{
-							<div style="background-color: rgb@{@item.ProgramColor}">
+							<div style="background-color: rgb@{
+						@item.ProgramColor
+}"
+								 data-missionid="@item.MissionId">
 								@item.MissionName
 							</div>
 							donedataFound = true;
 						}
 					}
-					
+
 					if (!donedataFound)
 					{
-						<div style="background-color: rgb(241, 193, 96);">近一周內無已完成任務</div>
+						<div style="background-color: rgb(119, 118, 115);color:white;">近一周內無已完成任務</div>
 					}
 
 				}
@@ -156,7 +161,23 @@
 	<div id='calendar'></div>
 </div>
 
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+	$('div[data-missionid]').click(function () {
+		var MissionIdValue = $(this).data('missionid');
+		$.ajax({
+			url: '/Mission/ProcessMission',
+			type: 'POST',
+			data: { missionId: MissionIdValue },
+			success: function (response) {
+				window.location.href = '/Mission/Index';
+			},
+			error: function (xhr, status, error) {
+				console.error('傳遞到後端失敗：', error);
+			}
+		});
+	});
 
-
+</script>
 
 <!-- 結束 -->
