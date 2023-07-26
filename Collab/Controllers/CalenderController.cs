@@ -1,4 +1,5 @@
-﻿using Collab.Models;
+﻿using Collab.Filters;
+using Collab.Models;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Collab.Controllers
@@ -16,7 +17,7 @@ namespace Collab.Controllers
         {
             return View();
         }
-
+        [ServiceFilter(typeof(ProfilePicturePathFilter))]
         public IActionResult CalenderPage()
         {
             var CalIfo = from cal in _bananaContext.Missions
