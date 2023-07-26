@@ -77,10 +77,34 @@
             </div>
             <br>
         </form>
+           
         </div>
         <br>
     </div>
+    @{
+        int? dialogToShow = ViewBag.DialogToShow; // 獲取要顯示的對話框編號
+    }
+
+    @*@if (dialogToShow == 1)*@
+    //{
+        <dialog id="changePasswordDialog" style="display: block; ">
+            <!-- 這裡放置更改密碼的表單 -->
+
+            <h4>您好~@ViewBag.MemberName</h4>
+            <form id="changePasswordForm">
+                <!-- 更改密碼的輸入欄位，例如： -->
+                <label for="newPassword">新密碼:</label>
+                <input type="password" id="newPassword" name="newPassword" placeholder="請輸入新密碼" required>
+                <br>
+                <label for="confirmPassword">確認新密碼:</label>
+                <input type="password" id="confirmPassword" name="confirmPassword" placeholder="請再次輸入新密碼" required>
+                <br>
+                <button type="submit">確認更改</button>
+            </form>
+        </dialog>
+    //}
 </body>
+
 <script>
     // 檢查是否有錯誤訊息
     var encodedErrorMessage = "@ViewBag.ErrorMessage";

@@ -128,12 +128,16 @@ namespace collab_00.Controllers
             if (CheckVerificationCode == VerificationCode)
 			{
 				var user = _TestBananaContext.Members.FirstOrDefault(m => m.MemberAccount == MemberAccount);
-                Response.Cookies.Append("UserID", user.MemberId.ToString());
-                return RedirectToAction("Index", "MemberArea");
+				ViewBag.UserID=user.MemberId.ToString();
+				ViewBag.MemberName = user.MemberName;
+                TempData["MemberAccount"] = MemberAccount;
+                ViewBag.DialogToShow=1;
+                return View("Index");
 			}
 			else
 			{
 				ViewBag.VerificationCodeError = "驗證碼輸入錯誤";
+                ViewBag.DialogToShow = 0;
                 return View("Index");
 			}
 		}

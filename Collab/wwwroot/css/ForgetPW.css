@@ -130,3 +130,37 @@ h1 {
     text-align: center;
     margin-top: 5%;
 }
+
+/* 將對話框設置為固定定位，並置中在畫面中間 */
+dialog#changePasswordDialog {
+    position:relative;
+    top:540px;
+    left: 960px;
+    transform: translate(-50%, -50%);
+    background-color: white;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    padding: 20px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+}
+
+    /* 美化按鈕 */
+    dialog#changePasswordDialog button[type="submit"] {
+        background-color: #007BFF;
+        color: white;
+        border: none;
+        padding: 10px 20px;
+        border-radius: 4px;
+        cursor: pointer;
+    }
+
+    /* 閉包按鈕 */
+    dialog#changePasswordDialog button[type="button"] {
+        background-color: #ccc;
+        color: black;
+        border: none;
+        padding: 5px 10px;
+        border-radius: 4px;
+        cursor: pointer;
+        float: right;
+    }
