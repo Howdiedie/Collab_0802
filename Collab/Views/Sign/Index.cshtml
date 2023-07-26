@@ -92,5 +92,27 @@
                 });
             }
         });
+
+        // 當用戶在帳號欄位中輸入並移開焦點時
+        $("#MemberAccount").blur(function () {
+            var account = $(this).val();
+            $.ajax({
+                url: "/Sign/CheckAccount", // 連接到後端的url
+                method: "post",
+                data: { account: account },
+                success: function (response) {
+                    if (response.isUsed) {
+                        // 如果該帳號已被使用，彈出警告並清空輸入框
+                        Swal.fire({
+                            icon: 'error',
+                            title: 'Oops...',
+                            text: '該帳號已被註冊'
+                        });
+                        $("#MemberAccount").val("");
+                    }
+                }
+            });
+        });
+
     });
 </script>

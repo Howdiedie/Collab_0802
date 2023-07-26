@@ -21,8 +21,16 @@ namespace collab_00.Controllers
         [HttpPost]
         public async Task<IActionResult> Register(Member member)
         {
+            var existingMember = await _TestBananaContext.Members
+           .FirstOrDefaultAsync(m => m.MemberAccount == member.MemberAccount);
 
-             member.MemberPhoto = "/img/MemberImg/memberphotoex.jpg";
+            if (existingMember != null)
+            {
+                ModelState.AddModelError(string.Empty, "該帳號已被註冊");
+                return View(member);
+            }
+
+            member.MemberPhoto = "/img/MemberImg/memberphotoex.jpg";
             
             _TestBananaContext.Members.Add(member);
             await _TestBananaContext.SaveChangesAsync();
@@ -30,6 +38,14 @@ namespace collab_00.Controllers
             // 註冊成功，重新導向到會員登入的頁面
 
             return RedirectToAction("Index", "Login");
+        }
+        [HttpPost]
+        public async Task<JsonResult> CheckAccount(string account)
+        {
+            var isUsed = await _TestBananaContext.Members
+                .AnyAsync(m => m.MemberAccount == account);
+
+            return Json(new { isUsed = isUsed });
         }
     }
 }
