@@ -42,6 +42,7 @@ namespace collab_00.Controllers {
             return View(NB_Bag.ToList());
         }
 
+        [ServiceFilter(typeof(ProfilePicturePathFilter))]
         [HttpPost]
         public IActionResult Index(string SerchWd)
         {

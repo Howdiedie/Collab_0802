@@ -20,10 +20,13 @@ namespace Collab.Controllers
         [ServiceFilter(typeof(ProfilePicturePathFilter))]
         public IActionResult CalenderPage()
         {
+            string programIdStr = Request.Cookies["ProgramId"];
+            int.TryParse(programIdStr, out int programId);
+
             var CalIfo = from cal in _bananaContext.Missions
                          join intent in _bananaContext.Intents on cal.IntentId equals intent.IntentId
                          join program in _bananaContext.Programs on intent.ProgramId equals program.ProgramId
-                         where program.ProgramId == 1
+                         where program.ProgramId == programId
                          select new TestBananaContext
                          {
                              MisTit = cal.MissionName,
@@ -31,7 +34,14 @@ namespace Collab.Controllers
                              MisEnd = cal.MisFinishTime.ToString()
                          };
 
-            return View(CalIfo.ToList());
+            if (CalIfo.Any())
+            {
+                // 返回视图，并传递列表
+                return View(CalIfo.ToList());
+            }
+
+            // 返回空视图
+            return View();
         }
     }
 }

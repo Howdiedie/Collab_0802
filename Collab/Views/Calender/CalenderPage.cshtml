@@ -28,7 +28,8 @@
     document.addEventListener('DOMContentLoaded', function () {
 
         var CalIfoBag = [];
-
+    @if (Model != null)
+    {
     @foreach (var GetCal in Model)
     {
         @:CalIfoBag.push({
@@ -36,7 +37,8 @@
         @:start: @Html.Raw(Json.Serialize(GetCal.MisSta)),
         @:end: @Html.Raw(Json.Serialize(GetCal.MisEnd))
         @:})
-    };
+    };        
+    }
     var calendarEl = document.getElementById('calendar');
     var calendar = new FullCalendar.Calendar(calendarEl, {
 
@@ -63,17 +65,10 @@
         //下方用events來在行事曆格子中新增 '活動'
         //屆時加入後端資料庫來新增活動 此處先自行輸入熟悉events用法
         //格式為 events:[{},{},{}...以此類推                            ] 字要打對= = 是Ｅ　Ｖ　Ｅ　Ｎ　Ｔ　Ｓ
+        
         events: CalIfoBag,
 
-        //下方為原本的範例只顯示一項
-        //  [
-        //    { //框框內部設定每個活動的細項
-        //        title: @Html.Raw(Json.Serialize(Model[0].MisTit)),   //設定活動標題　格式 title:'活動標題字串'
-        //        start: @Html.Raw(Json.Serialize(Model[0].MisSta)),  //設定此項活動開始時間 格式 start:'西元年-月-日'
-        //        end: @Html.Raw(Json.Serialize(Model[0].MisEnd)),    //設定此項活動結束時間 格式 end:'西元年-月-日'
-        //        // url:'https://www.youtube.com/watch?v=NcDX7XIQ40c&t=341s'
-        //    }
-        //],
+        
         eventClick: function (info) {
             info.jsEvent.preventDefault(); // don't let the browser navigate
             if (info.event.url) {
