@@ -14,12 +14,14 @@ namespace collab_00.Controllers {
             _TestBananaContext = testBananaContext;
         }
         [ServiceFilter(typeof(ProfilePicturePathFilter))]
-        public IActionResult Index() {
-            
+        public IActionResult Index(int id) {
+            Console.WriteLine(id);
             //全部的mission
             var missions = from mission in _TestBananaContext.Missions
                            join intent in _TestBananaContext.Intents on mission.IntentId equals intent.IntentId
                            join member in _TestBananaContext.Members on mission.MemberId equals member.MemberId
+                           where intent.ProgramId == id
+                           orderby mission.MisFinishTime ascending // 将 MisFinishTime 字段降序排序
                            select new {
                                Mission = mission,
                                IntentId = intent.IntentId,
@@ -30,7 +32,7 @@ namespace collab_00.Controllers {
             //全部的Intent
             var query = from intent in _TestBananaContext.Intents
                         join program in _TestBananaContext.Programs on intent.ProgramId equals program.ProgramId
-                        where intent.ProgramId == 1
+                        where intent.ProgramId == id
                         select new {
                             IntentName = intent.IntentName,
                             IntentId = intent.IntentId
@@ -39,7 +41,7 @@ namespace collab_00.Controllers {
             var membersInProgram = from member in _TestBananaContext.Members
                                    join programMember in _TestBananaContext.ProgramMembers
                                    on member.MemberId equals programMember.MemberId
-                                   where programMember.ProgramId == 1 && programMember.MemberState == "還在"
+                                   where programMember.ProgramId == id && programMember.MemberState == "還在"
                                    select new {
                                        MemberAccount = member.MemberAccount,
                                        MemberId = member.MemberId

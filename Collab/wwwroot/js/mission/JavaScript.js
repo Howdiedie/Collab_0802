@@ -1,5 +1,5 @@
 ﻿var $ = jQuery.noConflict();
-let infoModal = document.querySelector("#infoModal");
+/*let infoModal = document.querySelector("#infoModal");*/
 $(function ($) {
     //阻止mail的冒泡
     $(".mail").on("click", (event) => {
