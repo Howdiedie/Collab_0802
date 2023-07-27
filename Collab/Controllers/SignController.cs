@@ -30,7 +30,7 @@ namespace collab_00.Controllers
                 return View(member);
             }
 
-            member.MemberPhoto = "/img/MemberImg/memberphotoex.jpg";
+            member.MemberPhoto = "/img/MemberImg/memberphotoex.png";
             
             _TestBananaContext.Members.Add(member);
             await _TestBananaContext.SaveChangesAsync();

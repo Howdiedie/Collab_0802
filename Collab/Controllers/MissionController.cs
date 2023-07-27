@@ -4,6 +4,7 @@ using Collab.Filters;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System.Reflection;
+using Microsoft.VisualStudio.Web.CodeGeneration.Design;
 
 namespace collab_00.Controllers {
     public class MissionController : Controller {
@@ -64,11 +65,25 @@ namespace collab_00.Controllers {
         public IActionResult ActionName(string missionName, string misState) {
             // 查询数据库中具有特定MissionName的Mission实例
             var missionToUpdate = _TestBananaContext.Missions.FirstOrDefault(m => m.MissionName == missionName);
-
+            // 從 Session 或 Cookie 中獲取當前的 Program ID
+            string programIdStr = Request.Cookies["ProgramId"];
+            int.TryParse(programIdStr, out int programId);
+            // 從 Session 或 Cookie 中獲取當前登錄會員的 ID
+            string userIdStr = Request.Cookies["UserID"]; 
+            int.TryParse(userIdStr, out int userId);
             if (missionToUpdate != null) {
                 // 更新MisState的值
                 missionToUpdate.MisState = misState;
-
+                //新增通知
+                var NotifyAdd = new Notify {
+                    NotifyDate = DateTime.Now,
+                    NotifyAction = "修改",
+                    NotifyType = "任務",
+                    ActionName = missionName,
+                    ProgramId = programId,
+                    MemberId = userId
+                };
+                _TestBananaContext.Notifies.Add(NotifyAdd);
                 // 保存更改到数据库
                 _TestBananaContext.SaveChanges();
 

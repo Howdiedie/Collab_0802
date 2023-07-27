@@ -34,6 +34,13 @@ namespace collab_00.Controllers {
             try {
                 // 使用MissionId查詢資料庫中對應的Mission
                 var existingMission = _TestBananaContext.Missions.Find(MissionId);
+                // 從 Session 或 Cookie 中獲取當前的 Program ID
+                string programIdStr = Request.Cookies["ProgramId"];
+                int.TryParse(programIdStr, out int programId);
+                // 從 Session 或 Cookie 中獲取當前登錄會員的 ID
+                string userIdStr = Request.Cookies["UserID"];
+                int.TryParse(userIdStr, out int userId);
+
                 if (existingMission == null) {
                     return NotFound("找不到對應的Mission");
                 }
@@ -47,6 +54,16 @@ namespace collab_00.Controllers {
                 existingMission.IntentId = IntentId;
                 existingMission.MemberId = MemberId;
 
+                //新增通知
+                var NotifyAdd = new Notify {
+                    NotifyDate = DateTime.Now,
+                    NotifyAction = "修改",
+                    NotifyType = "任務",
+                    ActionName = MissionName,
+                    ProgramId = programId,
+                    MemberId = userId
+                };
+                _TestBananaContext.Notifies.Add(NotifyAdd);
                 // 儲存變更到資料庫
                 _TestBananaContext.SaveChanges();
 
@@ -60,6 +77,12 @@ namespace collab_00.Controllers {
         // 新增Mission
         private IActionResult CreateMission(string MissionName, DateTime? MisStartTime, DateTime? MisFinishTime, string MisState, string? MisDescribe, int? IntentId, int? MemberId) {
             try {
+                // 從 Session 或 Cookie 中獲取當前的 Program ID
+                string programIdStr = Request.Cookies["ProgramId"];
+                int.TryParse(programIdStr, out int programId);
+                // 從 Session 或 Cookie 中獲取當前登錄會員的 ID
+                string userIdStr = Request.Cookies["UserID"];
+                int.TryParse(userIdStr, out int userId);
 
                 var mission = new Mission {
                     MissionName = MissionName,
@@ -70,6 +93,16 @@ namespace collab_00.Controllers {
                     IntentId = IntentId,
                     MemberId = MemberId
                 };
+                //新增通知
+                var NotifyAdd = new Notify {
+                    NotifyDate = DateTime.Now,
+                    NotifyAction = "新增",
+                    NotifyType = "任務",
+                    ActionName = MissionName,
+                    ProgramId = programId,
+                    MemberId = userId
+                };
+                _TestBananaContext.Notifies.Add(NotifyAdd);
                 // 新增Mission到資料庫
                 _TestBananaContext.Missions.Add(mission);
                 _TestBananaContext.SaveChanges();

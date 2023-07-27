@@ -2,6 +2,17 @@
 @{
     ViewData["Title"] = "Index";
 }
+<script>
+    // alert視窗
+    function htmlDecode(input) {
+        var doc = new DOMParser().parseFromString(input, "text/html");
+        return doc.documentElement.textContent;
+    }
+    var message = '@Html.Raw(TempData["Message"])';
+    if (message) {
+        alert(htmlDecode(message));
+    }
+</script>
 
         <div class="Mycontainer  d-flex my-5 ">
             <!--------計劃概述------>
@@ -155,15 +166,7 @@
 <link rel="stylesheet" href="~/css/ProjectGeneral.css" />
 <!-- ------------- CSS end---------------- -->
 <script>
-    // alert視窗
-    function htmlDecode(input) {
-        var doc = new DOMParser().parseFromString(input, "text/html");
-        return doc.documentElement.textContent;
-    }
-    var message = '@Html.Raw(TempData["Message"])';
-    if (message) {
-        alert(htmlDecode(message));
-    }
+
 
 
     $(document).ready(function () {
