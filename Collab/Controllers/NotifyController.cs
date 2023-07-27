@@ -18,9 +18,10 @@ namespace Collab.Controllers {
             _TestBananaContext = testBananaContext;
         }
         [ServiceFilter(typeof(ProfilePicturePathFilter))]
-        public IActionResult Index() {
+        public IActionResult Index(int id) {
             var query = from notify in _TestBananaContext.Notifies
                         join member in _TestBananaContext.Members on notify.MemberId equals member.MemberId
+                        where notify.ProgramId == id
                         orderby notify.NotifyDate descending
                         select new NotifyWithMember {
                             NotifyId = notify.NotifyId,
