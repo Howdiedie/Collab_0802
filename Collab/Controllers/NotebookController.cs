@@ -13,9 +13,14 @@ namespace collab_00.Controllers {
         }
         [ServiceFilter(typeof(ProfilePicturePathFilter))]
         public IActionResult Index(int? SortNum) {
+
+            string programIdStr = Request.Cookies["ProgramId"];
+            int.TryParse(programIdStr, out int programId);
+            
+
             var NB_Bag = from Howhow in _bananaContext.Notebooks
                          join Diedie in _bananaContext.Members on Howhow.MemberId equals Diedie.MemberId
-                         where Howhow.ProgramId == 1
+                         where Howhow.ProgramId == programId
                          select new TestBananaContext
                          {
                              NBT = Howhow.NotebookTitle,
@@ -46,6 +51,10 @@ namespace collab_00.Controllers {
         [HttpPost]
         public IActionResult Index(string SerchWd)
         {
+
+            string programIdStr = Request.Cookies["ProgramId"];
+            int.TryParse(programIdStr, out int programId);
+            
             if (SerchWd == null)
             {
                 return RedirectToAction("Index");
@@ -54,7 +63,7 @@ namespace collab_00.Controllers {
             {
                 var NB_Bag = from Howhow in _bananaContext.Notebooks
                              join Diedie in _bananaContext.Members on Howhow.MemberId equals Diedie.MemberId
-                             where Howhow.ProgramId == 1 && Howhow.NotebookTitle.Contains(SerchWd)
+                             where Howhow.ProgramId == programId && Howhow.NotebookTitle.Contains(SerchWd)
                              select new TestBananaContext
                              {
                                  NBT = Howhow.NotebookTitle,
