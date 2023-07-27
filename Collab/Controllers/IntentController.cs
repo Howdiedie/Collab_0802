@@ -54,8 +54,8 @@ namespace collab_00.Controllers {
 
 			return RedirectToAction("Index");
 		}
-
-		public IActionResult Sort(int? sortOrder)
+        [ServiceFilter(typeof(ProfilePicturePathFilter))]
+        public IActionResult Sort(int? sortOrder)
 		{
 			var sortList = from targetItem in _bananaContext.Intents
 						   select new TestBananaContext
