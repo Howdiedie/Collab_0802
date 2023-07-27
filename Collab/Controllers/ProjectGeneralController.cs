@@ -19,7 +19,8 @@ namespace Collab.Controllers {
 
         [ServiceFilter(typeof(ProfilePicturePathFilter))]
         public IActionResult Index(int id) {
-            
+
+            Console.WriteLine(id);
             var program = _db.Programs.Find(id);  // 查詢的 Program 的 ID 
             int programId = id;  
             Response.Cookies.Append("ProgramId", programId.ToString());// 將 ProgramId 儲存到 Cookie

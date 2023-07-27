@@ -205,7 +205,7 @@
             $(".program-link").click(function () {
                 var programId = $(this).data("id");
                 localStorage.setItem('CurrentProgramId', programId);
-                var newUrl = '@Url.Action("Index", "ProjectGeneral")' + '?id=' + programId;
+                var newUrl = '/ProjectGeneral?id=' + programId;
                 window.location.href = newUrl;
             });
 
