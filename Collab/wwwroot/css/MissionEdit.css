@@ -1,10 +1,16 @@
-﻿/* 彈出視窗 */
+﻿﻿#show {
+    margin-top: 3%;
+    margin-left: 3%;
+}
+
+/* --------------------------------------- */
+/* 彈出視窗 */
 dialog {
     border: none;
     box-shadow: 0 2px 6px #ccc;
     border-radius: 10px;
     width: 900px;
-    background-color: #ffffff;
+    background-color: #f5f4f1;
 }
 
     /* 彈出視窗背景透明 */
@@ -13,7 +19,7 @@ dialog {
     }
 
 /* 計劃標題 */
-.missionEdit-projectName {
+.projectName {
     margin-top: 3%;
     color: rgb(30, 30, 30);
     font-size: 36px;
@@ -21,15 +27,15 @@ dialog {
 }
 
 /* 任務名稱 */
-.MissionName {
+.taskName {
     margin-top: 5%;
     font-size: 30px;
     margin-left: 5%;
 }
 
-    .MissionName input {
+    .taskName input {
         width: 400px;
-        background-color: #ffffff;
+        background-color: #f5f4f1;
         border: 2px solid rgb(162, 162, 162);
         border-radius: 10px 10px 10px 10px;
         outline: none;
@@ -39,9 +45,9 @@ dialog {
         padding-bottom: 5px;
     }
 
-        .MissionName input:focus {
+        .taskName input:focus {
             width: 400px;
-            background-color: #ffffff;
+            background-color: #f5f5f3;
             border: 2px solid rgb(44, 43, 43);
             border-radius: 10px 10px 10px 10px;
             outline: none;
@@ -53,7 +59,7 @@ dialog {
         }
 
 /* 指派人員 */
-.missionMember {
+.member {
     margin-top: 3%;
     font-size: 30px;
     margin-left: 5%;
@@ -67,7 +73,7 @@ dialog {
 }
 
     .startDate input {
-        background-color: #ffffff;
+        background-color: #f5f4f1;
         border-radius: 10px 10px 10px 10px;
         padding-left: 1%;
         font-size: 28px;
@@ -78,7 +84,7 @@ dialog {
     }
 
         .startDate input:focus {
-            background-color: #ffffff;
+            background-color: #f5f4f1;
             border-radius: 10px 10px 10px 10px;
             padding-left: 1%;
             font-size: 28px;
@@ -98,7 +104,7 @@ dialog {
 
 
     .endDate input {
-        background-color: #ffffff;
+        background-color: #f5f4f1;
         border-radius: 10px 10px 10px 10px;
         padding-left: 1%;
         font-size: 28px;
@@ -109,7 +115,7 @@ dialog {
     }
 
         .endDate input:focus {
-            background-color: #ffffff;
+            background-color: #f5f4f1;
             border-radius: 10px 10px 10px 10px;
             padding-left: 1%;
             font-size: 28px;
@@ -141,7 +147,7 @@ dialog {
 }
 
     .targetSelect select {
-        background-color: #ffffff;
+        background-color: #f5f4f1;
         border-radius: 10px 10px 10px 10px;
         padding-left: 1%;
         font-size: 28px;
@@ -153,7 +159,7 @@ dialog {
     }
 
         .targetSelect select:focus {
-            background-color: #ffffff;
+            background-color: #f5f4f1;
             border-radius: 10px 10px 10px 10px;
             padding-left: 1%;
             font-size: 28px;
@@ -176,7 +182,7 @@ dialog {
     .description textarea {
         margin-top: 2%;
         width: 90%;
-        background-color: #ffffff;
+        background-color: #f5f4f1;
         border: 2px solid rgb(162, 162, 162);
         border-radius: 10px 10px 10px 10px;
         /* outline: none; */
@@ -189,7 +195,7 @@ dialog {
         .description textarea:focus {
             margin-top: 2%;
             width: 90%;
-            background-color: #ffffff;
+            background-color: #f5f5f3;
             border: 2px solid rgb(44, 43, 43);
             border-radius: 10px 10px 10px 10px;
             outline: none;
@@ -201,7 +207,7 @@ dialog {
         }
 
 /* 儲存按鈕 */
-.missionEdit-submitBtn {
+.submitBtn {
     margin-top: 7%;
     margin-left: 5%;
     margin-bottom: 3%;
