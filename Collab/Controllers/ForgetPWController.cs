@@ -128,17 +128,39 @@ namespace collab_00.Controllers
             if (CheckVerificationCode == VerificationCode)
 			{
 				var user = _TestBananaContext.Members.FirstOrDefault(m => m.MemberAccount == MemberAccount);
-                Response.Cookies.Append("UserID", user.MemberId.ToString());
-                return RedirectToAction("Index", "MemberArea");
+				ViewBag.MemberName = user.MemberName;
+                TempData["MemberId"] = user.MemberId;
+                ViewBag.DialogToShow=1;
+                return View("Index");
 			}
 			else
 			{
 				ViewBag.VerificationCodeError = "驗證碼輸入錯誤";
+                ViewBag.DialogToShow = 0;
                 return View("Index");
 			}
 		}
+		public ActionResult changePasswordForm(string newPassword)
+		{
+			var UserID = (int)TempData["MemberId"]; // 假設UserID是整數類型
+			var user = _TestBananaContext.Members.FirstOrDefault(m => m.MemberId == UserID);
 
-        private string GenerateRandomVerificationCode()
+			// 確認找到了用戶記錄
+			if (user != null)
+			{
+				// 將新密碼更新到用戶資料中
+				user.MemberPassword = newPassword;
+
+				// 儲存變更到資料庫
+				_TestBananaContext.SaveChanges();
+				Response.Cookies.Append("UserID", user.MemberId.ToString());
+			}
+
+			return RedirectToAction("Index", "PersonalOverview");
+		}
+
+
+		private string GenerateRandomVerificationCode()
 		{
 			// 這裡生成 6 位數的驗證碼
 			Random random = new Random();
