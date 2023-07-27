@@ -61,7 +61,7 @@
                     <div class="d-flex ms-3">
                         <p class="MyTitle fs-3">資料連結</p>
                         <!-- <button class="btn-start mb-2  margin-delete">新增</button> -->
-                        <a id="btnAddLink" class="icon-addTarget margin-btnAddLink">
+                <a id="btnAddLink" class="icon-addTarget margin-btnAddLink" href="#">
                             <i class="fa-regular fa-square-plus fa-xl"></i>
                         </a>
                     </div>
@@ -121,6 +121,7 @@
 <!-- ------------- JS ---------------- -->
 <script>
     $(document).ready(function () {
+        //新增成員的dialog
         $("#addMemberButton").click(function () {
             $("#infoModal")[0].showModal();
         });
@@ -128,16 +129,28 @@
         $("#cancelButton").click(function () {
             $("#infoModal")[0].close();
         });
+        //刪除成員的dialog
         $("#DeleteMember").click(function () {
             $("#infoModalDelete")[0].showModal();
         });
         $("#close").click(function () {
             $("#infoModalDelete")[0].close();
         });
+        //Layout的新增計劃dialog
+        $("#btnAddProgram").click(function () {
+            var dialog = document.getElementById('AddProgramDialog');
+            dialog.showModal();
+        });
+        $("#cancelbtn").click(function () {
+            var dialog = document.getElementById('AddProgramDialog');
+            dialog.close();
+        });
+
     });
 </script>
 
 <!-- ------------- JS end---------------- -->
+
 <!-- ------------- CSS ---------------- -->
 <link rel="stylesheet" href="~/css/ProjectGeneral.css" />
 <!-- ------------- CSS end---------------- -->
@@ -201,5 +214,4 @@
 
 
 </script>
-
 

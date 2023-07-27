@@ -89,10 +89,10 @@ body {
     margin-right: 20px;
     font-weight:400 !important;
 }
-
     .projectName:hover {
         color: rgb(255, 255, 255);
     }
+
 
 .active {
     color: rgb(255, 255, 255);
@@ -249,19 +249,57 @@ body {
     --circle-color: rgb(248, 217, 146); /* 背景顏色的變量 */
 }
 
-    .circleyellow-Title::before {
-        content: "";
-        position: absolute;
-        top: 20%;
-        left: -15%;
-        width: 30px;
-        height: 30px;
-        border-radius: 30%;
-        background-color: var(--circle-color-title); /* 使用CSS變數來設定背景顏色 */
-    }
+#spanName::before {
+    content: "";
+    position: absolute;
+    /*top: 20%;
+        left: -50%;*/
+    margin-left: -45px;
+    margin-top:10px;
+    width: 30px;
+    height: 30px;
+    border-radius: 30%;
+    background-color: var(--circle-color-title); /* 使用CSS變數來設定背景顏色 */
+}
 
 /* 頁籤background */
 .nav-link.active {
     background-color: #254e6b !important;
     color: white !important;
+}
+
+.addInput {
+    font-size: 25px;
+    background-color: #f5f4f1;
+    border: 4px solid #e2e0e0;
+    border-radius: 10px 10px 10px 10px;
+    width: 270px;
+    height: 50px;
+    /* margin-left: 20px; */
+    outline-style: none
+}
+.AddProgramLabel {
+    font-size: 25px;
+    background-color: #f5f4f1;
+}
+.colorpicker {
+    background-color: #f5f4f1;
+    width: 100px;
+    height: 40px;
+}
+
+
+.icon-addTarget {
+    color: #b8b7b7;
+    font-size: 25px;
+}
+
+    .icon-addTarget:hover {
+        color: #2b3040e6;
+        font-size: 25px;
+        cursor: pointer;
+        background-color: transparent !important;
+    }
+.margin-btnSaveLink {
+    margin-left: 40px;
 }

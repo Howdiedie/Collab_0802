@@ -4,7 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
 namespace Collab.Controllers {
-    public class ProjectGeneralController : Controller {
+    public class ProjectGeneralController : LayoutController {
 
         //*************************************   連結 TestBanana 資料庫  ********************************* (start)
         #region
@@ -12,9 +12,10 @@ namespace Collab.Controllers {
         #endregion
         //*************************************   連結 TestBanana 資料庫  ********************************* (end)
 
-        public ProjectGeneralController(TestBananaContext context) {  //                                                                                          ****************************（自己動手加上）
+        public ProjectGeneralController(TestBananaContext context) : base(context) {
             _db = context;
         }
+
 
         [ServiceFilter(typeof(ProfilePicturePathFilter))]
         public IActionResult Index(int id) {

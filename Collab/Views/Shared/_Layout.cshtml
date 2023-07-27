@@ -34,6 +34,9 @@
     <link rel="stylesheet" href="~/css/style.css">
     
     <!-- JS Files -->
+    <!--spectrum-->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/spectrum/1.8.0/spectrum.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/spectrum/1.8.0/spectrum.min.css">
 
 </head>
 <body style="background-color: #ffffff;">
@@ -59,7 +62,29 @@
 
                     </div>
                     <!-- left projects-->
-                    <h3 class="col-8   projectTitle fs-4">計劃名稱</h3>
+                    <div class="col-8" style="display: flex; align-items: flex-end; justify-content: flex-start; ">
+                        <h3 class="projectTitle fs-4">計劃名稱</h3>
+                        <a id="btnAddProgram" class="icon-addTarget margin-btnSaveLink mb-1">
+                            <i class="fa-regular fa-square-plus fa-lg"></i>
+                        </a>
+                        
+                    </div>
+
+                    
+                    <!--------dialog------>
+                    <dialog id="AddProgramDialog">
+                        @using (Html.BeginForm("AddProgram", "Layout", FormMethod.Post, new { @class = "navbar-form navbar-left", role = "search" })) {
+                            <label class="ms-3 me-3 mt-5 AddProgramLabel">選擇顏色：</label>
+                            <input id="colorpicker" type="color" class=" colorpicker" name="programColor" value="">
+                            <br />
+                            @*<label class="me-3 mt-3 mb-3 AddProgramLabel">計劃名稱：</label>*@
+                            <br />
+                            <input type="text" class="addInput ms-3 mb-5 me-3" name="ProgramName" placeholder="輸入計劃名稱">
+                            <button type="submit" class="btnSave mb-5">新增計劃</button>
+                            <button type="button" id="cancelbtn" class="fs-5 btn-close position-absolute top-0 end-0"></button>
+                        }
+                    </dialog>
+
 
                     @*<button id="NewProjectBtn">新增計劃</button>*@
                     <!-- 左側欄 -->
@@ -78,8 +103,8 @@
                 <nav class="navbar navbar-expand-lg navbar-dark  py-3 "
                      style="background-color: #ffffff; box-shadow: 0 2px 5px rgba(181, 181, 181, 0.144) ">
                     <div class="container-fluid d-flex justify-content-between ">
-                        <div id="spanColor" class="mx-auto circleyellow-Title" >
-                            <span id="spanName" class="mx-auto fs-2 fw-bold navbarTitle"></span>
+                        <div id="spanColor" class="mx-auto circleyellow-Title">
+                            <span id="spanName" class="mx-auto fs-2 fw-bold navbarTitle "></span>
                         </div>
 
                         <!-- ----------------大頭貼下拉選單區------------ -->
@@ -167,6 +192,7 @@
             </div>
         </div>
     </div>
+   
     <!-- MVC -->
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
@@ -291,7 +317,12 @@
             });
 
 
+            $("#colorpicker").spectrum({
+                color: "#f00"
+            });
 
+
+            
 
 
         });
