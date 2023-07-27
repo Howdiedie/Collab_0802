@@ -87,6 +87,7 @@ body {
     font-size: 1.3rem;
     margin-left: 48px;
     margin-right: 20px;
+    font-weight:400 !important;
 }
 
     .projectName:hover {

@@ -44,7 +44,7 @@ namespace Collab.Controllers {
 
             // 這裡讀取 ProgramMember 的資料
             var members = _db.ProgramMembers
-                .Where(pm => pm.ProgramId == program.ProgramId)
+                .Where(pm => pm.ProgramId == program.ProgramId && pm.MemberState == "還在")
                 .Select(pm => new {
                     Name = pm.Member.MemberName,
                     PhotoUrl = pm.Member.MemberPhoto
@@ -158,21 +158,31 @@ namespace Collab.Controllers {
                 return RedirectToAction("Index", new { id = programId });
             }
 
-            // 檢查是否該成員已經是計劃的成員
-            var programMember = _db.ProgramMembers.FirstOrDefault(pm => pm.ProgramId == programId && pm.MemberId == member.MemberId);
-            if (programMember != null) {
+            // 檢查是否該成員已經是計劃的成員，且狀態為 "還在"
+            var existingProgramMember = _db.ProgramMembers.FirstOrDefault(pm => pm.ProgramId == programId && pm.MemberId == member.MemberId && pm.MemberState == "還在");
+            if (existingProgramMember != null) {
                 TempData["Message"] = "該成員已經是計劃的成員。";
                 return RedirectToAction("Index", new { id = programId });
             }
 
-            // 創建一個新的 ProgramMember 實例並儲存
-            var newProgramMember = new ProgramMember { ProgramId = programId, MemberId = member.MemberId, MemberState = "Active" };
-            _db.ProgramMembers.Add(newProgramMember);
+            // 檢查該成員是否已存在，但狀態為 "不在"
+            var inactiveProgramMember = _db.ProgramMembers.FirstOrDefault(pm => pm.ProgramId == programId && pm.MemberId == member.MemberId && pm.MemberState == "不在");
+            if (inactiveProgramMember != null) {
+                // 若該計劃曾經有這個成員，只是狀態為"不在"，改成"還在"
+                inactiveProgramMember.MemberState = "還在";
+            }
+            else {
+                // 創建一個新的 ProgramMember 實例並儲存
+                var newProgramMember = new ProgramMember { ProgramId = programId, MemberId = member.MemberId, MemberState = "還在" };
+                _db.ProgramMembers.Add(newProgramMember);
+            }
+
             _db.SaveChanges();
 
             TempData["Message"] = "成功添加成員。";
             return RedirectToAction("Index", new { id = programId });
         }
+
 
 
 
@@ -200,10 +210,11 @@ namespace Collab.Controllers {
                 return RedirectToAction("Index", new { id = programId });
             }
 
-            // 從計劃成員中刪除該成員
+            // 從計劃成員中找到該成員
             var memberInProgram = _db.ProgramMembers.FirstOrDefault(pm => pm.MemberId == member.MemberId && pm.ProgramId == programId);
             if (memberInProgram != null) {
-                _db.ProgramMembers.Remove(memberInProgram);
+                // 將該成員的狀態改為 "不在"
+                memberInProgram.MemberState = "不在";
                 _db.SaveChanges();
                 TempData["Message"] = "成員已成功從計劃中移除。";
             }
@@ -213,6 +224,7 @@ namespace Collab.Controllers {
 
             return RedirectToAction("Index", new { id = programId });
         }
+
 
 
 

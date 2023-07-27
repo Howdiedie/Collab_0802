@@ -60,6 +60,7 @@
                     </div>
                     <!-- left projects-->
                     <h3 class="col-8   projectTitle fs-4">計劃名稱</h3>
+
                     @*<button id="NewProjectBtn">新增計劃</button>*@
                     <!-- 左側欄 -->
                     @foreach (var program in ViewBag.Programs) {
@@ -96,7 +97,7 @@
                                 <ul class="dropdown-menu dropdown-menu-secondary "
                                     aria-labelledby="navbarDarkDropdownMenuLink">
                                     <li><a class="dropdown-item fs-5" href="@Url.Action("Index", "MemberArea")">會員中心</a></li>
-                                    <li><a class="dropdown-item fs-5" href="#">登出</a></li>
+                                    <li><a class="dropdown-item fs-5 logout-link" href="#">登出</a></li>
                                 </ul>
                             </li>
                         </ul>
@@ -276,10 +277,18 @@
                 url.search = params.toString();
 
                 // 頁面導向新的 URL
-                window.location.href = url.toString();
+                location.href = url.toString();
             });
 
+            $('.logout-link').click(function (e) {
+                e.preventDefault();  // 阻止默認的鏈接點擊行為
 
+                // 刪除 UserID cookie
+                document.cookie = 'UserID=; Path=/; Expires=Thu, 01 Jan 1970 00:00:01 GMT;';
+
+                // 重定向到登入頁面
+                window.location.href = '@Url.Action("Index", "Login")';
+            });
 
 
 

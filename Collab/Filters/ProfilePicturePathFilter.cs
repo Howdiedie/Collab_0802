@@ -1,4 +1,6 @@
-﻿using Collab.Models;
+﻿using Azure;
+using Azure.Core;
+using Collab.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Filters;
 
@@ -14,25 +16,36 @@ namespace Collab.Filters {
             _db = context;
         }
         public override void OnActionExecuting(ActionExecutingContext filterContext) {
+            if (filterContext.HttpContext.Request.Cookies.TryGetValue("UserID", out string userIdStr)) {
+                if (int.TryParse(userIdStr, out int userId)) {
+                    var user = _db.Members.Find(userId);
+                    if (user != null) {
+                        ((Controller)filterContext.Controller).ViewBag.ProfilePicturePath = user.MemberPhoto;
+                        ((Controller)filterContext.Controller).ViewBag.MemberName = user.MemberName;
 
-            var userId = 1;  // 從 Session 或 Cookie 中獲取當前登錄會員的 ID
-            var db = filterContext.HttpContext.RequestServices.GetService<TestBananaContext>();
-            var user = db.Members.Find(userId);
+                        // 從 ProgramMembers 表中獲取與當前用戶相關的所有 Program ID
+                        var programIds = _db.ProgramMembers
+                            .Where(pm => pm.MemberId == userId && pm.MemberState == "還在")
+                            .Select(pm => pm.ProgramId)
+                            .ToList();
 
-            if (user != null) {
-                ((Controller)filterContext.Controller).ViewBag.ProfilePicturePath = user.MemberPhoto;
+                        // 從 Programs 表中獲取這些 Programs
+                        var programs = _db.Programs
+                            .Where(p => programIds.Contains(p.ProgramId))
+                            .ToList();
+
+                        ((Controller)filterContext.Controller).ViewBag.Programs = programs;
+                    }
+                    else {
+                        ((Controller)filterContext.Controller).ViewBag.ProfilePicturePath = "/default/path/to/avatar.jpg";
+                    }
+                }
             }
-            else {
-                // 如果用戶為 null，可以設置一個預設的頭像路徑
-                ((Controller)filterContext.Controller).ViewBag.ProfilePicturePath = "/default/path/to/avatar.jpg";
-            }
-            ((Controller)filterContext.Controller).ViewBag.MemberName = user.MemberName;  // 設置會員名稱
 
-            var programs = _db.Programs.ToList();
-            ((Controller)filterContext.Controller).ViewBag.Programs = programs;
-            
             base.OnActionExecuting(filterContext);
         }
+
+       
 
 
 
