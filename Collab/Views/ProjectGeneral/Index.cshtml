@@ -61,7 +61,7 @@
                     <div class="d-flex ms-3">
                         <p class="MyTitle fs-3">資料連結</p>
                         <!-- <button class="btn-start mb-2  margin-delete">新增</button> -->
-                        <a id="btnAddLink" class="icon-addTarget margin-btnAddLink">
+                <a id="btnAddLink" class="icon-addTarget margin-btnAddLink" href="#">
                             <i class="fa-regular fa-square-plus fa-xl"></i>
                         </a>
                     </div>
@@ -104,7 +104,7 @@
 
 <dialog id="infoModal">
     <form asp-action="AddMember" method="post" class="mx-3 my-3">
-        <input type="text" class="addInput" name="memberAccount" placeholder="輸入成員賬號">
+        <input type="text" class="addInput" name="memberAccount" placeholder="輸入成員帳號">
         <button type="submit" class="fs-5 ms-4 my-4 btnSave">添加成員</button>
         <button type="button" id="cancelButton" class="fs-5 btn-close position-absolute top-0 end-0"></button>
     </form>
@@ -121,6 +121,7 @@
 <!-- ------------- JS ---------------- -->
 <script>
     $(document).ready(function () {
+        //新增成員的dialog
         $("#addMemberButton").click(function () {
             $("#infoModal")[0].showModal();
         });
@@ -128,16 +129,28 @@
         $("#cancelButton").click(function () {
             $("#infoModal")[0].close();
         });
+        //刪除成員的dialog
         $("#DeleteMember").click(function () {
             $("#infoModalDelete")[0].showModal();
         });
         $("#close").click(function () {
             $("#infoModalDelete")[0].close();
         });
+        //Layout的新增計劃dialog
+        $("#btnAddProgram").click(function () {
+            var dialog = document.getElementById('AddProgramDialog');
+            dialog.showModal();
+        });
+        $("#cancelbtn").click(function () {
+            var dialog = document.getElementById('AddProgramDialog');
+            dialog.close();
+        });
+
     });
 </script>
 
 <!-- ------------- JS end---------------- -->
+
 <!-- ------------- CSS ---------------- -->
 <link rel="stylesheet" href="~/css/ProjectGeneral.css" />
 <!-- ------------- CSS end---------------- -->
@@ -201,5 +214,4 @@
 
 
 </script>
-
 
