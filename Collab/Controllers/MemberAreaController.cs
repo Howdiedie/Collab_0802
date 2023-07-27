@@ -22,22 +22,25 @@ namespace Collab.Controllers {
 
         [ServiceFilter(typeof(ProfilePicturePathFilter))]
         public IActionResult Index() {
-            var userId =1;  // 從 Session 或 Cookie 中獲取當前登錄會員的 ID
+            string userIdStr = Request.Cookies["UserID"];  // 從 Session 或 Cookie 中獲取當前登錄會員的 ID
+            int.TryParse(userIdStr, out int userId);
             var user = _db.Members.Find(userId);  // 從資料庫中查詢該會員的資料
 
-            var member = _db.Members.FirstOrDefault();
+            //var member = _db.Members.FirstOrDefault();
 
             ViewBag.ProfilePicturePath = user.MemberPhoto;
 
 
-            return View(member);
+            return View(user);
         }
 
         //-------------編輯會員名稱
         [HttpPost] 
         public IActionResult Edit(Member updatedMember) {
             if (ModelState.IsValid) {
-                var existingMember = _db.Members.FirstOrDefault();
+                string userIdStr = Request.Cookies["UserID"];  // 從 Session 或 Cookie 中獲取當前登錄會員的 ID
+                int.TryParse(userIdStr, out int userId);
+                var existingMember = _db.Members.Find(userId);
                 if (existingMember != null) {
                     existingMember.MemberName = updatedMember.MemberName;
                     _db.SaveChanges(); // 將更新後的資料寫回資料庫
@@ -50,8 +53,9 @@ namespace Collab.Controllers {
         //-------------更改密碼
         [HttpPost]
         public IActionResult EditPWD(string oldPassword, string newPassword, string confirmPassword) {
-            int userId = 1;  // 假設 userId 為 1
-            /*var userId = Request.Cookies["UserID"]; */ // 從 Session 或 Cookie 中獲取當前登錄會員的 ID
+            string userIdStr = Request.Cookies["UserID"];  // 從 Session 或 Cookie 中獲取當前登錄會員的 ID
+            int.TryParse(userIdStr, out int userId);
+            
             var user = _db.Members.Find(userId);  // 從資料庫中查詢該會員的資料
 
             if (user == null) {
@@ -81,7 +85,9 @@ namespace Collab.Controllers {
         //-------------更改頭貼
         [HttpPost]
         public async Task<IActionResult> UploadProfilePicture( string cropped_image) {
-            var userId = 1;  // 從 Session 或 Cookie 中獲取當前登錄會員的 ID
+            /*var userId = 1;*/  
+            string userIdStr = Request.Cookies["UserID"];  // 從 Session 或 Cookie 中獲取當前登錄會員的 ID
+            int.TryParse(userIdStr, out int userId);
 
             // 從身份驗證 Cookie 中獲取當前登錄會員的 ID
             //var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
@@ -105,7 +111,8 @@ namespace Collab.Controllers {
 
             // 更新使用者的頭像路徑
             var user = _db.Members.Find(userId);
-            user.MemberPhoto = "/img/MemberImg/" + fileName;
+            user.MemberPhoto = "/img/MemberImg/" + fileName + "?t=" + DateTime.Now.Ticks;
+
             _db.SaveChanges();
             TempData["Message"] = "頭像上傳成功。";
             return RedirectToAction("Index");
