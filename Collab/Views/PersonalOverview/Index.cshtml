@@ -124,9 +124,7 @@
 					{
 						@foreach (var item in ViewBag.donemissions)
 						{
-							<div style="background-color: rgb@{
-						@item.ProgramColor
-}"
+							<div style="background-color: @item.ProgramColor"
 								 data-missionid="@item.MissionId">
 								@item.MissionName
 							</div>
