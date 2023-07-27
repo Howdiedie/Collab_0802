@@ -1,14 +1,13 @@
-﻿
-@{
-    ViewData["Title"] = "Index";
-    Layout = null;
+﻿@{
+	ViewData["Title"] = "Index";
+	Layout = null;
 }
 
 <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
 <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
 @*    <link rel="stylesheet" href="~/collab_00.styles.css" asp-append-version="true" />*@
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
-      integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+	  integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
 <!-- MVC -->
 <script src="~/lib/jquery/dist/jquery.min.js"></script>
 <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
@@ -17,120 +16,154 @@
 <link rel="stylesheet" href="~/css/ForgetPW.css" />
 
 <body>
-    <div class="wholepage">
-        <!-- <div class="colorpic"><svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
-                <path fill="#BAE6FF"
-                    d="M40.4,-58C50.7,-48.2,56.2,-34.1,62.2,-19.4C68.1,-4.6,74.4,10.8,71.9,24.9C69.5,39.1,58.3,52,44.9,55C31.4,58.1,15.7,51.3,3.7,46.2C-8.3,41.1,-16.6,37.7,-24.7,32.9C-32.8,28.1,-40.8,22,-41.9,14.6C-42.9,7.2,-37.1,-1.5,-34.4,-11.6C-31.7,-21.7,-32.1,-33.2,-26.9,-44.7C-21.7,-56.1,-10.8,-67.5,2.1,-70.4C15.1,-73.3,30.1,-67.8,40.4,-58Z"
-                    transform="translate(100 100)" />
-            </svg></div> -->
-        <div class="logo">
-            <div>
-                <img src="~/img/ForgetPW/logo_black.png" alt="" style="width: 300px">
-            </div>
-        </div>
+	<div class="wholepage">
+		<!-- <div class="colorpic"><svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+				<path fill="#BAE6FF"
+					d="M40.4,-58C50.7,-48.2,56.2,-34.1,62.2,-19.4C68.1,-4.6,74.4,10.8,71.9,24.9C69.5,39.1,58.3,52,44.9,55C31.4,58.1,15.7,51.3,3.7,46.2C-8.3,41.1,-16.6,37.7,-24.7,32.9C-32.8,28.1,-40.8,22,-41.9,14.6C-42.9,7.2,-37.1,-1.5,-34.4,-11.6C-31.7,-21.7,-32.1,-33.2,-26.9,-44.7C-21.7,-56.1,-10.8,-67.5,2.1,-70.4C15.1,-73.3,30.1,-67.8,40.4,-58Z"
+					transform="translate(100 100)" />
+			</svg></div> -->
+		<div class="logo">
+			<div>
+				<img src="~/img/ForgetPW/logo_black.png" alt="" style="width: 300px">
+			</div>
+		</div>
 
-    </div>
-    <div class="container">
-        <h1>忘記密碼</h1>
-        <div style="margin-top: 50px; margin-left: 7%;">
-         <form action="/ForgetPW/MemberEmail" method="post">
-            <div style="display: flex;">
-                <div class="myinputtitle">
-                    <label for="username">帳號</label>
-                </div>
-                <div style="width: 50%;">
-                        @if (ViewBag.memberaccount==null)
-                        {
-                            <input class="accountInput" id="memberaccount" name="memberaccount" type="text" placeholder="請輸入帳號(E-Mail)"  required>
-                        }
-                        else
-                        {
-                            <input class="accountInput"value="@ViewBag.memberaccount">
-                            <div style="text-align: center;color: black;font-size: 20px;margin-top:10px">驗證碼已寄出</div>
-                        }
-                        @if (!string.IsNullOrEmpty(ViewBag.notfound))
-                        {
-                            <div style="text-align: center;color: red;font-size: 20px;margin-top:10px">@ViewBag.notfound</div>
-                        }
-                    </div>
-                <div style="width: 30%;">
-                        <input class="my-button" type="submit" value="發送驗證碼" onclick=" return validateForm()" style="margin-left: 55px;">
-                </div>
-            </div>
-                
-        </form>
-        <form action="/ForgetPW/CheckVerificationCode" method="post">
-            <div style="display: flex ;margin-top: 35px; ">
-                <div class="myinputtitle">
-                    <label for="password">驗證碼</label>
-                </div>
-                <div style="width: 50%;">
-                        <input class="passwordInput" placeholder="請輸入驗證碼" name="CheckVerificationCode" type="number"  required>
-                        @if (!string.IsNullOrEmpty(ViewBag.VerificationCodeError))
-                        {
-                            <div style="text-align: center;color: red;font-size: 20px;margin-top:10px">@ViewBag.VerificationCodeError</div>
-                        }
-                </div>
-                <div style="width: 30%;">
-                    <input class="my-button" type="submit" value="確認" style="margin-left: 30px;">
-                    </div>
-            </div>
-            <br>
-        </form>
-           
-        </div>
-        <br>
-    </div>
-    @{
-        int? dialogToShow = ViewBag.DialogToShow; // 獲取要顯示的對話框編號
-    }
+	</div>
+	<div class="container">
+		<h1>忘記密碼</h1>
+		<div style="margin-top: 50px; margin-left: 7%;">
+			<form action="/ForgetPW/MemberEmail" method="post">
+				<div style="display: flex;">
+					<div class="myinputtitle">
+						<label for="username">帳號</label>
+					</div>
+					<div style="width: 50%;">
+						@if (ViewBag.memberaccount == null)
+						{
+							<input class="accountInput" id="memberaccount" name="memberaccount" type="text" placeholder="請輸入帳號(E-Mail)" required>
+						}
+						else
+						{
+							<input class="accountInput" value="@ViewBag.memberaccount">
+							<div style="text-align: center;color: black;font-size: 20px;margin-top:10px">驗證碼已寄出</div>
+						}
+						@if (!string.IsNullOrEmpty(ViewBag.notfound))
+						{
+							<div style="text-align: center;color: red;font-size: 20px;margin-top:10px">@ViewBag.notfound</div>
+						}
+					</div>
+					<div style="width: 30%;">
+						<input class="my-button" type="submit" value="發送驗證碼" onclick=" return validateForm()" style="margin-left: 55px;">
+					</div>
+				</div>
 
-    @*@if (dialogToShow == 1)*@
-    //{
-        <dialog id="changePasswordDialog" style="display: block; ">
-            <!-- 這裡放置更改密碼的表單 -->
+			</form>
+			<form action="/ForgetPW/CheckVerificationCode" method="post">
+				<div style="display: flex ;margin-top: 35px; ">
+					<div class="myinputtitle">
+						<label for="password">驗證碼</label>
+					</div>
+					<div style="width: 50%;">
+						<input class="passwordInput" placeholder="請輸入驗證碼" name="CheckVerificationCode" type="number" required>
+						@if (!string.IsNullOrEmpty(ViewBag.VerificationCodeError))
+						{
+							<div style="text-align: center;color: red;font-size: 20px;margin-top:10px">@ViewBag.VerificationCodeError</div>
+						}
+					</div>
+					<div style="width: 30%;">
+						<input class="my-button" type="submit" value="確認" style="margin-left: 30px;">
+					</div>
+				</div>
+				<br>
+			</form>
 
-            <h4>您好~@ViewBag.MemberName</h4>
-            <form id="changePasswordForm">
-                <!-- 更改密碼的輸入欄位，例如： -->
-                <label for="newPassword">新密碼:</label>
-                <input type="password" id="newPassword" name="newPassword" placeholder="請輸入新密碼" required>
-                <br>
-                <label for="confirmPassword">確認新密碼:</label>
-                <input type="password" id="confirmPassword" name="confirmPassword" placeholder="請再次輸入新密碼" required>
-                <br>
-                <button type="submit">確認更改</button>
-            </form>
-        </dialog>
-    //}
+		</div>
+		<br>
+	</div>
+	@{
+		int? dialogToShow = ViewBag.DialogToShow; // 獲取要顯示的對話框編號
+	}
+
+	@{
+		if (dialogToShow == 1)
+		{
+
+			<div class="overlay" style="display: block;"></div>
+			<dialog id="changePasswordDialog" style="display: block;position: fixed; top: 350px; left:10px">
+				<!-- 更改密碼的表單 -->
+				<div style="display:flex; height:20%;align-items: center; ">
+					<h4>您好~@ViewBag.MemberName</h4>
+					<h5>，請輸入欲更改的新密碼(6~12碼英數字)</h5>
+				</div>
+
+				<form action="/ForgetPW/changePasswordForm" method="post">
+					<!-- 更改密碼的輸入欄位-->
+
+					<div class="newPwDiv" style="margin-top:20px;">
+						<div class="myinputtitle" style="width: 30%; text-align:center"><label for="newPassword">新密碼</label></div>
+						<div style="width: 50%;">
+							<input class="passwordInput" type="password" name="newPassword" id="newPassword" placeholder="請輸入新密碼" minlength="6" maxlength="12" pattern="^[a-zA-Z0-9]{6,12}$" required>
+						</div>
+					</div>
+
+					<div class="newPwDiv" style="margin-top:20px;">
+						<div class="myinputtitle" style="width: 30%;  text-align:right"> <label for="confirmPassword">確認新密碼</label></div>
+						<div style="width: 50%;">
+							<input class="passwordInput" type="password" name="confirmPassword" id="confirmPassword" placeholder="請再次輸入新密碼" minlength="6" maxlength="12" pattern="^[a-zA-Z0-9]{6,12}$" required>
+						</div>
+					</div>
+					<div class="newPwDiv" style="  justify-content: flex-end;">
+						<button type="submit" class="my-button" onclick=" return checkPassword()" style="margin-top: 20px; margin-right: 20px;">確認更改</button>
+					</div>
+
+				</form>
+			</dialog>
+
+		}
+	}
+	<script>
+		// 檢查是否有錯誤訊息
+		var encodedErrorMessage = "@ViewBag.ErrorMessage";
+		var decodedErrorMessage = decodeHTMLEntities(encodedErrorMessage);
+
+
+		// 解碼HTML實體編碼
+		function decodeHTMLEntities(encodedString) {
+			var textarea = document.createElement("textarea");
+			textarea.innerHTML = encodedString;
+			return textarea.value;
+		}
+
+		//使用者是否輸入正確Email
+		var emailRegex = /^[a-zA-Z0-9_.+-]+@@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$/;
+		function validateForm() {
+			var memberaccount = document.getElementById("memberaccount").value;
+			// 檢查帳號是否為有效的電子郵件格式
+			if (!emailRegex.test(memberaccount)) {
+				alert("請輸入有效的電子郵件地址(帳號)");
+				return false; // 防止表單提交
+			}
+			// 如果通過驗證，允許提交表單
+			return true;
+		}
+
+		function checkPassword()
+		{
+			var password1 = document.getElementById("newPassword").value;
+			var password2 = document.getElementById("confirmPassword").value;
+			if (!(password1==password2))
+			{
+				alert("兩個欄位請輸入相同的密碼");
+				return false;
+			}
+			return true;
+		}
+
+	</script>
 </body>
 
-<script>
-    // 檢查是否有錯誤訊息
-    var encodedErrorMessage = "@ViewBag.ErrorMessage";
-    var decodedErrorMessage = decodeHTMLEntities(encodedErrorMessage);
 
 
-    // 解碼HTML實體編碼
-    function decodeHTMLEntities(encodedString) {
-        var textarea = document.createElement("textarea");
-        textarea.innerHTML = encodedString;
-        return textarea.value;
-    }
-
-    //使用者是否輸入正確Email
-    var emailRegex = /^[a-zA-Z0-9_.+-]+@@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$/;
-    function validateForm() {
-        var memberaccount = document.getElementById("memberaccount").value;
-        // 檢查帳號是否為有效的電子郵件格式
-        if (!emailRegex.test(memberaccount)) {
-            alert("請輸入有效的電子郵件地址(帳號)");
-            return false; // 防止表單提交
-        }
-        // 如果通過驗證，允許提交表單
-        return true;
-    }
-</script>
 
 
 
