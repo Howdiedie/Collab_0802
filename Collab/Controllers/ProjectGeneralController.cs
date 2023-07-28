@@ -25,7 +25,6 @@ namespace Collab.Controllers {
             int programId = id;  
             Response.Cookies.Append("ProgramId", programId.ToString());// 將 ProgramId 儲存到 Cookie
 
-
             if (program == null) {
                 // 找不到該 Program，返回錯誤訊息
                 TempData["Message"] = "該計劃不存在。";
