@@ -130,7 +130,7 @@ namespace collab_00.Controllers
 				var user = _TestBananaContext.Members.FirstOrDefault(m => m.MemberAccount == MemberAccount);
 				ViewBag.MemberName = user.MemberName;
                 TempData["MemberId"] = user.MemberId;
-                ViewBag.DialogToShow=1;
+				ViewBag.DialogToShow=1;
                 return View("Index");
 			}
 			else
@@ -148,6 +148,9 @@ namespace collab_00.Controllers
 			// 確認找到了用戶記錄
 			if (user != null)
 			{
+
+				user.MemberPassword = "#############";
+				_TestBananaContext.SaveChanges();
 				// 將新密碼更新到用戶資料中
 				user.MemberPassword = newPassword;
 

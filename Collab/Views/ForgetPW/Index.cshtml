@@ -151,7 +151,7 @@
 		function checkPassword() {
 			var password1 = document.getElementById("newPassword").value;
 			var password2 = document.getElementById("confirmPassword").value;
-			if (!(password1 == password2 && password1.length < 6)) {
+			if (!(password1 == password2)) {
 				alert("兩個欄位請輸入相同的密碼");
 				return false;
 			}
