@@ -121,7 +121,7 @@ progress {
     }
 
     progress[value]::-webkit-progress-bar {
-        background-color: #ffffff;
+        background-color: #f9f7f1;
         border: 2px solid #2b3040e6;
         border-radius: 10px 10px 10px 10px;
     }
@@ -141,7 +141,7 @@ p {
 }
 
 .bgImg {
-    width: 600px;
+    width: 580px;
     position: fixed;
     right: -40px;
     bottom: 0;

@@ -121,7 +121,7 @@ dialog {
 
     /* 彈出視窗背景透明 */
     dialog::backdrop {
-        background-color: rgba(0, 0, 0, 0.1);
+        background-color: rgba(0, 0, 0, 0.2);
     }
 /* ----------參與成員END-------- */
 /* ----------資料連結-------- */

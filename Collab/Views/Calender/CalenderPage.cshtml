@@ -23,7 +23,7 @@
         /* 调整字体大小 */
         padding: 4px 8px;
         /* 调整内边距 */
-        background-color: #b8b7b7;
+        /*background-color: #b8b7b7;*/
         border: none;
     }
 
@@ -37,6 +37,7 @@
 
 <script>
 
+    var BGColor = localStorage.getItem("bgcolor");
     document.addEventListener('DOMContentLoaded', function () {
 
         var CalIfoBag = [];
@@ -63,7 +64,7 @@
 
 
         initialView: 'dayGridMonth',
-        locale: 'zh-tw',//這行是自己加的，更改語言為繁中 使用版本6.1.8有些按鈕翻譯不全
+        /*locale: 'zh-tw',*///這行是自己加的，更改語言為繁中 使用版本6.1.8有些按鈕翻譯不全
         navLink: true, //增加導覽列進入月曆，自己出現並不會更改樣式 要配合下面headerToolbar
 
         headerToolbar: {//headToolbar可以根據自己需求 增加行事曆的功能於上方導覽列
@@ -80,6 +81,9 @@
         
         events: CalIfoBag,
 
+        eventDidMount: function (info) {
+            $(info.el).css("background-color", BGColor);
+        },
         
         eventClick: function (info) {
             info.jsEvent.preventDefault(); // don't let the browser navigate
@@ -91,6 +95,8 @@
     calendar.render();
             });
 
+    //var BGColor = localStorage.getItem("bgcolor");
+    //$(".fc-event").css("background-color", BGColor);
 </script>
 
 <div class="scroller " style="height: 87vh;">
