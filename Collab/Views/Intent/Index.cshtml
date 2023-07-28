@@ -2,7 +2,8 @@
 	ViewData["Title"] = "Index";
 }
 @model List<TestBananaContext>;
-
+<link rel="stylesheet" href="~/css/Intent.css" />
+<link rel="stylesheet" href="~/css/MissionEdit.css" />
 
 <div class="section1">
 	<div class="addTarget">
@@ -26,7 +27,7 @@
 		</ul>
 	</div>
 </div>
-</div>
+
 
 <div class="progressArea">
 	@foreach (var targetItem in Model) {
@@ -42,7 +43,7 @@
 			Count = Convert.ToInt32(Math.Round((MF / MC) * 100));
 		}
 
-		<div class="targetItem">
+		<div class="targetItem" data-target-id="@targetItem.targetID">
 			<div class="targeTittle">
 				<div>
 					<p for="">@targetItem.targetName</p>
@@ -63,74 +64,22 @@
 		<img src="~/img/Intent/9812.png" alt="" class="bgImg">
 	</div>
 
+	<!-- 任務編輯-->
 	<dialog id="infoModal">
-        <div class="position-relative">
-            <button type="button" class="btn-close position-absolute top-10 end-0 closeDialog" aria-label="Close"></button>
-        </div>
-        <!-- 計劃標題 -->
-        <h1 class="missionEdit-projectName">藝起派對寫生活動</h1>
-        <!-- 編輯內容 -->
-        <form>
-            <!-- 任務名稱 -->
-            <div class="taskName">
-                <label for="taskName">任務：</label>
-                <input type="text" placeholder="">
-            </div>
-            <!-- 指派人員 -->
-            <div class="missionMember">
-                <label for="personnel" class="col-md-2 col-form-label">人員：</label>
-                <img src="~/img/MemberImg/0733ba760b29378474dea0fdbcb97107.jpg" class="rounded-circle" alt="頭像" width="60px"
-                     height="60px">
-            </div>
-            <!-- 開始日 -->
-            <div class="startDate">
-                <label for="startDate">開始日：</label>
-                <input type="date" class="calendar">
-            </div>
-            <!-- 截止日 -->
-            <div class="endDate">
-                <label for="endDate">截止日：</label>
-                <input type="date" class="calendar">
-            </div>
-            <!-- 狀態 -->
-            <div class="status">
-                <label for="status">狀態：</label>
-                <div class="btn-group-toggle" data-toggle="buttons">
-                    <label class="btn btn-secondary btn-lg">
-                        <input type="radio" name="status" value="pending"> 新任務
-                    </label>&nbsp;&nbsp;
-                    <label class="btn btn-secondary btn-lg">
-                        <input type="radio" name="status" value="inProgress"> 進行中
-                    </label>&nbsp;&nbsp;
-                    <label class="btn btn-secondary btn-lg">
-                        <input type="radio" name="status" value="completed"> 已完成
-                    </label>
-                </div>
-            </div>
-            <!-- 目標選單 -->
-            <div class="targetSelect">
-                <label for="target">目標：</label>
-                <select>
-                    <option value="" selected disabled>請選擇</option>
-                    <option value="文宣規劃">文宣規劃</option>
-                    <option value="寫生活動">寫生活動</option>
-                    <option value="派對市集">派對市集</option>
-                </select>
-            </div>
-            <!-- 描述 -->
-            <div class="description">
-                <label for="description">描述：</label>
-                <textarea class="form-control" id="description" rows="5" maxlength="200" placeholder="請輸入描述內容">
-確認印製數量、費用、交件時程
-需開發票打統編
-                    </textarea>
-            </div>
-            <!-- 儲存按鈕 -->
-            <div class="missionEdit-submitBtn">
-                <button type="submit" class="btn btn-secondary btn-lg">儲存</button>
-            </div>
-        </form>
+
+		<div class="position-relative">
+			<button type="button" class="close btn-close position-absolute top-10 end-0" aria-label="Close"></button>
+		</div>
+
+		<partial name="~/Views/MissionEdit/Index.cshtml" />
+		<!-- 儲存按鈕 -->
+		<div class="submitBtn">
+			@*<input type="submit" class="close btn btn-secondary btn-lg" value="儲存">*@
+			<button id="sendValue" class="btn btn-secondary btn-lg">儲存</button>
+		</div>
+
 	</dialog>
+	<!-- 任務編輯 end-->
 
 </div>
 
@@ -139,23 +88,104 @@
 <script>
 	let showBtns = document.querySelectorAll(".showDialog");
 	let infoModal = document.querySelector("#infoModal");
-	let closeBtns = document.querySelectorAll(".closeDialog");
+	//let closeBtns = document.querySelectorAll(".close");
+
 
 	showBtns.forEach(function (showBtn) {
 		showBtn.addEventListener("click", function () {
+			
+			
+			let targetItem = showBtn.closest(".targetItem"); 
+			let targetId = targetItem.dataset.targetId;
+			console.log(targetId,"新增任務")
+			document.getElementById("statusSelect").value = targetId
+
 			infoModal.showModal();
 		});
 	});
 
-	closeBtns.forEach(function (closeBtn) {
-		closeBtn.addEventListener("click", function () {
-			infoModal.close();
-		});
-	});
-</script>
+	//closeBtns.forEach(function (closeBtn) {
+	//	closeBtn.addEventListener("click", function () {
+	//		infoModal.close();
+	//	});
+	//});
 
+	let addIntentBtn = document.querySelector(".icon-addTarget");
+	let addIntentInput = document.querySelector(".addInput");
+
+	addIntentBtn.addEventListener("click", function () {
+		let inputValue = addIntentInput.value.trim();
+		if (inputValue == "") {
+			alert("請輸入目標名稱")
+		};
+	});
+
+	/* 送出按鈕 將資料傳給controller */
+	$("#sendValue").click(function () {
+		infoModal.close();
+		var postMissionId = $("#missionId").val()
+		var postMissionName = $("#missionName").val()
+		var postMemberStatus = $("#memberStatus").val()
+		var postStartDate = $("#startDate").val()
+		var postEndDate = $("#endDate").val()
+		var postSelectedValue = $("input[name='status']:checked").val();
+		var postIntentSelect = $("#statusSelect").val()
+		var postDescription = $("#description").val();
+		console.log(postMissionId, postMissionName, postMemberStatus, postStartDate, postEndDate, postSelectedValue, postIntentSelect, postDescription)
+		var data = {
+			MissionId: parseInt(postMissionId),
+			MissionName: postMissionName,
+			MisStartTime: postStartDate,
+			MisFinishTime: postEndDate,
+			MisState: postSelectedValue,
+			MisDescribe: postDescription,
+			IntentId: parseInt(postIntentSelect),
+			MemberId: parseInt(postMemberStatus)
+		};
+		console.log(JSON.stringify(data))
+		$.ajax({
+			url: "/MissionEdit/UpsertMission", // 請根據您的Controller路由進行調整
+			type: "POST",
+			data: data,
+			success: function (result) {
+				// 處理成功回傳的結果
+				console.log(result);
+				// alert視窗
+				var message = '成功';
+				if (message) {
+					alert(message);
+				}
+				window.location.href = window.location.href;
+			},
+			error: function (xhr, status, error) {
+				// 處理錯誤
+				console.error("發生錯誤:", error);
+			}
+		});
+		/* 清空 */
+		$("#missionId").val("")
+		$("#missionName").val("")
+		$("#memberStatus").val("請選擇")
+		$("#startDate").val("")
+		$("#endDate").val("")
+		$("#statusSelect").val("請選擇")
+		$("#description").val("");
+	})
+	//控制 Modal開關
+	$(".close").on("click", () => {
+		infoModal.close();
+		/* 清空 */
+		$("#missionId").val("")
+		$("#missionName").val("")
+		$("#memberStatus").val("請選擇")
+		$("#startDate").val("")
+		$("#endDate").val("")
+		$("#statusSelect").val("請選擇")
+		$("#description").val("");
+	})
+
+</script>
 
 <!-- ------------- JS end---------------- -->
 
-<link rel="stylesheet" href="~/css/Intent.css" />
-<link rel="stylesheet" href="~/css/MissionEdit.css" />
+
