@@ -17,8 +17,8 @@
     <input type="text" id="missionName" placeholder="">
 </div>
 <!-- 指派人員 -->
-<div class="targetSelect">
-    <label for="personnel" class="col-md-2 col-form-label">人員：</label>
+<div class="member">
+    <label for="personnel" class="col-form-label">人員：</label>
     <select id="memberStatus">
         <option value="" selected disabled>請選擇</option>
         @if (ViewBag.membersInProgram != null) {
@@ -68,9 +68,7 @@
 <!-- 描述 -->
 <div class="description">
     <label for="description">描述：</label>
-    <textarea class="form-control" id="description" rows="5" maxlength="200" placeholder="請輸入描述內容">
-
-            </textarea>
+    <textarea class="form-control" id="description" rows="5" maxlength="200" placeholder="請輸入描述內容"></textarea>
 </div>
 <!-- ------------- JS ---------------- -->
 <script>

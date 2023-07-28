@@ -8,6 +8,7 @@ div {
 
 body {
     overflow-x: hidden;
+    font-family: Arial, Helvetica, sans-serif;
 }
 
 /* * {
@@ -123,12 +124,11 @@ body {
 .intro1 > p {
     font-size: 29px;
     line-height: 2;
-    margin-bottom: 100px;
+    margin-bottom: 80px;
 }
 
 .btn-start {
     color: white;
-    font-size: 30px;
     font-size: 40px;
     background-color: #0095c6;
     border-radius: 10px 10px 10px 10px;
@@ -161,7 +161,7 @@ body {
     top: -12%;
     left: 55%;
     width: 1100px;
-    height: 1100px;
+    height: 1030px;
     background: linear-gradient(to right, rgb(133, 216, 255), rgb(233, 253, 229));
     border-radius: 73% 27% 44% 56% / 41% 30% 70% 59%;
     box-shadow: 0px 10px 50px rgba(208, 208, 208, 0.757);
@@ -217,7 +217,7 @@ body {
 
 .section2 .intro2 {
     width: 35%;
-    font-size: 28px;
+    font-size: 25px;
     line-height: 2;
     margin-left: 58%;
 }
@@ -305,7 +305,7 @@ body {
     position: absolute;
     top: 150px;
     right: 6%;
-    font-size: 28px;
+    font-size: 27px;
     width: 35%;
 }
 
@@ -313,7 +313,7 @@ body {
     position: absolute;
     top: 800px;
     left: 8%;
-    font-size: 28px;
+    font-size: 27px;
     width: 35%;
 }
 
@@ -333,16 +333,16 @@ body {
     right: 140px;
 }
 
-.intro4 > h1 {
+.intro4 h1 {
     font-size: 60px;
 }
 
-.intro4 > p {
-    font-size: 30px;
+.intro4 p {
+    font-size: 32px;
 }
 
-.intro4 > .btn-start {
-    margin-top: 50px;
+.intro4 .btn-start {
+    margin-top: 10%;
     font-size: 40px;
 }
 

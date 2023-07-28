@@ -63,6 +63,7 @@ namespace collab_00.Controllers {
 
 			var obj = from targetItem in _bananaContext.Intents
 					  where targetItem.ProgramId == id
+					  orderby targetItem.IntentId descending
 					  select new TestBananaContext
 					  {
 						  targetID = targetItem.IntentId,
@@ -142,8 +143,6 @@ namespace collab_00.Controllers {
 			ViewBag.option = query.ToList();
 
 
-
-
 			var sortList = from targetItem in _bananaContext.Intents
 						   select new TestBananaContext
 						   {
@@ -156,7 +155,7 @@ namespace collab_00.Controllers {
 			switch (sortOrder) {
 				case 1:
 					// 按新增日期排序
-					sortList = sortList.OrderBy(item => item.targetID);
+					sortList = sortList.OrderByDescending(item => item.targetID);
 					break;
 				case 2:
                     // 按進度排序
@@ -164,7 +163,7 @@ namespace collab_00.Controllers {
 					break;
 				case 3:
 					// 按任務數量排序
-					sortList = sortList.OrderBy(item => item.missionCount);
+					sortList = sortList.OrderByDescending(item => item.missionCount);
 					break;
 				default:
 					break;
