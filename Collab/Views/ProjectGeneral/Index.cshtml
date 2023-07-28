@@ -14,9 +14,9 @@
     }
 </script>
 
-        <div class="Mycontainer  d-flex my-5 ">
+        <div class="Mycontainer  d-flex my-5 mb-5 " style="display: grid;">
             <!--------計劃概述------>
-            <div class=" col-5 me-5 ">
+            <div class="col-5 me-5 d-flex flex-column justify-content-between">
                 <form asp-action="UpdateProgramOverview" id="formProjectTextarea" method="post">
                     <div class="d-flex ">
                         <p class="MyTitle fs-3 ms-3">計劃概述</p>
@@ -28,25 +28,25 @@
                         <i id="iconSaveTextarea" class="fa-regular fa-floppy-disk fa-xl" style="display: none;"></i>
                     </button>
                     </div>
-                    <div class="headerBody  pt-3 pb-4 ">
+                    <div class="headerBody ProjectGeneralItem" style="height:100%">
                 <textarea id="ProjectTextarea" class="pe-4 lh-lg " name="newOverview" cols="50" rows="17"
-                                  readonly></textarea>
+                          readonly style="height:100%"></textarea>
                     </div>
                 </form>
             </div>
             <!--------計劃概述END------>
             <!-- 參與成員+資料連結 -->
-            <div class="col-6 ms-3 ">
+            <div class="col-6 ms-3 d-flex flex-column justify-content-between" >
 
                 <!--------參與成員------>
-                <div class="">
+                <div class="col-11">
                     <div class="d-flex ms-3">
                         <p class="MyTitle fs-3 ">參與成員</p>
                         <a id="DeleteMember" class="icon-addTarget margin-delete">
                             <i class="fa-sharp fa-solid fa-user-xmark fa-xl"></i>
                         </a>
                     </div>
-                    <div class=" headerBody pt-2 pb-4 d-flex flex-wrap ms-3">
+                    <div class="ProjectGeneralItem headerBody pt-4 pb-4 ps-4 d-flex flex-wrap ">
                         <div class=" me-5 mt-3 text-center ">
                             <a class="Myavatar AddNewBtn" id="addMemberButton">
                                 <i class="fa-solid fa-plus fa-xl"></i>
@@ -68,7 +68,7 @@
 
                 <!--------參與成員END------>
                 <!--------資料連結------>
-                <div class="mt-5 mb-5">
+                <div class="mt-5 mb-5 col-11">
                     <div class="d-flex ms-3">
                         <p class="MyTitle fs-3">資料連結</p>
                         <!-- <button class="btn-start mb-2  margin-delete">新增</button> -->
@@ -76,7 +76,7 @@
                             <i class="fa-regular fa-square-plus fa-xl"></i>
                         </a>
                     </div>
-                    <div class="headerBody pb-4 ">
+                    <div class="ProjectGeneralItem headerBody pb-4 ">
                         <div id="divAddLink" class="m-3" style="display: none;">
                             <form asp-action="AddLink" method="post" id="formAddLink">
                                 <input class="addInput me-3" type="text" placeholder="名稱" name="LinkTitle" onfocus="this.placeholder = ''" onblur="this.placeholder = '名稱'">
@@ -87,7 +87,7 @@
                             </form>
                         </div>
                         <!-- linkList -->
-                        <div class=" me-2 mb-3 pe-2">
+                        <div class=" me-2 mb-3 pe-2 ms-4">
                             <div class="scrollable-div mb-4 mt-3">
                                 <!-- linkRow -->
                                 @foreach (var link in ViewBag.Links) {

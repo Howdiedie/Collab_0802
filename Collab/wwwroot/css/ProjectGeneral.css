@@ -38,10 +38,10 @@ a {
     border-radius: 10px;
 }
 
-
-
+/*.Mycontainer {
+    align-items: stretch;
+}*/
 /* ------計劃概述------ */
-
 .headerBody {
     /* background-color: hsl(246, 22%, 91%); */
     /* background-color: rgb(234, 225, 207); */
@@ -66,6 +66,12 @@ textarea {
     background: none;
     border: 4px solid #e2e0e0;
 }
+textarea:focus {
+    outline: none !important;
+    border: 4px solid #e2e0e0;
+
+}
+
 
 .margin-editbtn {
     margin-left: 390px;
@@ -234,3 +240,8 @@ dialog {
         border: none;
         background-color: #0e356de6;
     }
+
+.ProjectGeneralItem {
+    border: 2px solid rgb(232, 230, 230);
+    box-shadow: 2px 2px 5px #d2d0d0db;
+}
