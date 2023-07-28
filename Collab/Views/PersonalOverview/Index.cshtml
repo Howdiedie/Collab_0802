@@ -10,7 +10,17 @@
 <script src='https://cdn.jsdelivr.net/npm/fullcalendar@6.1.8/index.global.min.js'></script>
 <script>
 	localStorage.setItem("bgcolor", "");
-
+	$(document).ready(function () {
+		//Layout的新增計劃dialog
+		$("#btnAddProgram").click(function () {
+			var dialog = document.getElementById('AddProgramDialog');
+			dialog.showModal();
+		});
+		$("#cancelbtn").click(function () {
+			var dialog = document.getElementById('AddProgramDialog');
+			dialog.close();
+		});
+	});
 	document.addEventListener('DOMContentLoaded', function () {
 		var calendarEl = document.getElementById('calendar');
 		var calendar = new FullCalendar.Calendar(calendarEl, {

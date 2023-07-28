@@ -2,6 +2,19 @@
     For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 *@
 @model List<Collab.Models.NotifyWithMember>
+<script>
+    $(document).ready(function () {
+        //Layout的新增計劃dialog
+        $("#btnAddProgram").click(function () {
+            var dialog = document.getElementById('AddProgramDialog');
+            dialog.showModal();
+        });
+        $("#cancelbtn").click(function () {
+            var dialog = document.getElementById('AddProgramDialog');
+            dialog.close();
+        });
+    });
+</script>
 <section class="">
     <div class="row">
         <div class="col scroller py-5" style="height: 87vh;">

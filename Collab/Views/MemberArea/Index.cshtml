@@ -6,7 +6,19 @@
 <script>
 localStorage.setItem("bgcolor", "");
 </script>
-
+<script>
+    $(document).ready(function () {
+        //Layout的新增計劃dialog
+        $("#btnAddProgram").click(function () {
+            var dialog = document.getElementById('AddProgramDialog');
+            dialog.showModal();
+        });
+        $("#cancelbtn").click(function () {
+            var dialog = document.getElementById('AddProgramDialog');
+            dialog.close();
+        });
+    });
+</script>
 <div class="scroller " style="height: 87vh;">
     <div class="mx-4">
         <div class=" mx-4">

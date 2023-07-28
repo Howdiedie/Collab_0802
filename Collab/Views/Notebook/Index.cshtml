@@ -2,7 +2,19 @@
 
 <link rel="stylesheet" href="~/css/Notebook.css" />
 
-
+<script>
+    $(document).ready(function () {
+        //Layout的新增計劃dialog
+        $("#btnAddProgram").click(function () {
+            var dialog = document.getElementById('AddProgramDialog');
+            dialog.showModal();
+        });
+        $("#cancelbtn").click(function () {
+            var dialog = document.getElementById('AddProgramDialog');
+            dialog.close();
+        });
+    });
+</script>
 <div class="container">
     <div class="mb-4">
         <div class="row mx-2">

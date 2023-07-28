@@ -1,5 +1,18 @@
 ﻿@{
 }
+<script>
+    $(document).ready(function () {
+        //Layout的新增計劃dialog
+        $("#btnAddProgram").click(function () {
+            var dialog = document.getElementById('AddProgramDialog');
+            dialog.showModal();
+        });
+        $("#cancelbtn").click(function () {
+            var dialog = document.getElementById('AddProgramDialog');
+            dialog.close();
+        });
+    });
+</script>
         <!-- 從這裡開始寫 -->
         <br>
         <!-- select option -->
