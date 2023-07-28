@@ -3,11 +3,14 @@
 	ViewData["Title"] = "Index";
 	var jsonIngMissions = Newtonsoft.Json.JsonConvert.SerializeObject(ViewBag.ingmissions);
 }
+
 <!-- css -->
 <link rel="stylesheet" href="~/css/PersonalOverview.css" />
 <!-- js -->
 <script src='https://cdn.jsdelivr.net/npm/fullcalendar@6.1.8/index.global.min.js'></script>
 <script>
+	localStorage.setItem("bgcolor", "");
+
 	document.addEventListener('DOMContentLoaded', function () {
 		var calendarEl = document.getElementById('calendar');
 		var calendar = new FullCalendar.Calendar(calendarEl, {
