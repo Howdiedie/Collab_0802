@@ -2,6 +2,7 @@
 using Collab.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.VisualStudio.Web.CodeGeneration.Design;
 
 namespace Collab.Controllers {
     public class ProjectGeneralController : LayoutController {
@@ -62,8 +63,10 @@ namespace Collab.Controllers {
             // 從 Session 或 Cookie 中獲取當前的 Program ID
             string programIdStr = Request.Cookies["ProgramId"];
             int.TryParse(programIdStr, out int programId);
+            string userIdStr = Request.Cookies["UserID"];  // 從 Session 或 Cookie 中獲取當前登錄會員的 ID
+            int.TryParse(userIdStr, out int userId);
 
-            int EditMemberId = 3; //誰編輯這個計畫概述的
+            int EditMemberId = userId; //誰編輯這個計畫概述的
             var program = _db.Programs.Find(programId);  // 從資料庫中查詢該計劃的資料
 
             if (program == null) {
@@ -79,7 +82,7 @@ namespace Collab.Controllers {
             var NotifyAdd = new Notify {
                 NotifyDate = DateTime.Now,
                 NotifyAction = "修改",
-                NotifyType = "計畫",
+                NotifyType = "計畫概述",
                 ActionName = program.ProgramName.ToString(),
                 ProgramId = program.ProgramId,
                 MemberId = EditMemberId
@@ -119,6 +122,21 @@ namespace Collab.Controllers {
 
             var newLink = new ProgramLinkList { LinkTitle = linkTitle, LinkUrl = linkUrl, ProgramId = programId };
             _db.ProgramLinkLists.Add(newLink);
+
+
+            string userIdStr = Request.Cookies["UserID"];  // 從 Session 或 Cookie 中獲取當前登錄會員的 ID
+            int.TryParse(userIdStr, out int userId);
+            int EditMemberId = userId; //誰編輯這個計畫概述的
+            //新增通知
+            var NotifyAdd = new Notify {
+                NotifyDate = DateTime.Now,
+                NotifyAction = "新增",
+                NotifyType = "連結",
+                ActionName = linkTitle,
+                ProgramId = program.ProgramId,
+                MemberId = EditMemberId
+            };
+            _db.Notifies.Add(NotifyAdd);
             _db.SaveChanges();
 
             TempData["Message"] = "連結添加成功。";
@@ -139,6 +157,19 @@ namespace Collab.Controllers {
             }
 
             _db.ProgramLinkLists.Remove(link);
+            string userIdStr = Request.Cookies["UserID"];  // 從 Session 或 Cookie 中獲取當前登錄會員的 ID
+            int.TryParse(userIdStr, out int userId);
+            int EditMemberId = userId; //誰編輯這個計畫概述的
+            //新增通知
+            var NotifyAdd = new Notify {
+                NotifyDate = DateTime.Now,
+                NotifyAction = "刪除",
+                NotifyType = "連結",
+                ActionName = link.LinkTitle,
+                ProgramId = programId,
+                MemberId = EditMemberId
+            };
+            _db.Notifies.Add(NotifyAdd);
             _db.SaveChanges();
 
             TempData["Message"] = "連結刪除成功。";
@@ -176,8 +207,24 @@ namespace Collab.Controllers {
                 // 創建一個新的 ProgramMember 實例並儲存
                 var newProgramMember = new ProgramMember { ProgramId = programId, MemberId = member.MemberId, MemberState = "還在" };
                 _db.ProgramMembers.Add(newProgramMember);
-            }
 
+                string userIdStr = Request.Cookies["UserID"];  // 從 Session 或 Cookie 中獲取當前登錄會員的 ID
+                int.TryParse(userIdStr, out int userId);
+                int EditMemberId = userId; //誰編輯這個計畫概述的
+                                           //新增通知
+                var NotifyAdd = new Notify {
+                    NotifyDate = DateTime.Now,
+                    NotifyAction = "新增",
+                    NotifyType = "成員",
+                    ActionName = member.MemberName,
+                    ProgramId = programId,
+                    MemberId = EditMemberId
+                };
+                _db.Notifies.Add(NotifyAdd);
+
+
+            }
+           
             _db.SaveChanges();
 
             TempData["Message"] = "成功添加成員。";
@@ -216,6 +263,22 @@ namespace Collab.Controllers {
             if (memberInProgram != null) {
                 // 將該成員的狀態改為 "不在"
                 memberInProgram.MemberState = "不在";
+
+                string userIdStr = Request.Cookies["UserID"];  // 從 Session 或 Cookie 中獲取當前登錄會員的 ID
+                int.TryParse(userIdStr, out int userId);
+                int EditMemberId = userId; //誰編輯這個計畫概述的
+                                           //新增通知
+                var NotifyAdd = new Notify {
+                    NotifyDate = DateTime.Now,
+                    NotifyAction = "刪除",
+                    NotifyType = "成員",
+                    ActionName = member.MemberName,
+                    ProgramId = programId,
+                    MemberId = EditMemberId
+                };
+                _db.Notifies.Add(NotifyAdd);
+
+
                 _db.SaveChanges();
                 TempData["Message"] = "成員已成功從計劃中移除。";
             }
