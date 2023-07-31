@@ -14,7 +14,7 @@
     }
 </script>
 
-        <div class="Mycontainer  d-flex my-5 mb-5 " style="display: grid;">
+        <div class="Mycontainer  d-flex my-5  " style="display: grid;">
             <!--------計劃概述------>
             <div class="col-5 me-5 d-flex flex-column justify-content-between">
                 <form asp-action="UpdateProgramOverview" id="formProjectTextarea" method="post">
@@ -28,7 +28,7 @@
                         <i id="iconSaveTextarea" class="fa-regular fa-floppy-disk fa-xl" style="display: none;"></i>
                     </button>
                     </div>
-                    <div class="headerBody ProjectGeneralItem" style="height:100%">
+                    <div class="headerBody ProjectGeneralItem" style="height:88%">
                 <textarea id="ProjectTextarea" class="pe-4 lh-lg " name="newOverview" cols="50" rows="17"
                           readonly style="height:100%"></textarea>
                     </div>
@@ -79,7 +79,7 @@
                     <div class="ProjectGeneralItem headerBody pb-4 ">
                         <div id="divAddLink" class="m-3" style="display: none;">
                             <form asp-action="AddLink" method="post" id="formAddLink">
-                                <input class="addInput me-3" type="text" placeholder="名稱" name="LinkTitle" onfocus="this.placeholder = ''" onblur="this.placeholder = '名稱'">
+                        <input class="addNameInput me-3" type="text" placeholder="名稱" name="LinkTitle" onfocus="this.placeholder = ''" onblur="this.placeholder = '名稱'">
                                 <input class="addInput" type="text" placeholder="URL" name="LinkUrl" onfocus="this.placeholder = ''" onblur="this.placeholder = 'URL'">
                                 <a id="btnSaveLink" class="icon-addTarget margin-btnSaveLink " href="#">
                                     <i class="fa-regular fa-floppy-disk fa-xl"></i>
@@ -88,7 +88,7 @@
                         </div>
                         <!-- linkList -->
                         <div class=" me-2 mb-3 pe-2 ms-4">
-                            <div class="scrollable-div mb-4 mt-3">
+                            <div class="scrollableLinkDiv mb-4 mt-3">
                                 <!-- linkRow -->
                                 @foreach (var link in ViewBag.Links) {
                                     <div class="linkList mt-4 me-5">
