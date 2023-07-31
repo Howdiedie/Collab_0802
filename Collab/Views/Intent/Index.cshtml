@@ -184,6 +184,15 @@
 		$("#statusSelect").val("請選擇")
 		$("#description").val("");
 	})
+	//Layout的新增計劃dialog
+	$("#btnAddProgram").click(function () {
+		var dialog = document.getElementById('AddProgramDialog');
+		dialog.showModal();
+	});
+	$("#cancelbtn").click(function () {
+		var dialog = document.getElementById('AddProgramDialog');
+		dialog.close();
+	});
 
 </script>
 
