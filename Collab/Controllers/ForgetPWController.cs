@@ -156,10 +156,10 @@ namespace collab_00.Controllers
 
 				// 儲存變更到資料庫
 				_TestBananaContext.SaveChanges();
-				Response.Cookies.Append("UserID", user.MemberId.ToString());
+				//Response.Cookies.Append("UserID", user.MemberId.ToString());
 			}
 
-			return RedirectToAction("Index", "PersonalOverview");
+			return RedirectToAction("Index", "Login");
 		}
 
 
