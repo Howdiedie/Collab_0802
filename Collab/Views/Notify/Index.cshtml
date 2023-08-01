@@ -20,20 +20,57 @@
         <div class="col scroller py-5" style="height: 87vh;">
             <ul class="timeline-with-icons">
                 @foreach (var notify in Model) {
-                    <li class="timeline-item mb-5">
-                        <span class="timeline-icon">
-                            <i class="fas fa-hand-holding-usd text-primary fa-sm fa-fw"></i>
-                        </span>
-                        <h4 class="fw-bold">
-                            @notify.MemberName
-                            @notify.NotifyAction 了
-                            @notify.NotifyType &nbsp;
-                            「@notify.ActionName」
-                        </h4>
-                        <p class="text-muted mb-2 fw-bold">
-                            @notify.NotifyDate
-                        </p>
-                    </li>
+                    @if (notify.NotifyAction == "修改") {
+                        <li class="timeline-item mb-5">
+                            <span class="timeline-icon">
+                                <i class="fa-regular fa-pen-to-square fa-lg"></i>
+                            </span>
+                            <h4 class="fw-bold">
+                                @notify.MemberName
+                                @notify.NotifyAction 了
+                                @notify.NotifyType &nbsp;
+                                「@notify.ActionName」
+                            </h4>
+                            <p class="text-muted mb-2 fw-bold">
+                                @notify.NotifyDate
+                            </p>
+                        </li>
+
+                    }
+                    @if (notify.NotifyAction == "新增") {
+                        <li class="timeline-item mb-5">
+                            <span class="timeline-icon">
+                                <i class="fa-solid fa-folder-plus fa-lg"></i>
+                            </span>
+                            <h4 class="fw-bold">
+                                @notify.MemberName
+                                @notify.NotifyAction 了
+                                @notify.NotifyType &nbsp;
+                                「@notify.ActionName」
+                            </h4>
+                            <p class="text-muted mb-2 fw-bold">
+                                @notify.NotifyDate
+                            </p>
+                        </li>
+
+                    }
+                    @if (notify.NotifyAction == "刪除") {
+                        <li class="timeline-item mb-5">
+                            <span class="timeline-icon">
+                                <i class="fa-solid fa-trash fa-lg"></i>
+                            </span>
+                            <h4 class="fw-bold">
+                                @notify.MemberName
+                                @notify.NotifyAction 了
+                                @notify.NotifyType &nbsp;
+                                「@notify.ActionName」
+                            </h4>
+                            <p class="text-muted mb-2 fw-bold">
+                                @notify.NotifyDate
+                            </p>
+                        </li>
+
+                    }
                 }
             </ul>
         </div>
