@@ -75,15 +75,15 @@ namespace collab_00.Controllers {
                 // 更新MisState的值
                 missionToUpdate.MisState = misState;
                 //新增通知
-                var NotifyAdd = new Notify {
-                    NotifyDate = DateTime.Now,
-                    NotifyAction = "修改",
-                    NotifyType = "任務",
-                    ActionName = missionName,
-                    ProgramId = programId,
-                    MemberId = userId
-                };
-                _TestBananaContext.Notifies.Add(NotifyAdd);
+                //var NotifyAdd = new Notify {
+                //    NotifyDate = DateTime.Now,
+                //    NotifyAction = "修改",
+                //    NotifyType = "任務",
+                //    ActionName = missionName,
+                //    ProgramId = programId,
+                //    MemberId = userId
+                //};
+                //_TestBananaContext.Notifies.Add(NotifyAdd);
                 // 保存更改到数据库
                 _TestBananaContext.SaveChanges();
 
