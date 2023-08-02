@@ -20,7 +20,8 @@ namespace collab_00.Controllers {
                           {
                               NBT = EB.NotebookTitle,
                               NBCT = EB.NotebooAddDate.ToString(),
-                              NBOverview = EB.NotebookContent
+                              NBOverview = EB.NotebookContent,
+                              NBID = EB.NotebookId
                           };
 
             
@@ -28,14 +29,14 @@ namespace collab_00.Controllers {
         }
 
         [HttpPost]
-        public IActionResult Index(string ChangeTitle, string ChangeOverView, string NBTime)
+        public IActionResult Index(string ChangeTitle, string ChangeOverView, int NBID)
         {
             string programIdStr = Request.Cookies["ProgramId"];
             int.TryParse(programIdStr, out int programId);
             string userIdStr = Request.Cookies["UserID"];  // 從 Session 或 Cookie 中獲取當前登錄會員的 ID
             int.TryParse(userIdStr, out int userId);
 
-            var notebook = _bananaContext.Notebooks.FirstOrDefault(n => n.NotebooAddDate.ToString() == NBTime);
+            var notebook = _bananaContext.Notebooks.FirstOrDefault(n => n.NotebookId == NBID );
             if (notebook != null)
             {
                 notebook.NotebookTitle = ChangeTitle;
@@ -50,6 +51,7 @@ namespace collab_00.Controllers {
                     ProgramId = programId,
                     MemberId = userId
                 };
+                
                 _bananaContext.Notifies.Add(NotifyAdd);
                 _bananaContext.SaveChanges();  // 儲存變更
             }
