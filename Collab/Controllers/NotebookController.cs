@@ -24,7 +24,7 @@ namespace collab_00.Controllers {
                          select new TestBananaContext
                          {
                              NBT = Howhow.NotebookTitle,
-                             NBCT = Howhow.NotebooAddDate.ToString(),
+                             NBCT = Howhow.NotebooAddDate.HasValue ? Howhow.NotebooAddDate.Value.ToString("yyyy-MM-dd HH:mm:ss") : null,
                              NBImg = Diedie.MemberPhoto
                          };
             switch (SortNum)
@@ -67,7 +67,7 @@ namespace collab_00.Controllers {
                              select new TestBananaContext
                              {
                                  NBT = Howhow.NotebookTitle,
-                                 NBCT = Howhow.NotebooAddDate.ToString(),
+                                 NBCT = Howhow.NotebooAddDate.HasValue ? Howhow.NotebooAddDate.Value.ToString("yyyy-MM-dd HH:mm:ss") : null,
                                  NBImg = Diedie.MemberPhoto
                              };
 
