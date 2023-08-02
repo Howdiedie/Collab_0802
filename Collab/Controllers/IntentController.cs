@@ -144,6 +144,8 @@ namespace collab_00.Controllers {
 
 
 			var sortList = from targetItem in _bananaContext.Intents
+						   join program in _bananaContext.Programs on targetItem.ProgramId equals program.ProgramId
+						   where targetItem.ProgramId == programId
 						   select new TestBananaContext
 						   {
 							   targetName = targetItem.IntentName,
